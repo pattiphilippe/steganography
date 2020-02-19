@@ -5,9 +5,9 @@ typedef struct __attribute__((__packed__)) header_lsd_t
 {
 	unsigned char header[6];
 	unsigned char width[2];
-	char height[2];
-	char packed_field;
-	char data[2];
+	unsigned char height[2];
+	unsigned char packed_field;
+	unsigned char data[2];
 } header_lsd_t;
 
  

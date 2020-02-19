@@ -5,6 +5,7 @@
 #AUTEUR : Foud Hind et Patti Philippe
 
 readGif : ReadGif
+	@clear
 	#Run command with "hacker.gif" as source file.
 	@./ReadGif rsc/hacker.gif
 
@@ -18,4 +19,4 @@ gif.o : gif.c gif.h
 	gcc -std=c99 -Wall -pedantic gif.c -c -o gif.o
 
 clean :
-	@rm -f ReadGif *.O *~
+	@rm -f ReadGif *.o *~

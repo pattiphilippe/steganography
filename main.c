@@ -42,6 +42,17 @@ int main(int argc, char* argv[])
   printf("hasGlobalColorTable %d\n", hasGlobalColorTable(&header_lsd));
   printf("hasGlobalColorTable %d\n", 128);
   printBitsOfByte("PackedField", &header_lsd.packed_field);
+  printf("Test for printing binary value\n"); 
+  printf("1 : %0x\n", 0b1);
+  printf("2 : %0x\n", 0b10);
+  printf("4 : %0x\n", 0b100);
+  printf("8 : %0x\n", 0b1000);
+  printf("16 : %0x\n", 0b10000);
+  printf("32 : %0x\n", 0b100000);
+  printf("64 : %0x\n", 0b1000000);
+  printf("128 : %0x\n", 0b10000000);
+  printf("255 : %0x\n", 0b11111111);
+  printf("Is bit 2 from right at 1 :  !(4|0b011) == 0 : %d\n", !(4|0b011) == 0);
 }
 
 

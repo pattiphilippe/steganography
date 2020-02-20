@@ -52,6 +52,7 @@ int main(int argc, char* argv[])
   printf("64 : %0x\n", 0b1000000);
   printf("128 : %0x\n", 0b10000000);
   printf("255 : %0x\n", 0b11111111);
+  printf("247 >> 7 : %d\n", 247 >> 7);
   printf("Is bit 2 from right at 1 :  !(4|0b011) == 0 : %d\n", !(4|0b011) == 0);
 }
 
@@ -68,6 +69,7 @@ void printBytes(const char * title, const unsigned char * bytes, size_t size){
 }
 
 bool hasGlobalColorTable(const header_lsd_t * header_lsd){
+	printf("packedField has value of %d", header_lsd->packed_field);
 	return header_lsd->packed_field & (1<<7);
 }
 

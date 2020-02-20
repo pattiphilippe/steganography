@@ -38,11 +38,9 @@ int main(int argc, char* argv[])
   printf("Logical Screen Descriptor\n");
   printBytes("Width", header_lsd.width, sizeof(header_lsd.width));
   printBytes("Height", header_lsd.height, sizeof(header_lsd.height));
-  printBytes("PackedField", &header_lsd.packed_field, sizeof(header_lsd.packed_field));
+  printBitsOfByte("PackedField ", &header_lsd.packed_field);
   printf("hasGlobalColorTable %d\n", hasGlobalColorTable(&header_lsd));
-  printf("hasGlobalColorTable %d\n", 128);
-  printBitsOfByte("PackedField", &header_lsd.packed_field);
-  printf("Test for printing binary value\n"); 
+  printf("\n\nTest for printing binary value\n"); 
   printf("1 : %0x\n", 0b1);
   printf("2 : %0x\n", 0b10);
   printf("4 : %0x\n", 0b100);
@@ -59,7 +57,6 @@ int main(int argc, char* argv[])
 
 void printBytes(const char * title, const unsigned char * bytes, size_t size){
 	printf("%s\n",title);
-	printf("size = %ld\n", size);
 	for(int i = 0; i < size; ++i){
 		if(! (i%8) && i)
 			printf("\n");
@@ -69,7 +66,6 @@ void printBytes(const char * title, const unsigned char * bytes, size_t size){
 }
 
 bool hasGlobalColorTable(const header_lsd_t * header_lsd){
-	printf("packedField has value of %d", header_lsd->packed_field);
 	return header_lsd->packed_field & (1<<7);
 }
 
@@ -79,9 +75,9 @@ void printBitsOfByte(const char* title, const unsigned char * byteSrc){
 	unsigned char byte = *byteSrc;
 	printf("%s\n", title);
 	for(int i = 0; i < 8; i++){
-	//if(! (i%4) && i)
-		printf(" ");
-		printf("%u", byte & 0x80 ? '1' : '0');
+		if(! (i%4) && i)
+			printf(" ");
+		printf("%d", (byte & 0x80) ? 1 : 0);
 		byte <<= 1;
 	}
 	printf("\n\n");

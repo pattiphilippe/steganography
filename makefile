@@ -10,7 +10,7 @@ readGif : ReadGif
 	@./ReadGif rsc/hacker.gif
 
 ReadGif : main.o gif.o
-	gcc main.o gif.o -o ReadGif
+	gcc main.o gif.o -o ReadGif -lm
 
 main.o : main.c gif.h
 	gcc -std=c99 -Wall -pedantic main.c -c -o main.o

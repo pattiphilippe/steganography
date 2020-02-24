@@ -12,5 +12,4 @@ typedef struct __attribute__((__packed__)) header_lsd_t
 	unsigned char * globalColorTable;
 } header_lsd_t;
 
- 
 

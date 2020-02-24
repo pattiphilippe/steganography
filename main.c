@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <errno.h>
 #include <stdbool.h>
+#include <math.h>
 
 #include "gif.h"
 
 void printBytes(const char* title, const unsigned char * bytes, size_t size);
 bool hasGlobalColorTable(const header_lsd_t * header_lsd); 
 void printBitsOfByte(const char* title, const unsigned char * byteSrc);
-char sizeOfGlobalColorTable(const header_lsd_t * header_lsd);
+unsigned sizeOfGlobalColorTable(const header_lsd_t * header_lsd);
 
 int main(int argc, char* argv[])
 {
@@ -35,9 +36,13 @@ int main(int argc, char* argv[])
   printBitsOfByte("PackedField ", &header_lsd.packed_field);
   header_lsd.hasGlobalColorTable = hasGlobalColorTable(&header_lsd);
   printf("hasGlobalColorTable %d\n", header_lsd.hasGlobalColorTable);
-  char size = sizeOfGlobalColorTable(&header_lsd);
-  printBitsOfByte("Size GCT : ", &size);
-  printf("sizeOfGlobalColorTable : %d\n", sizeOfGlobalColorTable(&header_lsd));
+  unsigned sizeGCT = sizeOfGlobalColorTable(&header_lsd);
+  printf("sizeOfGlobalColorTable : %d\n", sizeGCT);
+  
+  printf("ftell() before fseek : %d\n", ftell(gif_src));
+  fseek(gif_src,sizeGCT,SEEK_CUR);
+  printf("ftell() after fseek : %d\n", ftell(gif_src));
+	
 }
 
 
@@ -69,9 +74,12 @@ void printBitsOfByte(const char* title, const unsigned char * byteSrc){
 	printf("\n\n");
 }
 
-char sizeOfGlobalColorTable(const header_lsd_t * header_lsd){
-	return (header_lsd->packed_field & 0x70)>>4;
+unsigned sizeOfGlobalColorTable(const header_lsd_t * header_lsd){
+	unsigned char color_resolution = (header_lsd->packed_field & 0x70)>>4;
+	printf("color_resolution : %d\n", color_resolution);
+	return 3 * pow(2.0, (color_resolution + 1));
 }
+
 
 
 

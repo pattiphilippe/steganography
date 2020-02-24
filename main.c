@@ -80,10 +80,3 @@ unsigned sizeOfGlobalColorTable(const header_lsd_t * header_lsd){
 	return 3 * pow(2.0, (color_resolution + 1));
 }
 
-
-
-
-
-
-
-

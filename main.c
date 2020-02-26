@@ -10,6 +10,8 @@ bool hasGlobalColorTable(const header_lsd_t * header_lsd);
 void printBitsOfByte(const char* title, const unsigned char * byteSrc);
 unsigned sizeOfGlobalColorTable(const header_lsd_t * header_lsd);
 
+void printGlobalTableColor(const header_lsd_t * header_lsd, unsigned sizeOfGlobalColorTable, long currentPos);
+
 int main(int argc, char* argv[])
 {
   printf("%s\n", "Start program\n");
@@ -39,9 +41,14 @@ int main(int argc, char* argv[])
   unsigned sizeGCT = sizeOfGlobalColorTable(&header_lsd);
   printf("sizeOfGlobalColorTable : %d\n", sizeGCT);
   
-  printf("ftell() before fseek : %d\n", ftell(gif_src));
-  fseek(gif_src,sizeGCT,SEEK_CUR);
-  printf("ftell() after fseek : %d\n", ftell(gif_src));
+  long currentPos = ftell(gif_src);
+
+  printf("ftell() before fseek : %d\n", currentPos);
+  currentPos = fseek(gif_src,sizeGCT,SEEK_CUR);
+  printf("ftell() after fseek : %d\n", currentPos);
+
+  printBytes("GLobal Table Color", header_lsd.globalColorTable, sizeof(sizeGCT);
+  //printGlobalTableColor(gif_src, sizeGT, currentPos);
 	
 }
 
@@ -80,3 +87,8 @@ unsigned sizeOfGlobalColorTable(const header_lsd_t * header_lsd){
 	return 3 * pow(2.0, (color_resolution + 1));
 }
 
+
+void printGlobalTableColor(const  header_lsd_t * header_lsd, unsigned sizeOfGlobalColorTablor, long currentPos) 
+{
+	
+}

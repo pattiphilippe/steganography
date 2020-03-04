@@ -1,5 +1,5 @@
 #include <stdbool.h> 
-
+#include <stdio.h>
 
 /**
  * prototype of logical screen descriptor structure :
@@ -25,7 +25,10 @@ enum gif_section {
 	comment,
 	image_descr,
 	local_color_table,
-	image_data
+	image_data,
+	trailer
 };
 
 
+
+enum gif_section read_gif_section(FILE * source);

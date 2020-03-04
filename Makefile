@@ -6,7 +6,8 @@
 
 readBMP : ReadBMP
 	@clear
-	@./ReadBMP enc hill_src.bmp hill_dest.bmp input_message.txt
+	#@./ReadBMP enc hill_src.bmp hill_dest.bmp input_message.txt
+	@./ReadBMP enc splash_multicolor_src.bmp splash_multicolor_dest.bmp input_message.txt
 
 ReadBMP : main.o test.o
 	gcc main.o test.o -o ReadBMP

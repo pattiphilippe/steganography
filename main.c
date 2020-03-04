@@ -1,11 +1,11 @@
-#include <stdio.h>
+#include <stdio.h>DEI
 #include <errno.h>
 
 #include "test.h"
 
 int main(int argc, char* argv[])
 {
-  printf("%s", "start program");
+  printf("%s", "start program\n\n");
   
   FILE *file_handle = NULL;
   FILE *message_handle = NULL;
@@ -45,17 +45,21 @@ int main(int argc, char* argv[])
 
   char tmp_header_cpy;
   int offset = get_image_src_offset(file_handle);
+  printf("OFFSET : %d\n", offset);
 
   rewind(file_handle);
 
-
+  printf("%s", "HEADER\n\n");
   for (int i=0; i < offset; i++)
-  {
+  {  
 	  tmp_header_cpy = fgetc(file_handle);
+	  
+	  fromByteToBitsDisplay(tmp_header_cpy);
+
 	  fputc(tmp_header_cpy, hidden_message_handle);
 	  c++;
   }
-
+  printf("%s"," \n\n");
 
   // thirth step : on accède au message 
   char file_buffer;
@@ -68,15 +72,10 @@ int main(int argc, char* argv[])
 		fprintf(stderr, "Can't open text input file %s\n",argv[4]);
 		exit(1);
 	}
+
+	//à stocker quelque part pour pouvoir decrypter plus tard
 	int hidden_message_length=get_message_input_length(message_handle);
 
-
-	/* 
-	After offset has been read and the file header has been written as is for the virgin image - 
-	the length of the hidden message is written as the first byte. This length is then used while decrypting the text from the image. 
-	*/
-	fputc(hidden_message_length,hidden_message_handle);  //dans dest on a : header + longueur message caché
-	c++;
 	do {
 		int bit_of_message;
 		if(!feof(message_handle)) {		
@@ -96,7 +95,7 @@ int main(int argc, char* argv[])
 						file_buffer = (file_buffer | 1);
 					else
 						file_buffer = (file_buffer & ~1);
-						//  logic to flip the LSB bit of file_buffer and put it into a file with putc()
+					
 						fputc(file_buffer,hidden_message_handle);
 					
 				}

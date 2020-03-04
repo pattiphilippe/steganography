@@ -8,7 +8,7 @@
 int get_image_src_offset(FILE* bmp_offset)
 {
 	int indicator = fseek(bmp_offset, 10, 0);
-	int offset = (int) fgetc(bmp_offset);
+	int offset = fgetc(bmp_offset);
 	return offset;
 }
 
@@ -29,6 +29,7 @@ int get_message_input_length(FILE* fp)
 void fromByteToBitsDisplay(char data)
 {
 	bool bit[8];
+	printf("%c",'[');
 	for (int i = 0; i < 8; i++)
 	{
 		/*bit[i] = data >> i;
@@ -37,7 +38,9 @@ void fromByteToBitsDisplay(char data)
 		printf("(data >> i) & 0x01) : %d", bit[i]);*/
 
 		bit[i] = ((data >> i) & 0x01);
+		printf("%d", bit[i]);
 	}
+	printf("%c", ']');
 }
 
 /**

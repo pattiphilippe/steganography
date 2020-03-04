@@ -13,10 +13,10 @@ ReadGif : main.o gif.o
 	gcc main.o gif.o -o ReadGif -lm
 
 main.o : main.c gif.h
-	gcc -std=c99 -Wall -pedantic main.c -c -o main.o
+	gcc -std=c99 -Wall -pedantic main.c gif.h -o main.o
 
 gif.o : gif.c gif.h
-	gcc -std=c99 -Wall -pedantic gif.c -c -o gif.o
+	gcc -std=c99 -Wall -pedantic gif.c gif.h -o gif.o
 
 clean :
 	@rm -f ReadGif *.o *~

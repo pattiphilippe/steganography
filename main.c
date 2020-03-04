@@ -39,9 +39,9 @@ int main(int argc, char* argv[])
   unsigned sizeGCT = sizeOfGlobalColorTable(&header_lsd);
   printf("sizeOfGlobalColorTable : %d\n", sizeGCT);
   
-  printf("ftell() before fseek : %d\n", ftell(gif_src));
+  printf("ftell() before fseek : %ld\n", ftell(gif_src));
   fseek(gif_src,sizeGCT,SEEK_CUR);
-  printf("ftell() after fseek : %d\n", ftell(gif_src));
+  printf("ftell() after fseek : %ld\n", ftell(gif_src));
 	
 }
 

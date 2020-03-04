@@ -1,3 +1,6 @@
+#include <stdbool.h> 
+
+
 /**
  * prototype of logical screen descriptor structure :
  */
@@ -11,5 +14,18 @@ typedef struct __attribute__((__packed__)) header_lsd_t
 	bool hasGlobalColorTable;
 	unsigned char * globalColorTable;
 } header_lsd_t;
+
+
+
+
+enum gif_section {
+	graphics,
+	plain_text,
+	application,
+	comment,
+	image_descr,
+	local_color_table,
+	image_data
+};
 
 

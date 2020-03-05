@@ -24,7 +24,7 @@ enum gif_section read_gif_section(FILE * source){
 			case 0Xfe:
 				return comment;
 			case 0X3B:
-                                return trailer;
+                return trailer;
 			default:
 				exit(EXIT_FAILURE); 
 		}

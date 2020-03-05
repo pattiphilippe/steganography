@@ -34,15 +34,26 @@ int main(int argc, char* argv[])
   printBytes("Width", header_lsd.width, sizeof(header_lsd.width));
   printBytes("Height", header_lsd.height, sizeof(header_lsd.height));
   printBitsOfByte("PackedField ", &header_lsd.packed_field);
-  header_lsd.hasGlobalColorTable = hasGlobalColorTable(&header_lsd);
-  printf("hasGlobalColorTable %d\n", header_lsd.hasGlobalColorTable);
+  bool hasGCT = hasGlobalColorTable(&header_lsd);
+  printf("hasGlobalColorTable %d\n", hasGCT);
   unsigned sizeGCT = sizeOfGlobalColorTable(&header_lsd);
   printf("sizeOfGlobalColorTable : %d\n", sizeGCT);
   
   printf("ftell() before fseek : %ld\n", ftell(gif_src));
   fseek(gif_src,sizeGCT,SEEK_CUR);
   printf("ftell() after fseek : %ld\n", ftell(gif_src));
-	
+
+  printf("sizeof unsigned char [6] : %d\n", sizeof(unsigned char [6]));
+  printf("sizeof bool : %d\n", sizeof(bool));
+  printf("sizeof unsigned char * : %d\n", sizeof(unsigned char *));
+  
+  char * buffer;
+  fread(&buffer, 2, 1, gif_src);
+  printBytes("read 2 bytes for section : ", &buffer, 2);
+  fseek(gif_src, -2, SEEK_CUR);
+  printf("read gif_section : %d\n",read_gif_section(gif_src));
+  fread(&buffer, 1, 1, gif_src);
+  printBytes("Application Section  length: \n", &buffer, 1);
 }
 
 

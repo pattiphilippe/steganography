@@ -48,12 +48,20 @@ int main(int argc, char* argv[])
   printf("sizeof unsigned char * : %d\n", sizeof(unsigned char *));
   
   char * buffer;
+  enum gif_section section;
   fread(&buffer, 2, 1, gif_src);
   printBytes("read 2 bytes for section : ", &buffer, 2);
   fseek(gif_src, -2, SEEK_CUR);
-  printf("read gif_section : %d\n",read_gif_section(gif_src));
+  section = read_gif_section(gif_src);
+  printf("read gif_section : %d\n",section);
   fread(&buffer, 1, 1, gif_src);
   printBytes("Application Section  length: \n", &buffer, 1);
+  fseek(gif_src, -1, SEEK_CUR);
+
+  printf("ftell() before passing data section : %ld\n", ftell(gif_src));
+  printf("passSection return = %d\n", passDataSubBlocks(gif_src));
+  printf("ftell() after passing data section : %ld\n", ftell(gif_src));
+
 }
 
 

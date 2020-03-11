@@ -30,3 +30,6 @@ enum gif_section {
 
 
 enum gif_section read_gif_section(FILE * source);
+
+int passSection(FILE * source, enum gif_section section);
+int passDataSubBlocks(FILE * source);

@@ -24,10 +24,47 @@ enum gif_section read_gif_section(FILE * source){
 			case 0Xfe:
 				return comment;
 			case 0X3B:
-                return trailer;
-			default:
-				exit(EXIT_FAILURE); 
+		                return trailer;
 		}
 	} while (again);
-			
+	return -1;			
 }
+
+
+int passSection(FILE * source, enum gif_section section){
+	printf("in pass Section\n");
+	switch(section){
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+			passDataSubBlocks(source);
+			printf("back in pass Section\n");
+			break;
+		default:
+			return -1;
+	}
+	return 0;
+}
+
+
+int passDataSubBlocks(FILE * source){
+	unsigned char buffer, size;
+	fread(&buffer, sizeof(char), 1, source);
+	while(buffer){
+		printf("in while with buffer %d\n", buffer);
+		size = buffer;
+		printf("size = %d\n\n", size);
+		fread(&buffer, sizeof(char), size, source);
+		fread(&buffer, sizeof(char), 1, source);
+	}
+	printf("passDataSubBlocks out of while\n");
+	return 0;
+}
+
+
+
+
+
+
+

@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
   section = read_gif_section(gif_src);
   printf("read gif_section : %d\n",section);
   fread(&buffer, 1, 1, gif_src);
-  printBytes("Application Section  length: \n", &buffer, 1);
+  printBytes("Application Section  length 1: \n", &buffer, 1);
   fseek(gif_src, -1, SEEK_CUR);
 
   printf("ftell() before passing data section : %ld\n", ftell(gif_src));

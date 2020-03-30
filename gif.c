@@ -48,17 +48,22 @@ int passSection(FILE * source, enum gif_section section){
 }
 
 
-int passDataSubBlocks(FILE * source){
+int passDataSubBlocks(const FILE * source){
 	unsigned char buffer, size;
 	fread(&buffer, sizeof(char), 1, source);
+	printf("sizeof(buffer) = %d\n", sizeof(buffer));
 	while(buffer){
-		printf("in while with buffer %d\n", buffer);
+		//printf("in while with buffer %d\n", buffer);
+        printf("ftell() before moving : %ld\n", ftell(source));
 		size = buffer;
-		printf("size = %d\n\n", size);
-		fread(&buffer, sizeof(char), size, source);
+		// printf("size = %d, + reading next bite for size of next subblock\n", size);
+		//fread(&buffer, sizeof(char), size, source);
+  		fseek(source, size, SEEK_CUR);
 		fread(&buffer, sizeof(char), 1, source);
+        printf("ftell() before after : %ld\n\n", ftell(source));
 	}
-	printf("passDataSubBlocks out of while\n");
+    // printf("ftell() after passing data section : %ld\n", ftell(source));
+	// printf("passDataSubBlocks out of while\n");
 	return 0;
 }
 

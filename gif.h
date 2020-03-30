@@ -31,5 +31,5 @@ enum gif_section {
 
 enum gif_section read_gif_section(FILE * source);
 
-int passSection(FILE * source, enum gif_section section);
-int passDataSubBlocks(const FILE * source);
+void passSection(FILE * source, enum gif_section section);
+void passDataSubBlocks(const FILE * source);

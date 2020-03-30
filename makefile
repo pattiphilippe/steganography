@@ -6,7 +6,9 @@
 
 readGif : ReadGif
 	@clear
-	#Run command with "hacker.gif" as source file.
+	################################################
+	# Run command with "hacker.gif" as source file #
+	################################################
 	@./ReadGif rsc/hacker.gif
 
 ReadGif : main.o gif.o

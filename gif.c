@@ -9,6 +9,7 @@ enum gif_section read_gif_section(FILE * source){
 	do {
 		again = false;
 		fread(&buffer, sizeof(char), 1, source);
+		printf("bite of section type read : 0x%0x\n", buffer);
 		switch(buffer){
 			case 0X2C:
 				return image_descr;
@@ -24,47 +25,35 @@ enum gif_section read_gif_section(FILE * source){
 			case 0Xfe:
 				return comment;
 			case 0X3B:
-		                return trailer;
+		        return trailer;
 		}
 	} while (again);
 	return -1;			
 }
 
 
-int passSection(FILE * source, enum gif_section section){
-	printf("in pass Section\n");
+void passSection(FILE * source, enum gif_section section){
 	switch(section){
 		case 0:
 		case 1:
 		case 2:
 		case 3:
 			passDataSubBlocks(source);
-			printf("back in pass Section\n");
 			break;
 		default:
-			return -1;
+			perror("gif.c::passSection : Unknown Section");
+			exit(1);
 	}
-	return 0;
 }
 
 
-int passDataSubBlocks(const FILE * source){
-	unsigned char buffer, size;
-	fread(&buffer, sizeof(char), 1, source);
-	printf("sizeof(buffer) = %d\n", sizeof(buffer));
-	while(buffer){
-		//printf("in while with buffer %d\n", buffer);
-        printf("ftell() before moving : %ld\n", ftell(source));
-		size = buffer;
-		// printf("size = %d, + reading next bite for size of next subblock\n", size);
-		//fread(&buffer, sizeof(char), size, source);
+void passDataSubBlocks(const FILE * source){
+	unsigned char size;
+	fread(&size, sizeof(size), 1, source);
+	while(size){
   		fseek(source, size, SEEK_CUR);
-		fread(&buffer, sizeof(char), 1, source);
-        printf("ftell() before after : %ld\n\n", ftell(source));
+		fread(&size, sizeof(char), 1, source);
 	}
-    // printf("ftell() after passing data section : %ld\n", ftell(source));
-	// printf("passDataSubBlocks out of while\n");
-	return 0;
 }
 
 

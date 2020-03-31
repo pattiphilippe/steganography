@@ -1,6 +1,5 @@
-#include <stdbool.h>
 #include <stdio.h>
-#include <math.h>
+#include <stdbool.h>
 
 /**
  * Logical screen descriptor structure
@@ -36,10 +35,9 @@ typedef enum gif_section_t
 	trailer
 } gif_section_t;
 
+
 bool hasColorTable(const unsigned char *packed_field);
 unsigned sizeOfColorTable(const unsigned char *packed_field);
-
-int getMaxLCT(const char* source);
 gif_section_t read_gif_section(FILE *source);
 
 void passHeaderLSDGCT(FILE *source);

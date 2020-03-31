@@ -3,12 +3,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "gif.h"
+#include "gif_steg.h"
 
-void showUsage(const char *name)
-{
-	printf("Usage : %s SOURCE DESTINATION\n\n", name);
-}
+void showUsage(const char *name);
 void printBytesHexa(const char *title, const unsigned char *bytes, size_t size);
 void printBitsOfByte(const char *title, const unsigned char *byteSrc);
 
@@ -21,15 +18,13 @@ int main(int argc, char *argv[])
 		showUsage(argv[0]);
 		exit(1);
 	}
-	// FILE *gif_dest = fopen(argv[2], "w");
-
-	// if (gif_dest == NULL)
-	// {
-	// 	perror(strcat("Open dest file ", argv[2]));
-	// 	return -1;
-	// }
 
 	printf("Max Local Color Tables in source file : %d\n", getMaxLCT(argv[1]));
+}
+
+void showUsage(const char *name)
+{
+	printf("Usage : %s SOURCE DESTINATION\n\n", name);
 }
 
 void printBytesHexa(const char *title, const unsigned char *bytes, size_t size)

@@ -11,7 +11,7 @@ run : build
 	# ./dist/ReadGif rsc/hacker.gif rsc/steg.gif                              #
 	###########################################################################
 	@echo
-	@./dist/ReadGif rsc/hacker.gif rsc/steg.gif
+	@./dist/ReadGif rsc/dog.gif rsc/steg.gif
 
 build : dist/ReadGif
 

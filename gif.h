@@ -34,15 +34,15 @@ enum gif_section
 	application,
 	comment,
 	image_descr,
-	local_color_table,
-	image_data,
 	trailer
 };
 
 bool hasColorTable(const unsigned char *packed_field);
 unsigned sizeOfColorTable(const unsigned char *packed_field);
 
+int getMaxLCT(const char* source);
 enum gif_section read_gif_section(FILE *source);
 
-void passSection(FILE *source, enum gif_section section);
+void passHeaderLSDGCT(FILE *source);
 void passDataSubBlocks(FILE *source);
+void passImageDescrBlock(FILE *source);

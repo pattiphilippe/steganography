@@ -26,8 +26,7 @@ typedef struct __attribute__((__packed__)) image_descr_t
 	unsigned char packed_field;
 } image_descr_t;
 
-//TODO try typedef
-enum gif_section
+typedef enum gif_section_t
 {
 	graphics,
 	plain_text,
@@ -35,13 +34,13 @@ enum gif_section
 	comment,
 	image_descr,
 	trailer
-};
+} gif_section_t;
 
 bool hasColorTable(const unsigned char *packed_field);
 unsigned sizeOfColorTable(const unsigned char *packed_field);
 
 int getMaxLCT(const char* source);
-enum gif_section read_gif_section(FILE *source);
+gif_section_t read_gif_section(FILE *source);
 
 void passHeaderLSDGCT(FILE *source);
 void passDataSubBlocks(FILE *source);

@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <errno.h>
+#include <string.h>
 #include "gif.h"
 
 bool hasColorTable(const unsigned char *packed_field)
@@ -12,7 +13,7 @@ unsigned sizeOfColorTable(const unsigned char *packed_field)
 	return 3 * pow(2.0, (color_resolution + 1));
 }
 
-enum gif_section read_gif_section(FILE *source)
+gif_section_t read_gif_section(FILE *source)
 {
 	unsigned char buffer;
 	bool again;
@@ -56,9 +57,8 @@ int getMaxLCT(const char *source)
 	}
 	passHeaderLSDGCT(gif_src);
 
-	//TODO try typedef enum gif_section
 	int maxLCT = 0;
-	enum gif_section section = read_gif_section(gif_src);
+	gif_section_t section = read_gif_section(gif_src);
 	while (section != trailer)
 	{
 		printf("in while section with section : %d, at ftell : %ld\n\n", section, ftell(gif_src));

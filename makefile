@@ -28,4 +28,4 @@ dist/gif_util.o : gif_util.c gif_util.h
 	gcc -std=c99 -Wall -pedantic -o dist/gif_util.o -c gif_util.c 
 
 clean :
-	rm -f ReadGif dist/*
+	rm -f ReadGif dist/* rsc/steg.gif

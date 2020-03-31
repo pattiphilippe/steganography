@@ -21,7 +21,7 @@ gif_section_t read_gif_section(FILE *source)
 	{
 		again = false;
 		fread(&buffer, sizeof(char), 1, source);
-		printf("bite of section type read : 0x%02x\n", buffer);
+		printf("byte of section type read : 0x%02x\n", buffer);
 		switch (buffer)
 		{
 		case 0X2C:
@@ -46,6 +46,58 @@ gif_section_t read_gif_section(FILE *source)
 	exit(0);
 }
 
+void passHeaderLsdGct(FILE *source)
+{
+	copyHeaderLsdGct(source, NULL, false, NULL, NULL);
+}
+
+void copyHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *posGCT)
+{
+	printf("COUCOU\n");
+	header_lsd_t header_lsd;
+	fread(&header_lsd, sizeof(char), sizeof(header_lsd_t), source);
+	bool hasGCT = hasColorTable(&(header_lsd.packed_field));
+	if (hasGCT)
+	{
+		printf("COUCOU\n");
+		int size = sizeOfColorTable(&(header_lsd.packed_field));
+		if (copy)
+		{
+			printf("COUCOU\n");
+			if (dest == NULL)
+			{
+				errno = 22;
+				perror("gif_util.c::copyHeaderLSDGCT : dest = NULL");
+				exit(0);
+			}
+			printf("COUCOU\n");
+			*sizeGCT = size;
+			printf("COUCOU\n");
+			*posGCT = ftell(source);
+			fwrite(&header_lsd, sizeof(char), sizeof(header_lsd), dest);
+			copyGCT(source, dest, size, *posGCT);
+			printf("COUCOU\n");
+		}
+		else
+		{
+			fseek(source, size, SEEK_CUR);
+		}
+	}
+}
+
+void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT)
+{
+	long savePos = ftell(source);
+	fseek(source, posGCT, SEEK_SET);
+	char buffer[6];
+	for (int i = 0; i < sizeGCT; i += 6)
+	{
+		fread(&buffer, 6, 1, source);
+		fwrite(&buffer, 6, 1, dest);
+	}
+	fseek(source, savePos, SEEK_SET);
+}
+
 void passDataSubBlocks(FILE *source)
 {
 	unsigned char size;
@@ -54,17 +106,6 @@ void passDataSubBlocks(FILE *source)
 	{
 		fseek(source, size, SEEK_CUR);
 		fread(&size, sizeof(char), 1, source);
-	}
-}
-
-void passHeaderLSDGCT(FILE *source){
-	header_lsd_t header_lsd;
-	fread(&header_lsd, sizeof(char), sizeof(header_lsd_t), source);
-	bool hasGCT = hasColorTable(&(header_lsd.packed_field));
-	if (hasGCT)
-	{
-		unsigned sizeGCT = sizeOfColorTable(&(header_lsd.packed_field));
-		fseek(source, sizeGCT, SEEK_CUR);
 	}
 }
 

@@ -40,6 +40,8 @@ bool hasColorTable(const unsigned char *packed_field);
 unsigned sizeOfColorTable(const unsigned char *packed_field);
 gif_section_t read_gif_section(FILE *source);
 
-void passHeaderLSDGCT(FILE *source);
+void passHeaderLsdGct(FILE *source);
+void copyHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *posGCT);
+void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT);
 void passDataSubBlocks(FILE *source);
 void passImageDescrBlock(FILE *source);

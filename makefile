@@ -5,12 +5,12 @@
 #AUTEUR : Foud Hind et Patti Philippe
 
 readGif : ReadGif
-	@clear
-	################################################
-	# Run command with "hacker.gif" as source file #
-	################################################
+	#@clear
+	###########################################################################
+	# Run command with "hacker.gif" as source file and "steg.gif as dest file #
+	###########################################################################
 	@echo
-	@./ReadGif rsc/hacker.gif
+	@./ReadGif rsc/hacker.gif rsc/steg.gif
 
 ReadGif : gif.o main.o 
 	gcc main.o gif.o -o ReadGif -lm

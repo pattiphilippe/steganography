@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <errno.h>
 #include <stdbool.h>
-#include <math.h>
+#include <stdlib.h>
 
 #include "gif.h"
 
-void printBytes(const char *title, const unsigned char *bytes, size_t size);
-bool hasGlobalColorTable(const header_lsd_t *header_lsd);
+void printBytesHexa(const char *title, const unsigned char *bytes, size_t size);
 void printBitsOfByte(const char *title, const unsigned char *byteSrc);
-unsigned sizeOfGlobalColorTable(const header_lsd_t *header_lsd);
 
 int main(int argc, char *argv[])
 {
@@ -26,17 +24,17 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	header_lsd_t header_lsd;
+	header_lsd_t header_lsd = {0};
 	fread(&header_lsd, sizeof(char), sizeof(header_lsd_t), gif_src);
-	bool hasGCT = hasGlobalColorTable(&header_lsd);
-	unsigned sizeGCT = sizeOfGlobalColorTable(&header_lsd);
+	bool hasGCT = hasColorTable(&(header_lsd.packed_field));
+	unsigned sizeGCT = sizeOfColorTable(&(header_lsd.packed_field));
 	if (hasGCT)
 		fseek(gif_src, sizeGCT, SEEK_CUR);
 
 	enum gif_section section = read_gif_section(gif_src);
 	while (section != trailer)
 	{
-		printf("in while section with section : %d\n\n", section);
+		printf("in while section with section : %d, at ftell : %ld\n\n", section, ftell(gif_src));
 		switch (section)
 		{
 		case 0:
@@ -46,8 +44,20 @@ int main(int argc, char *argv[])
 			passDataSubBlocks(gif_src);
 			break;
 		case 4:
-
+			printf("");
+			image_descr_t image_descr;
+			fread(&image_descr, sizeof(char), sizeof(image_descr), gif_src);
+			// printBytesHexa("image descr : ", &image_descr, sizeof(image_descr_t));
+			// printBitsOfByte("packed field of image descr : ", &(image_descr.packed_field));
+			bool hasLCT = hasColorTable(&(image_descr.packed_field));
+			unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
+			if (hasLCT)
+				fseek(gif_src, sizeLCT, SEEK_CUR);
+			fseek(gif_src, 1, SEEK_CUR); // in image data, passing LZW minimum code size byte
+			passDataSubBlocks(gif_src);
+			break;
 		default:
+			errno = 22;
 			perror("Section is yet unknown!\n");
 			exit(1);
 		}
@@ -55,22 +65,18 @@ int main(int argc, char *argv[])
 	}
 }
 
-void printBytes(const char *title, const unsigned char *bytes, size_t size)
+void printBytesHexa(const char *title, const unsigned char *bytes, size_t size)
 {
 	printf("%s\n", title);
 	for (int i = 0; i < size; ++i)
 	{
 		if (!(i % 8) && i)
 			printf("\n");
-		printf("0x%0x ", bytes[i]);
+		printf("0x%02x ", bytes[i]);
 	}
 	printf("\n\n");
 }
 
-bool hasGlobalColorTable(const header_lsd_t *header_lsd)
-{
-	return header_lsd->packed_field & (1 << 7);
-}
 
 void printBitsOfByte(const char *title, const unsigned char *byteSrc)
 {
@@ -84,10 +90,4 @@ void printBitsOfByte(const char *title, const unsigned char *byteSrc)
 		byte <<= 1;
 	}
 	printf("\n\n");
-}
-
-unsigned sizeOfGlobalColorTable(const header_lsd_t *header_lsd)
-{
-	unsigned char color_resolution = (header_lsd->packed_field & 0x70) >> 4;
-	return 3 * pow(2.0, (color_resolution + 1));
 }

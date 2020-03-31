@@ -9,16 +9,17 @@ readGif : ReadGif
 	################################################
 	# Run command with "hacker.gif" as source file #
 	################################################
+	@echo
 	@./ReadGif rsc/hacker.gif
 
-ReadGif : main.o gif.o
+ReadGif : gif.o main.o 
 	gcc main.o gif.o -o ReadGif -lm
 
 main.o : main.c gif.h
 	gcc -std=c99 -Wall -pedantic main.c -c -o main.o 
 
 gif.o : gif.c gif.h
-	gcc -std=c99 -Wall -pedantic gif.c -c -o gif.o
+	gcc -std=c99 -Wall -pedantic gif.c -c -o gif.o 
 
 clean :
 	@rm -f ReadGif *.o *~

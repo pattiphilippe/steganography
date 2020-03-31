@@ -1,7 +1,17 @@
 #include <stdlib.h>
+#include <errno.h>
 #include "gif.h"
 
 
+bool hasColorTable(const unsigned char *packed_field)
+{
+	return *packed_field & (1 << 7);
+}
+unsigned sizeOfColorTable(const unsigned char *packed_field)
+{
+	unsigned char color_resolution = (*packed_field & 0x70) >> 4;
+	return 3 * pow(2.0, (color_resolution + 1));
+}
 
 enum gif_section read_gif_section(FILE * source){
 	unsigned char buffer;
@@ -9,7 +19,7 @@ enum gif_section read_gif_section(FILE * source){
 	do {
 		again = false;
 		fread(&buffer, sizeof(char), 1, source);
-		printf("bite of section type read : 0x%0x\n", buffer);
+		printf("bite of section type read : 0x%02x\n", buffer);
 		switch(buffer){
 			case 0X2C:
 				return image_descr;
@@ -28,7 +38,9 @@ enum gif_section read_gif_section(FILE * source){
 		        return trailer;
 		}
 	} while (again);
-	return -1;			
+	errno = 22;
+	perror("unknown section");	
+	exit(0);	
 }
 
 
@@ -47,7 +59,7 @@ void passSection(FILE * source, enum gif_section section){
 }
 
 
-void passDataSubBlocks(const FILE * source){
+void passDataSubBlocks(FILE * source){
 	unsigned char size;
 	fread(&size, sizeof(size), 1, source);
 	while(size){

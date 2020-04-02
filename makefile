@@ -17,11 +17,14 @@
 # make build_gif   : compile uniquement la demo pour le format GIF
 # make clean_gif   : supprime uniquement les fichiers generes lies au format GIF
 
-run : run_bmp run_gif
+run : run_gif #run_bmp 
 
-build : build_bmp build_gif
+build : build_gif #build_bmp
 
-clean : clean_bmp clean_gif
+clean : clean_gif #clean_bmp 
+
+
+
 
 run_bmp : build_bmp
 	##################################################################################################

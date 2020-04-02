@@ -26,21 +26,21 @@ run_gif : build_gif
 	# ./dist/ReadGif rsc/hacker.gif rsc/steg.gif                              #
 	###########################################################################
 	@echo
-	@./dist/ReadGif rsc/dog.gif rsc/steg.gif
+	@./dist/gif/ReadGif rsc/dog.gif rsc/steg.gif
 
-build_gif : dist/ReadGif
+build_gif : dist/gif/ReadGif
 
-dist/ReadGif : dist/gif_util.o dist/gif_steg.o dist/gif_main.o 
-	gcc -o dist/ReadGif dist/gif_main.o dist/gif_steg.o dist/gif_util.o -lm 
+dist/gif/ReadGif : dist/gif/gif_util.o dist/gif/gif_steg.o dist/gif/gif_main.o 
+	gcc -o dist/gif/ReadGif dist/gif/gif_main.o dist/gif/gif_steg.o dist/gif/gif_util.o -lm 
 
-dist/gif_main.o : src/gif/gif_main.c src/gif/gif_steg.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif_main.o -c src/gif/gif_main.c   
+dist/gif/gif_main.o : src/gif/gif_main.c src/gif/gif_steg.h
+	gcc -std=c99 -Wall -pedantic -o dist/gif/gif_main.o -c src/gif/gif_main.c   
 
-dist/gif_steg.o : src/gif/gif_steg.c src/gif/gif_steg.h src/gif/gif_util.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif_steg.o -c src/gif/gif_steg.c 
+dist/gif/gif_steg.o : src/gif/gif_steg.c src/gif/gif_steg.h src/gif/gif_util.h
+	gcc -std=c99 -Wall -pedantic -o dist/gif/gif_steg.o -c src/gif/gif_steg.c 
 
-dist/gif_util.o : src/gif/gif_util.c src/gif/gif_util.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif_util.o -c src/gif/gif_util.c 
+dist/gif/gif_util.o : src/gif/gif_util.c src/gif/gif_util.h
+	gcc -std=c99 -Wall -pedantic -o dist/gif/gif_util.o -c src/gif/gif_util.c 
 
 clean :
-	rm -f ReadGif dist/* rsc/steg.gif
+	rm -f dist/gif/* rsc/steg.gif

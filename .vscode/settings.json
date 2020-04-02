@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "gif_util.h": "c"
+        "gif_util.h": "c",
+        "bitmap.h": "c"
     }
 }

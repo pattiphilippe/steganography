@@ -6,18 +6,21 @@
 
 readBMP : ReadBMP
 	@clear
-	#@./ReadBMP enc hill_src.bmp hill_dest.bmp input_message.txt
-	@./ReadBMP enc splash_multicolor_src.bmp splash_multicolor_dest.bmp input_message.txt
+	@./ReadBMP enc io/splash_multicolor_src.bmp io/splash_multicolor_dest.bmp io/input_message.txt
 
-ReadBMP : main.o test.o
-	gcc main.o test.o -o ReadBMP
+ReadBMP : main.o bitmap.o utils.o
+	gcc main.o bitmap.o utils.o -o ReadBMP
 
-main.o : main.c test.h
+main.o : main.c bitmap.h utils.h
 	gcc -std=c99 -Wall -pedantic main.c -c -o main.o
 
-test.o : test.c test.h
-	gcc -std=c99 -Wall -pedantic test.c -c -o test.o
+bitmap.o : bitmap.c bitmap.h
+	gcc -std=c99 -Wall -pedantic bitmap.c -c -o bitmap.o
+
+utils.o: utils.c utils.h
+	gcc -std=c99 -Wall -pedantic utils.c -c -o utils.o
 
 clean :
 	@rm -f ReadBMP *.o *~
+	@rm -f io/*_dest.bmp
 

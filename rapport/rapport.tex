@@ -1,0 +1,50 @@
+%\documentclass[french, a4paper, 12pt, titlepage]{article}
+\documentclass[french, a4paper, 10pt]{article} % si la table des matiï¿œes est petite
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[french]{babel}
+% Modification des marges ------------------------------
+\oddsidemargin -4mm 	% Marge de gauche -4mm
+\textwidth 17cm 	% Largeur de gauche = 17cm
+\textheight 22cm 	% Hauteur du texte = 22cm
+\parindent 0cm		% Pas d'indentation de paragraphe
+% -----------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage{graphicx,color, caption}
+\usepackage{epsfig}
+\usepackage{fancyhdr}
+%\usepackage{fancyvrb}
+\usepackage{textcomp}
+\pagestyle{fancy}
+\usepackage{listings}		% pour incorporer des sources
+\usepackage[francais]{layout}	% pour obtenir le layout
+\usepackage{fullpage}		% pour obtenir le layout
+\usepackage{makeidx}		% pour créer une table d'index
+%\usepackage{shadow}		% pour faire des encadrements
+\pdfminorversion=7
+\begin{document}
+% Titres sur  chaque page -----------------------------
+\lhead{ } % Haut gauche
+%\chead{Haut centre}
+\rhead{Stéganographie : Bitmap et GIF}
+\lfoot{\copyright{Foud Hind et Patti Philippe}}
+\cfoot{ } % Bas centre - obligatoire !
+\rfoot{\thepage} % Bas droite
+\renewcommand{\headrulewidth}{0.4pt} 
+\renewcommand{\footrulewidth}{0.4pt} 
+% Numérotation et table des matières -----------------
+\setcounter{tocdepth}{1}    % fixe la profondeur de la table des matières
+\setcounter{secnumdepth}{5} % fixe la profondeur de la numérotation des sections et paragraph
+% Page de garde --------------------------------------
+\title{\emph{\textbf{Stéganographie : Bitmap et GIF}}}
+\author{Foud Hind et Patti Philippe}
+\date{3 avril 2020}
+\maketitle
+\tableofcontents
+% Inclusion des textes
+\include{intro}
+\include{bitmap} % pas de saut de page
+\include{gif}
+\include{conclusion}
+\printindex			% Impression de la table des index
+\end{document}

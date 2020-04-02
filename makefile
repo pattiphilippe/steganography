@@ -1,8 +1,21 @@
 #NOM : Makefile
-#CLASSE : SYSG5 - Steganography Gif
-#OBJET : Demo du programme
-#HOWTO : make ; make run_gif; make build_gif; make clean
+#CLASSE : SYSG5 
+#OBJET : Steganographie avec Bitmap et GIF
 #AUTEUR : Foud Hind et Patti Philippe
+#HOWTO : make ; make run_gif; make build_gif; make clean
+
+# make             : execute les demos
+# make run         : execute les demos
+# make build       : compile les demos	
+# make clean       : supprime les fichiers generes	
+
+# make run_bmp     : execute uniquement la demo pour le format bmp
+# make build_bmp   : compile uniquement la demo pour le format bmp
+# make clean_bmp   : supprime uniquement les fichiers generes lies au format bmp
+
+# make run_gif     : execute uniquement la demo pour le format GIF
+# make build_gif   : compile uniquement la demo pour le format GIF
+# make clean_gif   : supprime uniquement les fichiers generes lies au format GIF
 
 run : run_gif
 

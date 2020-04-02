@@ -1,4 +1,4 @@
-#include "gif_util.h"
+#include "util.h"
 
 void writeGifWithLCT(const char* source, const char* dest);
 

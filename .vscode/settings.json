@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "gif_util.h": "c",
-        "bitmap.h": "c"
+        "bitmap.h": "c",
+        "steg.h": "c",
+        "util.h": "c"
     }
 }

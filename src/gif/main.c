@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "gif_steg.h"
+#include "steg.h"
 
 void showUsage(const char *name);
 void printBytesHexa(const char *title, const unsigned char *bytes, size_t size);

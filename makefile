@@ -64,17 +64,17 @@ run_gif : build_gif
 
 build_gif : dist/gif/ReadGIF
 
-dist/gif/ReadGIF : dist/gif/gif_util.o dist/gif/gif_steg.o dist/gif/gif_main.o 
-	gcc -o dist/gif/ReadGIF dist/gif/gif_main.o dist/gif/gif_steg.o dist/gif/gif_util.o -lm 
+dist/gif/ReadGIF : dist/gif/util.o dist/gif/steg.o dist/gif/main.o 
+	gcc -o dist/gif/ReadGIF dist/gif/main.o dist/gif/steg.o dist/gif/util.o -lm 
 
-dist/gif/gif_main.o : src/gif/gif_main.c src/gif/gif_steg.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif/gif_main.o -c src/gif/gif_main.c   
+dist/gif/main.o : src/gif/main.c src/gif/steg.h
+	gcc -std=c99 -Wall -pedantic -o dist/gif/main.o -c src/gif/main.c   
 
-dist/gif/gif_steg.o : src/gif/gif_steg.c src/gif/gif_steg.h src/gif/gif_util.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif/gif_steg.o -c src/gif/gif_steg.c 
+dist/gif/steg.o : src/gif/steg.c src/gif/steg.h src/gif/util.h
+	gcc -std=c99 -Wall -pedantic -o dist/gif/steg.o -c src/gif/steg.c 
 
-dist/gif/gif_util.o : src/gif/gif_util.c src/gif/gif_util.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif/gif_util.o -c src/gif/gif_util.c 
+dist/gif/util.o : src/gif/util.c src/gif/util.h
+	gcc -std=c99 -Wall -pedantic -o dist/gif/util.o -c src/gif/util.c 
 
 clean_gif :
 	@rm -f dist/gif/* rsc/steg.gif

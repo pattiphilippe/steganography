@@ -2,7 +2,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
-#include "gif_steg.h"
+#include "steg.h"
 
 int getMaxLCT(const char *source)
 {

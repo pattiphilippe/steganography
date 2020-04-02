@@ -1,7 +1,7 @@
 #include <errno.h>
 #include <math.h>
 #include <stdlib.h>
-#include "gif_util.h"
+#include "util.h"
 
 bool hasColorTable(const unsigned char *packed_field)
 {

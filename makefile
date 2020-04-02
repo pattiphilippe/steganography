@@ -1,10 +1,12 @@
 #NOM : Makefile
 #CLASSE : SYSG5 - Steganography Gif
 #OBJET : Demo du programme
-#HOWTO : make ; make run; make build; make clean
+#HOWTO : make ; make run_gif; make build_gif; make clean
 #AUTEUR : Foud Hind et Patti Philippe
 
-run : build 
+run : run_gif
+
+run_gif : build_gif
 	###########################################################################
 	# Run command with "hacker.gif" as source file and "steg.gif as dest file #
 	#                                                                         #
@@ -13,19 +15,19 @@ run : build
 	@echo
 	@./dist/ReadGif rsc/dog.gif rsc/steg.gif
 
-build : dist/ReadGif
+build_gif : dist/ReadGif
 
-dist/ReadGif : dist/gif_util.o dist/gif_steg.o dist/main.o 
-	gcc -o dist/ReadGif dist/main.o dist/gif_steg.o dist/gif_util.o -lm 
+dist/ReadGif : dist/gif_util.o dist/gif_steg.o dist/gif_main.o 
+	gcc -o dist/ReadGif dist/gif_main.o dist/gif_steg.o dist/gif_util.o -lm 
 
-dist/main.o : main.c gif_steg.h
-	gcc -std=c99 -Wall -pedantic -o dist/main.o -c main.c   
+dist/gif_main.o : src/gif/gif_main.c src/gif/gif_steg.h
+	gcc -std=c99 -Wall -pedantic -o dist/gif_main.o -c src/gif/gif_main.c   
 
-dist/gif_steg.o : gif_steg.c gif_steg.h gif_util.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif_steg.o -c gif_steg.c 
+dist/gif_steg.o : src/gif/gif_steg.c src/gif/gif_steg.h src/gif/gif_util.h
+	gcc -std=c99 -Wall -pedantic -o dist/gif_steg.o -c src/gif/gif_steg.c 
 
-dist/gif_util.o : gif_util.c gif_util.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif_util.o -c gif_util.c 
+dist/gif_util.o : src/gif/gif_util.c src/gif/gif_util.h
+	gcc -std=c99 -Wall -pedantic -o dist/gif_util.o -c src/gif/gif_util.c 
 
 clean :
 	rm -f ReadGif dist/* rsc/steg.gif

@@ -4,23 +4,23 @@
 #HOWTO : make ; make clean
 #AUTEUR : Foud Hind et Patti Philippe
 
-readBMP : ReadBMP
+readBMP : dist/bmp/ReadBMP
 	@clear
-	@./ReadBMP enc io/splash_multicolor_src.bmp io/splash_multicolor_dest.bmp io/input_message.txt
+	@./dist/bmp/ReadBMP enc rsc/splash_multicolor_src.bmp rsc/splash_multicolor_dest.bmp rsc/input_message.txt
 
-ReadBMP : main.o bitmap.o utils.o
-	gcc main.o bitmap.o utils.o -o ReadBMP
+dist/bmp/ReadBMP : dist/bmp/main.o dist/bmp/bitmap.o dist/bmp/utils.o
+	gcc dist/bmp/main.o dist/bmp/bitmap.o dist/bmp/utils.o -o dist/bmp/ReadBMP
 
-main.o : main.c bitmap.h utils.h
-	gcc -std=c99 -Wall -pedantic main.c -c -o main.o
+dist/bmp/main.o : src/bmp/main.c src/bmp/bitmap.h src/bmp/utils.h
+	gcc -std=c99 -Wall -pedantic src/bmp/main.c -c -o dist/bmp/main.o
 
-bitmap.o : bitmap.c bitmap.h
-	gcc -std=c99 -Wall -pedantic bitmap.c -c -o bitmap.o
+dist/bmp/bitmap.o : src/bmp/bitmap.c src/bmp/bitmap.h
+	gcc -std=c99 -Wall -pedantic src/bmp/bitmap.c -c -o dist/bmp/bitmap.o
 
-utils.o: utils.c utils.h
-	gcc -std=c99 -Wall -pedantic utils.c -c -o utils.o
+dist/bmp/utils.o: src/bmp/utils.c src/bmp/utils.h
+	gcc -std=c99 -Wall -pedantic src/bmp/utils.c -c -o dist/bmp/utils.o
 
 clean :
-	@rm -f ReadBMP *.o *~
-	@rm -f io/*_dest.bmp
+	@rm -f dist/bmp/*
+	@rm -f rsc/*_dest.bmp
 

@@ -23,6 +23,9 @@ build : build_bmp build_gif
 
 clean : clean_bmp clean_gif
 
+
+
+
 run_bmp : build_bmp
 	##################################################################################################
 	# Run ReadBMP with "splash_multicolor_src.bmp" and "input_message.txt"                           #

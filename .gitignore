@@ -1,6 +1,3 @@
 dist/*/*.o
 Ressources-20200401
 
-rapport/*.log
-rapport/*.aux
-rapport/*.toc

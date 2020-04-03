@@ -39,7 +39,7 @@ int getMaxLCT(const char *source)
 		}
 		section = read_gif_section(gif_src, NULL, false);
 	}
-	printf("last section read : %d, at ftell : %d\n", section, ftell(gif_src));
+	printf("last section read : %d, at ftell : %ld\n", section, ftell(gif_src));
 
 	fclose(gif_src);
 	return maxLCT;
@@ -88,7 +88,7 @@ void writeGifWithLCT(const char *source, const char *dest)
 		}
 		section = read_gif_section(gif_src, gif_dest, true);
 	}
-	printf("last section read : %d, at ftell : %d\n", section, ftell(gif_src));
+	printf("last section read : %d, at ftell : %ld\n", section, ftell(gif_src));
 
 	fclose(gif_src);
 	fclose(gif_dest);

@@ -63,7 +63,7 @@ run_gif : build_gif
 	# ./dist/gif/ReadGIF rsc/hacker.gif rsc/steg.gif                          #
 	###########################################################################
 	@echo
-	@./dist/gif/ReadGIF rsc/hacker.gif rsc/steg.gif
+	@./dist/gif/ReadGIF rsc/murica.gif rsc/steg.gif > rsc/read_gif.log
 
 build_gif : dist/gif/ReadGIF
 
@@ -80,4 +80,4 @@ dist/gif/util.o : src/gif/util.c src/gif/util.h
 	gcc -std=c99 -Wall -pedantic -o dist/gif/util.o -c src/gif/util.c 
 
 clean_gif :
-	@rm -f dist/gif/* rsc/steg.gif
+	@rm -f dist/gif/* rsc/steg.gif rsc/read_gif.log

@@ -21,9 +21,9 @@ gif_section_t read_gif_section(FILE *source, FILE *dest, bool copy)
 	do
 	{
 		again = false;
-		printf("in read section before reading, with copy = %d\n", copy);
+		//printf("in read section before reading, with copy = %d\n", copy);
 		fread(&buffer, 1, 1, source);
-		printf("byte of section type read : 0x%02x\n", buffer);
+		//printf("byte of section type read (copy = %d) : 0x%02x\n", copy, buffer);
 		if (copy)
 		{
 			fwrite(&buffer, 1, 1, dest);
@@ -44,7 +44,10 @@ gif_section_t read_gif_section(FILE *source, FILE *dest, bool copy)
 		case 0Xfe:
 			return comment;
 		case 0X3B:
+		{
+			printf("read trailer\n");
 			return trailer;
+		}
 		}
 	} while (again);
 	errno = 22;
@@ -142,6 +145,7 @@ void passImageDescrBlock(FILE *source)
 	fread(&image_descr, 1, sizeof(image_descr), source);
 	if (hasColorTable(&(image_descr.packed_field)))
 	{
+		printf("has LCT\n");
 		unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
 		fseek(source, sizeLCT, SEEK_CUR);
 	}

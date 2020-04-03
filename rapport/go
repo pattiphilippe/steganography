@@ -1,0 +1,7 @@
+#! /bin/sh
+FN=rapport
+latex $FN.tex
+rm $FN.aux $FN.log $FN.out
+dvips $FN.dvi -o $FN.ps
+rm $FN.dvi
+gv $FN.ps

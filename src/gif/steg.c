@@ -19,7 +19,6 @@ int getMaxLCT(const char *source)
 	gif_section_t section = read_gif_section(gif_src, NULL, false);
 	while (section != trailer)
 	{
-		printf("in while section with section : %d, at ftell : %ld\n", section, ftell(gif_src));
 		switch (section)
 		{
 		case 0:
@@ -39,7 +38,6 @@ int getMaxLCT(const char *source)
 		}
 		section = read_gif_section(gif_src, NULL, false);
 	}
-	printf("last section read : %d, at ftell : %ld\n", section, ftell(gif_src));
 
 	fclose(gif_src);
 	return maxLCT;
@@ -62,14 +60,11 @@ void writeGifWithLCT(const char *source, const char *dest)
 
 	int sizeGCT = 0;
 	long posGCT = 0;
-	printf("ftell() before copy header : %ld\n", ftell(gif_src));
 	copyHeaderLsdGct(gif_src, gif_dest, &sizeGCT, &posGCT);
-	printf("ftell() after copy header : %ld\n", ftell(gif_src));
 
 	gif_section_t section = read_gif_section(gif_src, gif_dest, true);
 	while (section != trailer)
 	{
-		printf("in while section with section : %d, at ftell : %ld\n", section, ftell(gif_src));
 		switch (section)
 		{
 		case 0:
@@ -88,7 +83,6 @@ void writeGifWithLCT(const char *source, const char *dest)
 		}
 		section = read_gif_section(gif_src, gif_dest, true);
 	}
-	printf("last section read : %d, at ftell : %ld\n", section, ftell(gif_src));
 
 	fclose(gif_src);
 	fclose(gif_dest);

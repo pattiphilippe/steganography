@@ -21,8 +21,7 @@ int main(int argc, char *argv[])
 
 	printf("Max Local Color Tables in source file : %d\n\n\n", getMaxLCT(argv[1]));
 	writeGifWithLCT(argv[1], argv[2]);
-	printf("\n\n\n TEST OF NEW DEST FILE \n\n\n");
-	printf("\n\n\nMax Local Color Tables in dest file : %d\n\n\n", getMaxLCT(argv[2]));
+	printf("\nMax Local Color Tables in dest file : %d\n\n\n", getMaxLCT(argv[2]));
 }
 
 void showUsage(const char *name)

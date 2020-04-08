@@ -63,7 +63,7 @@ run_gif : build_gif
 	# ./dist/gif/ReadGIF rsc/hacker.gif rsc/steg.gif                          #
 	###########################################################################
 	@echo
-	@./dist/gif/ReadGIF rsc/murica.gif rsc/steg.gif > rsc/read_gif.log
+	@./dist/gif/ReadGIF rsc/murica.gif rsc/steg.gif
 
 build_gif : dist/gif/ReadGIF
 

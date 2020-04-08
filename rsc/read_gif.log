@@ -293,430 +293,572 @@ ftell() after copy header : 781
 in while section with section : 2, at ftell : 783
 in while section with section : 0, at ftell : 802
 in while section with section : 4, at ftell : 809
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 809
+ftell() after : 1586
 in while section with section : 0, at ftell : 31570
 in while section with section : 4, at ftell : 31577
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 32345
+ftell() after : 33122
 in while section with section : 0, at ftell : 61766
 in while section with section : 4, at ftell : 61773
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 63309
+ftell() after : 64086
 in while section with section : 0, at ftell : 91650
 in while section with section : 4, at ftell : 91657
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 93961
+ftell() after : 94738
 in while section with section : 0, at ftell : 124636
 in while section with section : 4, at ftell : 124643
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 127715
+ftell() after : 128492
 in while section with section : 0, at ftell : 155219
 in while section with section : 4, at ftell : 155226
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 159066
+ftell() after : 159843
 in while section with section : 0, at ftell : 183801
 in while section with section : 4, at ftell : 183808
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 188416
+ftell() after : 189193
 in while section with section : 0, at ftell : 211861
 in while section with section : 4, at ftell : 211868
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 217244
+ftell() after : 218021
 in while section with section : 0, at ftell : 239145
 in while section with section : 4, at ftell : 239152
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 245296
+ftell() after : 246073
 in while section with section : 0, at ftell : 265577
 in while section with section : 4, at ftell : 265584
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 272496
+ftell() after : 273273
 in while section with section : 0, at ftell : 295021
 in while section with section : 4, at ftell : 295028
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 302708
+ftell() after : 303485
 in while section with section : 0, at ftell : 324082
 in while section with section : 4, at ftell : 324089
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 332537
+ftell() after : 333314
 in while section with section : 0, at ftell : 352730
 in while section with section : 4, at ftell : 352737
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 361953
+ftell() after : 362730
 in while section with section : 0, at ftell : 384168
 in while section with section : 4, at ftell : 384175
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 394159
+ftell() after : 394936
 in while section with section : 0, at ftell : 409985
 in while section with section : 4, at ftell : 409992
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 420744
+ftell() after : 421521
 in while section with section : 0, at ftell : 438137
 in while section with section : 4, at ftell : 438144
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 449664
+ftell() after : 450441
 in while section with section : 0, at ftell : 466860
 in while section with section : 4, at ftell : 466867
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 479155
+ftell() after : 479932
 in while section with section : 0, at ftell : 496165
 in while section with section : 4, at ftell : 496172
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 509228
+ftell() after : 510005
 in while section with section : 0, at ftell : 527940
 in while section with section : 4, at ftell : 527947
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 541771
+ftell() after : 542548
 in while section with section : 0, at ftell : 560807
 in while section with section : 4, at ftell : 560814
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 575406
+ftell() after : 576183
 in while section with section : 0, at ftell : 594653
 in while section with section : 4, at ftell : 594660
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 610020
+ftell() after : 610797
 in while section with section : 0, at ftell : 629056
 in while section with section : 4, at ftell : 629063
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 645191
+ftell() after : 645968
 in while section with section : 0, at ftell : 663884
 in while section with section : 4, at ftell : 663891
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 680787
+ftell() after : 681564
 in while section with section : 0, at ftell : 698565
 in while section with section : 4, at ftell : 698572
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 716236
+ftell() after : 717013
 in while section with section : 0, at ftell : 733359
 in while section with section : 4, at ftell : 733366
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 751798
+ftell() after : 752575
 in while section with section : 0, at ftell : 767759
 in while section with section : 4, at ftell : 767766
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 786966
+ftell() after : 787743
 in while section with section : 0, at ftell : 802482
 in while section with section : 4, at ftell : 802489
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 822457
+ftell() after : 823234
 in while section with section : 0, at ftell : 836279
 in while section with section : 4, at ftell : 836286
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 857022
+ftell() after : 857799
 in while section with section : 0, at ftell : 869568
 in while section with section : 4, at ftell : 869575
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 891079
+ftell() after : 891856
 in while section with section : 0, at ftell : 903029
 in while section with section : 4, at ftell : 903036
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 925308
+ftell() after : 926085
 in while section with section : 0, at ftell : 935034
 in while section with section : 4, at ftell : 935041
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 958081
+ftell() after : 958858
 in while section with section : 0, at ftell : 966046
 in while section with section : 4, at ftell : 966053
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 989861
+ftell() after : 990638
 in while section with section : 0, at ftell : 999750
 in while section with section : 4, at ftell : 999757
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1024333
+ftell() after : 1025110
 in while section with section : 0, at ftell : 1030956
 in while section with section : 4, at ftell : 1030963
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1056307
+ftell() after : 1057084
 in while section with section : 0, at ftell : 1061831
 in while section with section : 4, at ftell : 1061838
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1087950
+ftell() after : 1088727
 in while section with section : 0, at ftell : 1092625
 in while section with section : 4, at ftell : 1092632
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1119512
+ftell() after : 1120289
 in while section with section : 0, at ftell : 1124687
 in while section with section : 4, at ftell : 1124694
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1152342
+ftell() after : 1153119
 in while section with section : 0, at ftell : 1152601
 in while section with section : 4, at ftell : 1152608
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1181024
+ftell() after : 1181801
 in while section with section : 0, at ftell : 1178479
 in while section with section : 4, at ftell : 1178486
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1207670
+ftell() after : 1208447
 in while section with section : 0, at ftell : 1209696
 in while section with section : 4, at ftell : 1209703
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1239655
+ftell() after : 1240432
 in while section with section : 0, at ftell : 1238205
 in while section with section : 4, at ftell : 1238212
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1268932
+ftell() after : 1269709
 in while section with section : 0, at ftell : 1266427
 in while section with section : 4, at ftell : 1266434
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1297922
+ftell() after : 1298699
 in while section with section : 0, at ftell : 1296254
 in while section with section : 4, at ftell : 1296261
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1328517
+ftell() after : 1329294
 in while section with section : 0, at ftell : 1326804
 in while section with section : 4, at ftell : 1326811
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1359835
+ftell() after : 1360612
 in while section with section : 0, at ftell : 1360506
 in while section with section : 4, at ftell : 1360513
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1394305
+ftell() after : 1395082
 in while section with section : 0, at ftell : 1394434
 in while section with section : 4, at ftell : 1394441
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1429001
+ftell() after : 1429778
 in while section with section : 0, at ftell : 1429536
 in while section with section : 4, at ftell : 1429543
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1464871
+ftell() after : 1465648
 in while section with section : 0, at ftell : 1465085
 in while section with section : 4, at ftell : 1465092
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1501188
+ftell() after : 1501965
 in while section with section : 0, at ftell : 1501307
 in while section with section : 4, at ftell : 1501314
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1538178
+ftell() after : 1538955
 in while section with section : 0, at ftell : 1537683
 in while section with section : 4, at ftell : 1537690
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1575322
+ftell() after : 1576099
 in while section with section : 0, at ftell : 1574027
 in while section with section : 4, at ftell : 1574034
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1612434
+ftell() after : 1613211
 in while section with section : 0, at ftell : 1609347
 in while section with section : 4, at ftell : 1609354
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1648522
+ftell() after : 1649299
 in while section with section : 0, at ftell : 1644843
 in while section with section : 4, at ftell : 1644850
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1684786
+ftell() after : 1685563
 in while section with section : 0, at ftell : 1680508
 in while section with section : 4, at ftell : 1680515
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1721219
+ftell() after : 1721996
 in while section with section : 0, at ftell : 1717012
 in while section with section : 4, at ftell : 1717019
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1758491
+ftell() after : 1759268
 in while section with section : 0, at ftell : 1752859
 in while section with section : 4, at ftell : 1752866
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1795106
+ftell() after : 1795883
 in while section with section : 0, at ftell : 1788295
 in while section with section : 4, at ftell : 1788302
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1831310
+ftell() after : 1832087
 in while section with section : 0, at ftell : 1823996
 in while section with section : 4, at ftell : 1824003
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1867779
+ftell() after : 1868556
 in while section with section : 0, at ftell : 1858891
 in while section with section : 4, at ftell : 1858898
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1903442
+ftell() after : 1904219
 in while section with section : 0, at ftell : 1893160
 in while section with section : 4, at ftell : 1893167
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1938479
+ftell() after : 1939256
 in while section with section : 0, at ftell : 1926918
 in while section with section : 4, at ftell : 1926925
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 1973005
+ftell() after : 1973782
 in while section with section : 0, at ftell : 1960008
 in while section with section : 4, at ftell : 1960015
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2006863
+ftell() after : 2007640
 in while section with section : 0, at ftell : 1992758
 in while section with section : 4, at ftell : 1992765
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2040381
+ftell() after : 2041158
 in while section with section : 0, at ftell : 2024866
 in while section with section : 4, at ftell : 2024873
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2073257
+ftell() after : 2074034
 in while section with section : 0, at ftell : 2058962
 in while section with section : 4, at ftell : 2058969
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2108121
+ftell() after : 2108898
 in while section with section : 0, at ftell : 2091269
 in while section with section : 4, at ftell : 2091276
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2141196
+ftell() after : 2141973
 in while section with section : 0, at ftell : 2122256
 in while section with section : 4, at ftell : 2122263
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2172951
+ftell() after : 2173728
 in while section with section : 0, at ftell : 2152715
 in while section with section : 4, at ftell : 2152722
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2204178
+ftell() after : 2204955
 in while section with section : 0, at ftell : 2182752
 in while section with section : 4, at ftell : 2182759
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2234983
+ftell() after : 2235760
 in while section with section : 0, at ftell : 2212548
 in while section with section : 4, at ftell : 2212555
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2265547
+ftell() after : 2266324
 in while section with section : 0, at ftell : 2244659
 in while section with section : 4, at ftell : 2244666
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2298426
+ftell() after : 2299203
 in while section with section : 0, at ftell : 2277514
 in while section with section : 4, at ftell : 2277521
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2332049
+ftell() after : 2332826
 in while section with section : 0, at ftell : 2310921
 in while section with section : 4, at ftell : 2310928
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2366224
+ftell() after : 2367001
 in while section with section : 0, at ftell : 2344550
 in while section with section : 4, at ftell : 2344557
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2400621
+ftell() after : 2401398
 in while section with section : 0, at ftell : 2378287
 in while section with section : 4, at ftell : 2378294
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2435126
+ftell() after : 2435903
 in while section with section : 0, at ftell : 2411582
 in while section with section : 4, at ftell : 2411589
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2469189
+ftell() after : 2469966
 in while section with section : 0, at ftell : 2444609
 in while section with section : 4, at ftell : 2444616
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2502984
+ftell() after : 2503761
 in while section with section : 0, at ftell : 2477729
 in while section with section : 4, at ftell : 2477736
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2536872
+ftell() after : 2537649
 in while section with section : 0, at ftell : 2511554
 in while section with section : 4, at ftell : 2511561
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2571465
+ftell() after : 2572242
 in while section with section : 0, at ftell : 2545019
 in while section with section : 4, at ftell : 2545026
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2605698
+ftell() after : 2606475
 in while section with section : 0, at ftell : 2578626
 in while section with section : 4, at ftell : 2578633
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2640073
+ftell() after : 2640850
 in while section with section : 0, at ftell : 2612790
 in while section with section : 4, at ftell : 2612797
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2675005
+ftell() after : 2675782
 in while section with section : 0, at ftell : 2648499
 in while section with section : 4, at ftell : 2648506
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2711482
+ftell() after : 2712259
 in while section with section : 0, at ftell : 2684003
 in while section with section : 4, at ftell : 2684010
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2747754
+ftell() after : 2748531
 in while section with section : 0, at ftell : 2718674
 in while section with section : 4, at ftell : 2718681
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2783193
+ftell() after : 2783970
 in while section with section : 0, at ftell : 2754660
 in while section with section : 4, at ftell : 2754667
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2819947
+ftell() after : 2820724
 in while section with section : 0, at ftell : 2790023
 in while section with section : 4, at ftell : 2790030
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2856078
+ftell() after : 2856855
 in while section with section : 0, at ftell : 2824234
 in while section with section : 4, at ftell : 2824241
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2891057
+ftell() after : 2891834
 in while section with section : 0, at ftell : 2857860
 in while section with section : 4, at ftell : 2857867
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2925451
+ftell() after : 2926228
 in while section with section : 0, at ftell : 2892016
 in while section with section : 4, at ftell : 2892023
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2960375
+ftell() after : 2961152
 in while section with section : 0, at ftell : 2926735
 in while section with section : 4, at ftell : 2926742
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 2995862
+ftell() after : 2996639
 in while section with section : 0, at ftell : 2961797
 in while section with section : 4, at ftell : 2961804
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3031692
+ftell() after : 3032469
 in while section with section : 0, at ftell : 2996805
 in while section with section : 4, at ftell : 2996812
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3067468
+ftell() after : 3068245
 in while section with section : 0, at ftell : 3031682
 in while section with section : 4, at ftell : 3031689
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3103113
+ftell() after : 3103890
 in while section with section : 0, at ftell : 3066294
 in while section with section : 4, at ftell : 3066301
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3138493
+ftell() after : 3139270
 in while section with section : 0, at ftell : 3100346
 in while section with section : 4, at ftell : 3100353
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3173313
+ftell() after : 3174090
 in while section with section : 0, at ftell : 3135300
 in while section with section : 4, at ftell : 3135307
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3209035
+ftell() after : 3209812
 in while section with section : 0, at ftell : 3170152
 in while section with section : 4, at ftell : 3170159
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3244655
+ftell() after : 3245432
 in while section with section : 0, at ftell : 3202864
 in while section with section : 4, at ftell : 3202871
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3278135
+ftell() after : 3278912
 in while section with section : 0, at ftell : 3236342
 in while section with section : 4, at ftell : 3236349
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3312381
+ftell() after : 3313158
 in while section with section : 0, at ftell : 3268129
 in while section with section : 4, at ftell : 3268136
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3344936
+ftell() after : 3345713
 in while section with section : 0, at ftell : 3299416
 in while section with section : 4, at ftell : 3299423
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3376991
+ftell() after : 3377768
 in while section with section : 0, at ftell : 3332974
 in while section with section : 4, at ftell : 3332981
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3411317
+ftell() after : 3412094
 in while section with section : 0, at ftell : 3367070
 in while section with section : 4, at ftell : 3367077
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3446181
+ftell() after : 3446958
 in while section with section : 0, at ftell : 3401287
 in while section with section : 4, at ftell : 3401294
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3481166
+ftell() after : 3481943
 in while section with section : 0, at ftell : 3435488
 in while section with section : 4, at ftell : 3435495
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3516135
+ftell() after : 3516912
 in while section with section : 0, at ftell : 3468642
 in while section with section : 4, at ftell : 3468649
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3550057
+ftell() after : 3550834
 in while section with section : 0, at ftell : 3501011
 in while section with section : 4, at ftell : 3501018
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3583194
+ftell() after : 3583971
 in while section with section : 0, at ftell : 3534018
 in while section with section : 4, at ftell : 3534025
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3616969
+ftell() after : 3617746
 in while section with section : 0, at ftell : 3566852
 in while section with section : 4, at ftell : 3566859
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3650571
+ftell() after : 3651348
 in while section with section : 0, at ftell : 3595131
 in while section with section : 4, at ftell : 3595138
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3679618
+ftell() after : 3680395
 in while section with section : 0, at ftell : 3622557
 in while section with section : 4, at ftell : 3622564
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3707812
+ftell() after : 3708589
 in while section with section : 0, at ftell : 3650628
 in while section with section : 4, at ftell : 3650635
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3736651
+ftell() after : 3737428
 in while section with section : 0, at ftell : 3681448
 in while section with section : 4, at ftell : 3681455
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3768239
+ftell() after : 3769016
 in while section with section : 0, at ftell : 3715454
 in while section with section : 4, at ftell : 3715461
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3803013
+ftell() after : 3803790
 in while section with section : 0, at ftell : 3749695
 in while section with section : 4, at ftell : 3749702
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3838022
+ftell() after : 3838799
 in while section with section : 0, at ftell : 3784349
 in while section with section : 4, at ftell : 3784356
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3873444
+ftell() after : 3874221
 in while section with section : 0, at ftell : 3819110
 in while section with section : 4, at ftell : 3819117
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3908973
+ftell() after : 3909750
 in while section with section : 0, at ftell : 3854134
 in while section with section : 4, at ftell : 3854141
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3944765
+ftell() after : 3945542
 in while section with section : 0, at ftell : 3889361
 in while section with section : 4, at ftell : 3889368
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 3980760
+ftell() after : 3981537
 in while section with section : 0, at ftell : 3923204
 in while section with section : 4, at ftell : 3923211
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4015371
+ftell() after : 4016148
 in while section with section : 0, at ftell : 3955129
 in while section with section : 4, at ftell : 3955136
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4048064
+ftell() after : 4048841
 in while section with section : 0, at ftell : 3988003
 in while section with section : 4, at ftell : 3988010
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4081706
+ftell() after : 4082483
 in while section with section : 0, at ftell : 4022415
 in while section with section : 4, at ftell : 4022422
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4116886
+ftell() after : 4117663
 in while section with section : 0, at ftell : 4055607
 in while section with section : 4, at ftell : 4055614
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4150846
+ftell() after : 4151623
 in while section with section : 0, at ftell : 4088014
 in while section with section : 4, at ftell : 4088021
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4184021
+ftell() after : 4184798
 in while section with section : 0, at ftell : 4119220
 in while section with section : 4, at ftell : 4119227
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4215995
+ftell() after : 4216772
 in while section with section : 0, at ftell : 4150370
 in while section with section : 4, at ftell : 4150377
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4247913
+ftell() after : 4248690
 in while section with section : 0, at ftell : 4182065
 in while section with section : 4, at ftell : 4182072
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4280376
+ftell() after : 4281153
 in while section with section : 0, at ftell : 4215382
 in while section with section : 4, at ftell : 4215389
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4314461
+ftell() after : 4315238
 in while section with section : 0, at ftell : 4249959
 in while section with section : 4, at ftell : 4249966
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4349806
+ftell() after : 4350583
 in while section with section : 0, at ftell : 4283937
 in while section with section : 4, at ftell : 4283944
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4384552
+ftell() after : 4385329
 in while section with section : 0, at ftell : 4318671
 in while section with section : 4, at ftell : 4318678
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4420054
+ftell() after : 4420831
 in while section with section : 0, at ftell : 4353460
 in while section with section : 4, at ftell : 4353467
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4455611
+ftell() after : 4456388
 in while section with section : 0, at ftell : 4387039
 in while section with section : 4, at ftell : 4387046
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4489958
+ftell() after : 4490735
 in while section with section : 0, at ftell : 4419832
 in while section with section : 4, at ftell : 4419839
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4523519
+ftell() after : 4524296
 in while section with section : 0, at ftell : 4451699
 in while section with section : 4, at ftell : 4451706
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4556154
+ftell() after : 4556931
 in while section with section : 0, at ftell : 4486262
 in while section with section : 4, at ftell : 4486269
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4591485
+ftell() after : 4592262
 in while section with section : 0, at ftell : 4519557
 in while section with section : 4, at ftell : 4519564
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4625548
+ftell() after : 4626325
 in while section with section : 0, at ftell : 4552444
 in while section with section : 4, at ftell : 4552451
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4659203
+ftell() after : 4659980
 in while section with section : 0, at ftell : 4583577
 in while section with section : 4, at ftell : 4583584
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4691104
+ftell() after : 4691881
 in while section with section : 0, at ftell : 4613376
 in while section with section : 4, at ftell : 4613383
-COPYING IMAGE SECTION - NEW LCT AS GCT
+COPYING IMAGE SECTION - NEW LCT AS GCT, ftell() before : 4721671
+ftell() after : 4722448
 read trailer
 last section read : 5, at ftell : 4641277
 
@@ -728,432 +870,574 @@ last section read : 5, at ftell : 4641277
 in while section with section : 2, at ftell : 783
 in while section with section : 0, at ftell : 802
 in while section with section : 4, at ftell : 809
-has LCT
-in while section with section : 0, at ftell : 31570
-in while section with section : 4, at ftell : 31577
-has LCT
-in while section with section : 0, at ftell : 61766
-in while section with section : 4, at ftell : 61773
-has LCT
-in while section with section : 0, at ftell : 91650
-in while section with section : 4, at ftell : 91657
-has LCT
-in while section with section : 0, at ftell : 124636
-in while section with section : 4, at ftell : 124643
-has LCT
-in while section with section : 0, at ftell : 155219
-in while section with section : 4, at ftell : 155226
-has LCT
-in while section with section : 0, at ftell : 183801
-in while section with section : 4, at ftell : 183808
-has LCT
-in while section with section : 0, at ftell : 211861
-in while section with section : 4, at ftell : 211868
-has LCT
-in while section with section : 0, at ftell : 239145
-in while section with section : 4, at ftell : 239152
-has LCT
-in while section with section : 0, at ftell : 265577
-in while section with section : 4, at ftell : 265584
-has LCT
-in while section with section : 0, at ftell : 295021
-in while section with section : 4, at ftell : 295028
-has LCT
-in while section with section : 0, at ftell : 324082
-in while section with section : 4, at ftell : 324089
-has LCT
-in while section with section : 0, at ftell : 352730
-in while section with section : 4, at ftell : 352737
-has LCT
-in while section with section : 0, at ftell : 384168
-in while section with section : 4, at ftell : 384175
-has LCT
-in while section with section : 0, at ftell : 409985
-in while section with section : 4, at ftell : 409992
-has LCT
-in while section with section : 0, at ftell : 438137
-in while section with section : 4, at ftell : 438144
-has LCT
-in while section with section : 0, at ftell : 466860
-in while section with section : 4, at ftell : 466867
-has LCT
-in while section with section : 0, at ftell : 496165
-in while section with section : 4, at ftell : 496172
-has LCT
-in while section with section : 0, at ftell : 527940
-in while section with section : 4, at ftell : 527947
-has LCT
-in while section with section : 0, at ftell : 560807
-in while section with section : 4, at ftell : 560814
-has LCT
-in while section with section : 0, at ftell : 594653
-in while section with section : 4, at ftell : 594660
-has LCT
-in while section with section : 0, at ftell : 629056
-in while section with section : 4, at ftell : 629063
-has LCT
-in while section with section : 0, at ftell : 663884
-in while section with section : 4, at ftell : 663891
-has LCT
-in while section with section : 0, at ftell : 698565
-in while section with section : 4, at ftell : 698572
-has LCT
-in while section with section : 0, at ftell : 733359
-in while section with section : 4, at ftell : 733366
-has LCT
-in while section with section : 0, at ftell : 767759
-in while section with section : 4, at ftell : 767766
-has LCT
-in while section with section : 0, at ftell : 802482
-in while section with section : 4, at ftell : 802489
-has LCT
-in while section with section : 0, at ftell : 836279
-in while section with section : 4, at ftell : 836286
-has LCT
-in while section with section : 0, at ftell : 869568
-in while section with section : 4, at ftell : 869575
-has LCT
-in while section with section : 0, at ftell : 903029
-in while section with section : 4, at ftell : 903036
-has LCT
-in while section with section : 0, at ftell : 935034
-in while section with section : 4, at ftell : 935041
-has LCT
-in while section with section : 0, at ftell : 966046
-in while section with section : 4, at ftell : 966053
-has LCT
-in while section with section : 0, at ftell : 999750
-in while section with section : 4, at ftell : 999757
-has LCT
-in while section with section : 0, at ftell : 1030956
-in while section with section : 4, at ftell : 1030963
-has LCT
-in while section with section : 0, at ftell : 1061831
-in while section with section : 4, at ftell : 1061838
-has LCT
-in while section with section : 0, at ftell : 1092625
-in while section with section : 4, at ftell : 1092632
-has LCT
-in while section with section : 0, at ftell : 1124687
-in while section with section : 4, at ftell : 1124694
-has LCT
-in while section with section : 0, at ftell : 1152601
-in while section with section : 4, at ftell : 1152608
-has LCT
-in while section with section : 0, at ftell : 1178479
-in while section with section : 4, at ftell : 1178486
-has LCT
-in while section with section : 0, at ftell : 1209696
-in while section with section : 4, at ftell : 1209703
-has LCT
-in while section with section : 0, at ftell : 1238205
-in while section with section : 4, at ftell : 1238212
-has LCT
-in while section with section : 0, at ftell : 1266427
-in while section with section : 4, at ftell : 1266434
-has LCT
-in while section with section : 0, at ftell : 1296254
-in while section with section : 4, at ftell : 1296261
-has LCT
-in while section with section : 0, at ftell : 1326804
-in while section with section : 4, at ftell : 1326811
-has LCT
-in while section with section : 0, at ftell : 1360506
-in while section with section : 4, at ftell : 1360513
-has LCT
-in while section with section : 0, at ftell : 1394434
-in while section with section : 4, at ftell : 1394441
-has LCT
-in while section with section : 0, at ftell : 1429536
-in while section with section : 4, at ftell : 1429543
-has LCT
-in while section with section : 0, at ftell : 1465085
-in while section with section : 4, at ftell : 1465092
-has LCT
-in while section with section : 0, at ftell : 1501307
-in while section with section : 4, at ftell : 1501314
-has LCT
-in while section with section : 0, at ftell : 1537683
-in while section with section : 4, at ftell : 1537690
-has LCT
-in while section with section : 0, at ftell : 1574027
-in while section with section : 4, at ftell : 1574034
-has LCT
-in while section with section : 0, at ftell : 1609347
-in while section with section : 4, at ftell : 1609354
-has LCT
-in while section with section : 0, at ftell : 1644843
-in while section with section : 4, at ftell : 1644850
-has LCT
-in while section with section : 0, at ftell : 1680508
-in while section with section : 4, at ftell : 1680515
-has LCT
-in while section with section : 0, at ftell : 1717012
-in while section with section : 4, at ftell : 1717019
-has LCT
-in while section with section : 0, at ftell : 1752859
-in while section with section : 4, at ftell : 1752866
-has LCT
-in while section with section : 0, at ftell : 1788295
-in while section with section : 4, at ftell : 1788302
-has LCT
-in while section with section : 0, at ftell : 1823996
-in while section with section : 4, at ftell : 1824003
-has LCT
-in while section with section : 0, at ftell : 1858891
-in while section with section : 4, at ftell : 1858898
-has LCT
-in while section with section : 0, at ftell : 1893160
-in while section with section : 4, at ftell : 1893167
-has LCT
-in while section with section : 0, at ftell : 1926918
-in while section with section : 4, at ftell : 1926925
-has LCT
-in while section with section : 0, at ftell : 1960008
-in while section with section : 4, at ftell : 1960015
-has LCT
-in while section with section : 0, at ftell : 1992758
-in while section with section : 4, at ftell : 1992765
-has LCT
-in while section with section : 0, at ftell : 2024866
-in while section with section : 4, at ftell : 2024873
-has LCT
-in while section with section : 0, at ftell : 2058962
-in while section with section : 4, at ftell : 2058969
-has LCT
-in while section with section : 0, at ftell : 2091269
-in while section with section : 4, at ftell : 2091276
-has LCT
-in while section with section : 0, at ftell : 2122256
-in while section with section : 4, at ftell : 2122263
-has LCT
-in while section with section : 0, at ftell : 2152715
-in while section with section : 4, at ftell : 2152722
-has LCT
-in while section with section : 0, at ftell : 2182752
-in while section with section : 4, at ftell : 2182759
-has LCT
-in while section with section : 0, at ftell : 2212548
-in while section with section : 4, at ftell : 2212555
-has LCT
-in while section with section : 0, at ftell : 2244659
-in while section with section : 4, at ftell : 2244666
-has LCT
-in while section with section : 0, at ftell : 2277514
-in while section with section : 4, at ftell : 2277521
-has LCT
-in while section with section : 0, at ftell : 2310921
-in while section with section : 4, at ftell : 2310928
-has LCT
-in while section with section : 0, at ftell : 2344550
-in while section with section : 4, at ftell : 2344557
-has LCT
-in while section with section : 0, at ftell : 2378287
-in while section with section : 4, at ftell : 2378294
-has LCT
-in while section with section : 0, at ftell : 2411582
-in while section with section : 4, at ftell : 2411589
-has LCT
-in while section with section : 0, at ftell : 2444609
-in while section with section : 4, at ftell : 2444616
-has LCT
-in while section with section : 0, at ftell : 2477729
-in while section with section : 4, at ftell : 2477736
-has LCT
-in while section with section : 0, at ftell : 2511554
-in while section with section : 4, at ftell : 2511561
-has LCT
-in while section with section : 0, at ftell : 2545019
-in while section with section : 4, at ftell : 2545026
-has LCT
-in while section with section : 0, at ftell : 2578626
-in while section with section : 4, at ftell : 2578633
-has LCT
-in while section with section : 0, at ftell : 2612790
-in while section with section : 4, at ftell : 2612797
-has LCT
-in while section with section : 0, at ftell : 2648499
-in while section with section : 4, at ftell : 2648506
-has LCT
-in while section with section : 0, at ftell : 2684003
-in while section with section : 4, at ftell : 2684010
-has LCT
-in while section with section : 0, at ftell : 2718674
-in while section with section : 4, at ftell : 2718681
-has LCT
-in while section with section : 0, at ftell : 2754660
-in while section with section : 4, at ftell : 2754667
-has LCT
-in while section with section : 0, at ftell : 2790023
-in while section with section : 4, at ftell : 2790030
-has LCT
-in while section with section : 0, at ftell : 2824234
-in while section with section : 4, at ftell : 2824241
-has LCT
-in while section with section : 0, at ftell : 2857860
-in while section with section : 4, at ftell : 2857867
-has LCT
-in while section with section : 0, at ftell : 2892016
-in while section with section : 4, at ftell : 2892023
-has LCT
-in while section with section : 0, at ftell : 2926735
-in while section with section : 4, at ftell : 2926742
-has LCT
-in while section with section : 0, at ftell : 2961797
-in while section with section : 4, at ftell : 2961804
-has LCT
-in while section with section : 0, at ftell : 2996805
-in while section with section : 4, at ftell : 2996812
-has LCT
-in while section with section : 0, at ftell : 3031682
-in while section with section : 4, at ftell : 3031689
-has LCT
-in while section with section : 0, at ftell : 3066294
-in while section with section : 4, at ftell : 3066301
-has LCT
-in while section with section : 0, at ftell : 3100346
-in while section with section : 4, at ftell : 3100353
-has LCT
-in while section with section : 0, at ftell : 3135300
-in while section with section : 4, at ftell : 3135307
-has LCT
-in while section with section : 0, at ftell : 3170152
-in while section with section : 4, at ftell : 3170159
-has LCT
-in while section with section : 0, at ftell : 3202864
-in while section with section : 4, at ftell : 3202871
-has LCT
-in while section with section : 0, at ftell : 3236342
-in while section with section : 4, at ftell : 3236349
-has LCT
-in while section with section : 0, at ftell : 3268129
-in while section with section : 4, at ftell : 3268136
-has LCT
-in while section with section : 0, at ftell : 3299416
-in while section with section : 4, at ftell : 3299423
-has LCT
-in while section with section : 0, at ftell : 3332974
-in while section with section : 4, at ftell : 3332981
-has LCT
-in while section with section : 0, at ftell : 3367070
-in while section with section : 4, at ftell : 3367077
-has LCT
-in while section with section : 0, at ftell : 3401287
-in while section with section : 4, at ftell : 3401294
-has LCT
-in while section with section : 0, at ftell : 3435488
-in while section with section : 4, at ftell : 3435495
-has LCT
-in while section with section : 0, at ftell : 3468642
-in while section with section : 4, at ftell : 3468649
-has LCT
-in while section with section : 0, at ftell : 3501011
-in while section with section : 4, at ftell : 3501018
-has LCT
-in while section with section : 0, at ftell : 3534018
-in while section with section : 4, at ftell : 3534025
-has LCT
-in while section with section : 0, at ftell : 3566852
-in while section with section : 4, at ftell : 3566859
-has LCT
-in while section with section : 0, at ftell : 3595131
-in while section with section : 4, at ftell : 3595138
-has LCT
-in while section with section : 0, at ftell : 3622557
-in while section with section : 4, at ftell : 3622564
-has LCT
-in while section with section : 0, at ftell : 3650628
-in while section with section : 4, at ftell : 3650635
-has LCT
-in while section with section : 0, at ftell : 3681448
-in while section with section : 4, at ftell : 3681455
-has LCT
-in while section with section : 0, at ftell : 3715454
-in while section with section : 4, at ftell : 3715461
-has LCT
-in while section with section : 0, at ftell : 3749695
-in while section with section : 4, at ftell : 3749702
-has LCT
-in while section with section : 0, at ftell : 3784349
-in while section with section : 4, at ftell : 3784356
-has LCT
-in while section with section : 0, at ftell : 3819110
-in while section with section : 4, at ftell : 3819117
-has LCT
-in while section with section : 0, at ftell : 3854134
-in while section with section : 4, at ftell : 3854141
-has LCT
-in while section with section : 0, at ftell : 3889361
-in while section with section : 4, at ftell : 3889368
-has LCT
-in while section with section : 0, at ftell : 3923204
-in while section with section : 4, at ftell : 3923211
-has LCT
-in while section with section : 0, at ftell : 3955129
-in while section with section : 4, at ftell : 3955136
-has LCT
-in while section with section : 0, at ftell : 3988003
-in while section with section : 4, at ftell : 3988010
-has LCT
-in while section with section : 0, at ftell : 4022415
-in while section with section : 4, at ftell : 4022422
-has LCT
-in while section with section : 0, at ftell : 4055607
-in while section with section : 4, at ftell : 4055614
-has LCT
-in while section with section : 0, at ftell : 4088014
-in while section with section : 4, at ftell : 4088021
-has LCT
-in while section with section : 0, at ftell : 4119220
-in while section with section : 4, at ftell : 4119227
-has LCT
-in while section with section : 0, at ftell : 4150370
-in while section with section : 4, at ftell : 4150377
-has LCT
-in while section with section : 0, at ftell : 4182065
-in while section with section : 4, at ftell : 4182072
-has LCT
-in while section with section : 0, at ftell : 4215382
-in while section with section : 4, at ftell : 4215389
-has LCT
-in while section with section : 0, at ftell : 4249959
-in while section with section : 4, at ftell : 4249966
-has LCT
-in while section with section : 0, at ftell : 4283937
-in while section with section : 4, at ftell : 4283944
-has LCT
-in while section with section : 0, at ftell : 4318671
-in while section with section : 4, at ftell : 4318678
-has LCT
-in while section with section : 0, at ftell : 4353460
-in while section with section : 4, at ftell : 4353467
-has LCT
-in while section with section : 0, at ftell : 4387039
-in while section with section : 4, at ftell : 4387046
-has LCT
-in while section with section : 0, at ftell : 4419832
-in while section with section : 4, at ftell : 4419839
-has LCT
-in while section with section : 0, at ftell : 4451699
-in while section with section : 4, at ftell : 4451706
-has LCT
-in while section with section : 0, at ftell : 4486262
-in while section with section : 4, at ftell : 4486269
-has LCT
-in while section with section : 0, at ftell : 4519557
-in while section with section : 4, at ftell : 4519564
-has LCT
-in while section with section : 0, at ftell : 4552444
-in while section with section : 4, at ftell : 4552451
-has LCT
-in while section with section : 0, at ftell : 4583577
-in while section with section : 4, at ftell : 4583584
-has LCT
-in while section with section : 0, at ftell : 4613376
-in while section with section : 4, at ftell : 4613383
-has LCT
+has LCT, size : 768, ftell() before : 818
+ftell() after : 1586
+in while section with section : 0, at ftell : 32338
+in while section with section : 4, at ftell : 32345
+has LCT, size : 768, ftell() before : 32354
+ftell() after : 33122
+in while section with section : 0, at ftell : 63302
+in while section with section : 4, at ftell : 63309
+has LCT, size : 768, ftell() before : 63318
+ftell() after : 64086
+in while section with section : 0, at ftell : 93954
+in while section with section : 4, at ftell : 93961
+has LCT, size : 768, ftell() before : 93970
+ftell() after : 94738
+in while section with section : 0, at ftell : 127708
+in while section with section : 4, at ftell : 127715
+has LCT, size : 768, ftell() before : 127724
+ftell() after : 128492
+in while section with section : 0, at ftell : 159059
+in while section with section : 4, at ftell : 159066
+has LCT, size : 768, ftell() before : 159075
+ftell() after : 159843
+in while section with section : 0, at ftell : 188409
+in while section with section : 4, at ftell : 188416
+has LCT, size : 768, ftell() before : 188425
+ftell() after : 189193
+in while section with section : 0, at ftell : 217237
+in while section with section : 4, at ftell : 217244
+has LCT, size : 768, ftell() before : 217253
+ftell() after : 218021
+in while section with section : 0, at ftell : 245289
+in while section with section : 4, at ftell : 245296
+has LCT, size : 768, ftell() before : 245305
+ftell() after : 246073
+in while section with section : 0, at ftell : 272489
+in while section with section : 4, at ftell : 272496
+has LCT, size : 768, ftell() before : 272505
+ftell() after : 273273
+in while section with section : 0, at ftell : 302701
+in while section with section : 4, at ftell : 302708
+has LCT, size : 768, ftell() before : 302717
+ftell() after : 303485
+in while section with section : 0, at ftell : 332530
+in while section with section : 4, at ftell : 332537
+has LCT, size : 768, ftell() before : 332546
+ftell() after : 333314
+in while section with section : 0, at ftell : 361946
+in while section with section : 4, at ftell : 361953
+has LCT, size : 768, ftell() before : 361962
+ftell() after : 362730
+in while section with section : 0, at ftell : 394152
+in while section with section : 4, at ftell : 394159
+has LCT, size : 768, ftell() before : 394168
+ftell() after : 394936
+in while section with section : 0, at ftell : 420737
+in while section with section : 4, at ftell : 420744
+has LCT, size : 768, ftell() before : 420753
+ftell() after : 421521
+in while section with section : 0, at ftell : 449657
+in while section with section : 4, at ftell : 449664
+has LCT, size : 768, ftell() before : 449673
+ftell() after : 450441
+in while section with section : 0, at ftell : 479148
+in while section with section : 4, at ftell : 479155
+has LCT, size : 768, ftell() before : 479164
+ftell() after : 479932
+in while section with section : 0, at ftell : 509221
+in while section with section : 4, at ftell : 509228
+has LCT, size : 768, ftell() before : 509237
+ftell() after : 510005
+in while section with section : 0, at ftell : 541764
+in while section with section : 4, at ftell : 541771
+has LCT, size : 768, ftell() before : 541780
+ftell() after : 542548
+in while section with section : 0, at ftell : 575399
+in while section with section : 4, at ftell : 575406
+has LCT, size : 768, ftell() before : 575415
+ftell() after : 576183
+in while section with section : 0, at ftell : 610013
+in while section with section : 4, at ftell : 610020
+has LCT, size : 768, ftell() before : 610029
+ftell() after : 610797
+in while section with section : 0, at ftell : 645184
+in while section with section : 4, at ftell : 645191
+has LCT, size : 768, ftell() before : 645200
+ftell() after : 645968
+in while section with section : 0, at ftell : 680780
+in while section with section : 4, at ftell : 680787
+has LCT, size : 768, ftell() before : 680796
+ftell() after : 681564
+in while section with section : 0, at ftell : 716229
+in while section with section : 4, at ftell : 716236
+has LCT, size : 768, ftell() before : 716245
+ftell() after : 717013
+in while section with section : 0, at ftell : 751791
+in while section with section : 4, at ftell : 751798
+has LCT, size : 768, ftell() before : 751807
+ftell() after : 752575
+in while section with section : 0, at ftell : 786959
+in while section with section : 4, at ftell : 786966
+has LCT, size : 768, ftell() before : 786975
+ftell() after : 787743
+in while section with section : 0, at ftell : 822450
+in while section with section : 4, at ftell : 822457
+has LCT, size : 768, ftell() before : 822466
+ftell() after : 823234
+in while section with section : 0, at ftell : 857015
+in while section with section : 4, at ftell : 857022
+has LCT, size : 768, ftell() before : 857031
+ftell() after : 857799
+in while section with section : 0, at ftell : 891072
+in while section with section : 4, at ftell : 891079
+has LCT, size : 768, ftell() before : 891088
+ftell() after : 891856
+in while section with section : 0, at ftell : 925301
+in while section with section : 4, at ftell : 925308
+has LCT, size : 768, ftell() before : 925317
+ftell() after : 926085
+in while section with section : 0, at ftell : 958074
+in while section with section : 4, at ftell : 958081
+has LCT, size : 768, ftell() before : 958090
+ftell() after : 958858
+in while section with section : 0, at ftell : 989854
+in while section with section : 4, at ftell : 989861
+has LCT, size : 768, ftell() before : 989870
+ftell() after : 990638
+in while section with section : 0, at ftell : 1024326
+in while section with section : 4, at ftell : 1024333
+has LCT, size : 768, ftell() before : 1024342
+ftell() after : 1025110
+in while section with section : 0, at ftell : 1056300
+in while section with section : 4, at ftell : 1056307
+has LCT, size : 768, ftell() before : 1056316
+ftell() after : 1057084
+in while section with section : 0, at ftell : 1087943
+in while section with section : 4, at ftell : 1087950
+has LCT, size : 768, ftell() before : 1087959
+ftell() after : 1088727
+in while section with section : 0, at ftell : 1119505
+in while section with section : 4, at ftell : 1119512
+has LCT, size : 768, ftell() before : 1119521
+ftell() after : 1120289
+in while section with section : 0, at ftell : 1152335
+in while section with section : 4, at ftell : 1152342
+has LCT, size : 768, ftell() before : 1152351
+ftell() after : 1153119
+in while section with section : 0, at ftell : 1181017
+in while section with section : 4, at ftell : 1181024
+has LCT, size : 768, ftell() before : 1181033
+ftell() after : 1181801
+in while section with section : 0, at ftell : 1207663
+in while section with section : 4, at ftell : 1207670
+has LCT, size : 768, ftell() before : 1207679
+ftell() after : 1208447
+in while section with section : 0, at ftell : 1239648
+in while section with section : 4, at ftell : 1239655
+has LCT, size : 768, ftell() before : 1239664
+ftell() after : 1240432
+in while section with section : 0, at ftell : 1268925
+in while section with section : 4, at ftell : 1268932
+has LCT, size : 768, ftell() before : 1268941
+ftell() after : 1269709
+in while section with section : 0, at ftell : 1297915
+in while section with section : 4, at ftell : 1297922
+has LCT, size : 768, ftell() before : 1297931
+ftell() after : 1298699
+in while section with section : 0, at ftell : 1328510
+in while section with section : 4, at ftell : 1328517
+has LCT, size : 768, ftell() before : 1328526
+ftell() after : 1329294
+in while section with section : 0, at ftell : 1359828
+in while section with section : 4, at ftell : 1359835
+has LCT, size : 768, ftell() before : 1359844
+ftell() after : 1360612
+in while section with section : 0, at ftell : 1394298
+in while section with section : 4, at ftell : 1394305
+has LCT, size : 768, ftell() before : 1394314
+ftell() after : 1395082
+in while section with section : 0, at ftell : 1428994
+in while section with section : 4, at ftell : 1429001
+has LCT, size : 768, ftell() before : 1429010
+ftell() after : 1429778
+in while section with section : 0, at ftell : 1464864
+in while section with section : 4, at ftell : 1464871
+has LCT, size : 768, ftell() before : 1464880
+ftell() after : 1465648
+in while section with section : 0, at ftell : 1501181
+in while section with section : 4, at ftell : 1501188
+has LCT, size : 768, ftell() before : 1501197
+ftell() after : 1501965
+in while section with section : 0, at ftell : 1538171
+in while section with section : 4, at ftell : 1538178
+has LCT, size : 768, ftell() before : 1538187
+ftell() after : 1538955
+in while section with section : 0, at ftell : 1575315
+in while section with section : 4, at ftell : 1575322
+has LCT, size : 768, ftell() before : 1575331
+ftell() after : 1576099
+in while section with section : 0, at ftell : 1612427
+in while section with section : 4, at ftell : 1612434
+has LCT, size : 768, ftell() before : 1612443
+ftell() after : 1613211
+in while section with section : 0, at ftell : 1648515
+in while section with section : 4, at ftell : 1648522
+has LCT, size : 768, ftell() before : 1648531
+ftell() after : 1649299
+in while section with section : 0, at ftell : 1684779
+in while section with section : 4, at ftell : 1684786
+has LCT, size : 768, ftell() before : 1684795
+ftell() after : 1685563
+in while section with section : 0, at ftell : 1721212
+in while section with section : 4, at ftell : 1721219
+has LCT, size : 768, ftell() before : 1721228
+ftell() after : 1721996
+in while section with section : 0, at ftell : 1758484
+in while section with section : 4, at ftell : 1758491
+has LCT, size : 768, ftell() before : 1758500
+ftell() after : 1759268
+in while section with section : 0, at ftell : 1795099
+in while section with section : 4, at ftell : 1795106
+has LCT, size : 768, ftell() before : 1795115
+ftell() after : 1795883
+in while section with section : 0, at ftell : 1831303
+in while section with section : 4, at ftell : 1831310
+has LCT, size : 768, ftell() before : 1831319
+ftell() after : 1832087
+in while section with section : 0, at ftell : 1867772
+in while section with section : 4, at ftell : 1867779
+has LCT, size : 768, ftell() before : 1867788
+ftell() after : 1868556
+in while section with section : 0, at ftell : 1903435
+in while section with section : 4, at ftell : 1903442
+has LCT, size : 768, ftell() before : 1903451
+ftell() after : 1904219
+in while section with section : 0, at ftell : 1938472
+in while section with section : 4, at ftell : 1938479
+has LCT, size : 768, ftell() before : 1938488
+ftell() after : 1939256
+in while section with section : 0, at ftell : 1972998
+in while section with section : 4, at ftell : 1973005
+has LCT, size : 768, ftell() before : 1973014
+ftell() after : 1973782
+in while section with section : 0, at ftell : 2006856
+in while section with section : 4, at ftell : 2006863
+has LCT, size : 768, ftell() before : 2006872
+ftell() after : 2007640
+in while section with section : 0, at ftell : 2040374
+in while section with section : 4, at ftell : 2040381
+has LCT, size : 768, ftell() before : 2040390
+ftell() after : 2041158
+in while section with section : 0, at ftell : 2073250
+in while section with section : 4, at ftell : 2073257
+has LCT, size : 768, ftell() before : 2073266
+ftell() after : 2074034
+in while section with section : 0, at ftell : 2108114
+in while section with section : 4, at ftell : 2108121
+has LCT, size : 768, ftell() before : 2108130
+ftell() after : 2108898
+in while section with section : 0, at ftell : 2141189
+in while section with section : 4, at ftell : 2141196
+has LCT, size : 768, ftell() before : 2141205
+ftell() after : 2141973
+in while section with section : 0, at ftell : 2172944
+in while section with section : 4, at ftell : 2172951
+has LCT, size : 768, ftell() before : 2172960
+ftell() after : 2173728
+in while section with section : 0, at ftell : 2204171
+in while section with section : 4, at ftell : 2204178
+has LCT, size : 768, ftell() before : 2204187
+ftell() after : 2204955
+in while section with section : 0, at ftell : 2234976
+in while section with section : 4, at ftell : 2234983
+has LCT, size : 768, ftell() before : 2234992
+ftell() after : 2235760
+in while section with section : 0, at ftell : 2265540
+in while section with section : 4, at ftell : 2265547
+has LCT, size : 768, ftell() before : 2265556
+ftell() after : 2266324
+in while section with section : 0, at ftell : 2298419
+in while section with section : 4, at ftell : 2298426
+has LCT, size : 768, ftell() before : 2298435
+ftell() after : 2299203
+in while section with section : 0, at ftell : 2332042
+in while section with section : 4, at ftell : 2332049
+has LCT, size : 768, ftell() before : 2332058
+ftell() after : 2332826
+in while section with section : 0, at ftell : 2366217
+in while section with section : 4, at ftell : 2366224
+has LCT, size : 768, ftell() before : 2366233
+ftell() after : 2367001
+in while section with section : 0, at ftell : 2400614
+in while section with section : 4, at ftell : 2400621
+has LCT, size : 768, ftell() before : 2400630
+ftell() after : 2401398
+in while section with section : 0, at ftell : 2435119
+in while section with section : 4, at ftell : 2435126
+has LCT, size : 768, ftell() before : 2435135
+ftell() after : 2435903
+in while section with section : 0, at ftell : 2469182
+in while section with section : 4, at ftell : 2469189
+has LCT, size : 768, ftell() before : 2469198
+ftell() after : 2469966
+in while section with section : 0, at ftell : 2502977
+in while section with section : 4, at ftell : 2502984
+has LCT, size : 768, ftell() before : 2502993
+ftell() after : 2503761
+in while section with section : 0, at ftell : 2536865
+in while section with section : 4, at ftell : 2536872
+has LCT, size : 768, ftell() before : 2536881
+ftell() after : 2537649
+in while section with section : 0, at ftell : 2571458
+in while section with section : 4, at ftell : 2571465
+has LCT, size : 768, ftell() before : 2571474
+ftell() after : 2572242
+in while section with section : 0, at ftell : 2605691
+in while section with section : 4, at ftell : 2605698
+has LCT, size : 768, ftell() before : 2605707
+ftell() after : 2606475
+in while section with section : 0, at ftell : 2640066
+in while section with section : 4, at ftell : 2640073
+has LCT, size : 768, ftell() before : 2640082
+ftell() after : 2640850
+in while section with section : 0, at ftell : 2674998
+in while section with section : 4, at ftell : 2675005
+has LCT, size : 768, ftell() before : 2675014
+ftell() after : 2675782
+in while section with section : 0, at ftell : 2711475
+in while section with section : 4, at ftell : 2711482
+has LCT, size : 768, ftell() before : 2711491
+ftell() after : 2712259
+in while section with section : 0, at ftell : 2747747
+in while section with section : 4, at ftell : 2747754
+has LCT, size : 768, ftell() before : 2747763
+ftell() after : 2748531
+in while section with section : 0, at ftell : 2783186
+in while section with section : 4, at ftell : 2783193
+has LCT, size : 768, ftell() before : 2783202
+ftell() after : 2783970
+in while section with section : 0, at ftell : 2819940
+in while section with section : 4, at ftell : 2819947
+has LCT, size : 768, ftell() before : 2819956
+ftell() after : 2820724
+in while section with section : 0, at ftell : 2856071
+in while section with section : 4, at ftell : 2856078
+has LCT, size : 768, ftell() before : 2856087
+ftell() after : 2856855
+in while section with section : 0, at ftell : 2891050
+in while section with section : 4, at ftell : 2891057
+has LCT, size : 768, ftell() before : 2891066
+ftell() after : 2891834
+in while section with section : 0, at ftell : 2925444
+in while section with section : 4, at ftell : 2925451
+has LCT, size : 768, ftell() before : 2925460
+ftell() after : 2926228
+in while section with section : 0, at ftell : 2960368
+in while section with section : 4, at ftell : 2960375
+has LCT, size : 768, ftell() before : 2960384
+ftell() after : 2961152
+in while section with section : 0, at ftell : 2995855
+in while section with section : 4, at ftell : 2995862
+has LCT, size : 768, ftell() before : 2995871
+ftell() after : 2996639
+in while section with section : 0, at ftell : 3031685
+in while section with section : 4, at ftell : 3031692
+has LCT, size : 768, ftell() before : 3031701
+ftell() after : 3032469
+in while section with section : 0, at ftell : 3067461
+in while section with section : 4, at ftell : 3067468
+has LCT, size : 768, ftell() before : 3067477
+ftell() after : 3068245
+in while section with section : 0, at ftell : 3103106
+in while section with section : 4, at ftell : 3103113
+has LCT, size : 768, ftell() before : 3103122
+ftell() after : 3103890
+in while section with section : 0, at ftell : 3138486
+in while section with section : 4, at ftell : 3138493
+has LCT, size : 768, ftell() before : 3138502
+ftell() after : 3139270
+in while section with section : 0, at ftell : 3173306
+in while section with section : 4, at ftell : 3173313
+has LCT, size : 768, ftell() before : 3173322
+ftell() after : 3174090
+in while section with section : 0, at ftell : 3209028
+in while section with section : 4, at ftell : 3209035
+has LCT, size : 768, ftell() before : 3209044
+ftell() after : 3209812
+in while section with section : 0, at ftell : 3244648
+in while section with section : 4, at ftell : 3244655
+has LCT, size : 768, ftell() before : 3244664
+ftell() after : 3245432
+in while section with section : 0, at ftell : 3278128
+in while section with section : 4, at ftell : 3278135
+has LCT, size : 768, ftell() before : 3278144
+ftell() after : 3278912
+in while section with section : 0, at ftell : 3312374
+in while section with section : 4, at ftell : 3312381
+has LCT, size : 768, ftell() before : 3312390
+ftell() after : 3313158
+in while section with section : 0, at ftell : 3344929
+in while section with section : 4, at ftell : 3344936
+has LCT, size : 768, ftell() before : 3344945
+ftell() after : 3345713
+in while section with section : 0, at ftell : 3376984
+in while section with section : 4, at ftell : 3376991
+has LCT, size : 768, ftell() before : 3377000
+ftell() after : 3377768
+in while section with section : 0, at ftell : 3411310
+in while section with section : 4, at ftell : 3411317
+has LCT, size : 768, ftell() before : 3411326
+ftell() after : 3412094
+in while section with section : 0, at ftell : 3446174
+in while section with section : 4, at ftell : 3446181
+has LCT, size : 768, ftell() before : 3446190
+ftell() after : 3446958
+in while section with section : 0, at ftell : 3481159
+in while section with section : 4, at ftell : 3481166
+has LCT, size : 768, ftell() before : 3481175
+ftell() after : 3481943
+in while section with section : 0, at ftell : 3516128
+in while section with section : 4, at ftell : 3516135
+has LCT, size : 768, ftell() before : 3516144
+ftell() after : 3516912
+in while section with section : 0, at ftell : 3550050
+in while section with section : 4, at ftell : 3550057
+has LCT, size : 768, ftell() before : 3550066
+ftell() after : 3550834
+in while section with section : 0, at ftell : 3583187
+in while section with section : 4, at ftell : 3583194
+has LCT, size : 768, ftell() before : 3583203
+ftell() after : 3583971
+in while section with section : 0, at ftell : 3616962
+in while section with section : 4, at ftell : 3616969
+has LCT, size : 768, ftell() before : 3616978
+ftell() after : 3617746
+in while section with section : 0, at ftell : 3650564
+in while section with section : 4, at ftell : 3650571
+has LCT, size : 768, ftell() before : 3650580
+ftell() after : 3651348
+in while section with section : 0, at ftell : 3679611
+in while section with section : 4, at ftell : 3679618
+has LCT, size : 768, ftell() before : 3679627
+ftell() after : 3680395
+in while section with section : 0, at ftell : 3707805
+in while section with section : 4, at ftell : 3707812
+has LCT, size : 768, ftell() before : 3707821
+ftell() after : 3708589
+in while section with section : 0, at ftell : 3736644
+in while section with section : 4, at ftell : 3736651
+has LCT, size : 768, ftell() before : 3736660
+ftell() after : 3737428
+in while section with section : 0, at ftell : 3768232
+in while section with section : 4, at ftell : 3768239
+has LCT, size : 768, ftell() before : 3768248
+ftell() after : 3769016
+in while section with section : 0, at ftell : 3803006
+in while section with section : 4, at ftell : 3803013
+has LCT, size : 768, ftell() before : 3803022
+ftell() after : 3803790
+in while section with section : 0, at ftell : 3838015
+in while section with section : 4, at ftell : 3838022
+has LCT, size : 768, ftell() before : 3838031
+ftell() after : 3838799
+in while section with section : 0, at ftell : 3873437
+in while section with section : 4, at ftell : 3873444
+has LCT, size : 768, ftell() before : 3873453
+ftell() after : 3874221
+in while section with section : 0, at ftell : 3908966
+in while section with section : 4, at ftell : 3908973
+has LCT, size : 768, ftell() before : 3908982
+ftell() after : 3909750
+in while section with section : 0, at ftell : 3944758
+in while section with section : 4, at ftell : 3944765
+has LCT, size : 768, ftell() before : 3944774
+ftell() after : 3945542
+in while section with section : 0, at ftell : 3980753
+in while section with section : 4, at ftell : 3980760
+has LCT, size : 768, ftell() before : 3980769
+ftell() after : 3981537
+in while section with section : 0, at ftell : 4015364
+in while section with section : 4, at ftell : 4015371
+has LCT, size : 768, ftell() before : 4015380
+ftell() after : 4016148
+in while section with section : 0, at ftell : 4048057
+in while section with section : 4, at ftell : 4048064
+has LCT, size : 768, ftell() before : 4048073
+ftell() after : 4048841
+in while section with section : 0, at ftell : 4081699
+in while section with section : 4, at ftell : 4081706
+has LCT, size : 768, ftell() before : 4081715
+ftell() after : 4082483
+in while section with section : 0, at ftell : 4116879
+in while section with section : 4, at ftell : 4116886
+has LCT, size : 768, ftell() before : 4116895
+ftell() after : 4117663
+in while section with section : 0, at ftell : 4150839
+in while section with section : 4, at ftell : 4150846
+has LCT, size : 768, ftell() before : 4150855
+ftell() after : 4151623
+in while section with section : 0, at ftell : 4184014
+in while section with section : 4, at ftell : 4184021
+has LCT, size : 768, ftell() before : 4184030
+ftell() after : 4184798
+in while section with section : 0, at ftell : 4215988
+in while section with section : 4, at ftell : 4215995
+has LCT, size : 768, ftell() before : 4216004
+ftell() after : 4216772
+in while section with section : 0, at ftell : 4247906
+in while section with section : 4, at ftell : 4247913
+has LCT, size : 768, ftell() before : 4247922
+ftell() after : 4248690
+in while section with section : 0, at ftell : 4280369
+in while section with section : 4, at ftell : 4280376
+has LCT, size : 768, ftell() before : 4280385
+ftell() after : 4281153
+in while section with section : 0, at ftell : 4314454
+in while section with section : 4, at ftell : 4314461
+has LCT, size : 768, ftell() before : 4314470
+ftell() after : 4315238
+in while section with section : 0, at ftell : 4349799
+in while section with section : 4, at ftell : 4349806
+has LCT, size : 768, ftell() before : 4349815
+ftell() after : 4350583
+in while section with section : 0, at ftell : 4384545
+in while section with section : 4, at ftell : 4384552
+has LCT, size : 768, ftell() before : 4384561
+ftell() after : 4385329
+in while section with section : 0, at ftell : 4420047
+in while section with section : 4, at ftell : 4420054
+has LCT, size : 768, ftell() before : 4420063
+ftell() after : 4420831
+in while section with section : 0, at ftell : 4455604
+in while section with section : 4, at ftell : 4455611
+has LCT, size : 768, ftell() before : 4455620
+ftell() after : 4456388
+in while section with section : 0, at ftell : 4489951
+in while section with section : 4, at ftell : 4489958
+has LCT, size : 768, ftell() before : 4489967
+ftell() after : 4490735
+in while section with section : 0, at ftell : 4523512
+in while section with section : 4, at ftell : 4523519
+has LCT, size : 768, ftell() before : 4523528
+ftell() after : 4524296
+in while section with section : 0, at ftell : 4556147
+in while section with section : 4, at ftell : 4556154
+has LCT, size : 768, ftell() before : 4556163
+ftell() after : 4556931
+in while section with section : 0, at ftell : 4591478
+in while section with section : 4, at ftell : 4591485
+has LCT, size : 768, ftell() before : 4591494
+ftell() after : 4592262
+in while section with section : 0, at ftell : 4625541
+in while section with section : 4, at ftell : 4625548
+has LCT, size : 768, ftell() before : 4625557
+ftell() after : 4626325
+in while section with section : 0, at ftell : 4659196
+in while section with section : 4, at ftell : 4659203
+has LCT, size : 768, ftell() before : 4659212
+ftell() after : 4659980
+in while section with section : 0, at ftell : 4691097
+in while section with section : 4, at ftell : 4691104
+has LCT, size : 768, ftell() before : 4691113
+ftell() after : 4691881
+in while section with section : 0, at ftell : 4721664
+in while section with section : 4, at ftell : 4721671
+has LCT, size : 768, ftell() before : 4721680
+ftell() after : 4722448
 read trailer
-last section read : 5, at ftell : 4641277
+last section read : 5, at ftell : 4750333
 
 
 

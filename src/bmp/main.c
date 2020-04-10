@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <errno.h>
+#include <stdint.h>
 
 #include "bitmap.h"
 #include "utils.h"
@@ -8,6 +9,8 @@ void encode(FILE *src_img, FILE *dest, const char *src_secret_file);
 void decode();
 
 void printBitsOfByte(const char *title, const unsigned char *byteSrc);
+
+int get_nbBits_per_pixels(FILE *bmp_src_file);
 
 int main(int argc, char *argv[])
 {
@@ -44,6 +47,9 @@ void encode(FILE *src_img, FILE *dest, const char *src_secret_file)
 
 	int src_data_length = get_image_data_length(src_img);
 	printf("src_data_length : %d\n", src_data_length);
+
+	int src_data_bpp = get_nbBits_per_pixels(src_img);
+	printf("nb_per_pixels : %d\n", src_data_bpp);
 
 	if ((secret_length * 8) > src_data_length)
 	{
@@ -119,4 +125,14 @@ void printBitsOfByte(const char *title, const unsigned char *byteSrc)
 		byte <<= 1;
 	}
 	printf("\n\n");
+}
+
+int get_nbBits_per_pixels(FILE *bmp_src_file) 
+{
+	uint16_t bpp;
+	long save_pos = ftell(bmp_src_file);
+	fseek(bmp_src_file, 28, SEEK_SET);
+	fread(&bpp, 1, sizeof(uint16_t), bmp_src_file);
+	fseek(bmp_src_file, save_pos, SEEK_SET);
+	return bpp;
 }

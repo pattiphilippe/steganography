@@ -28,6 +28,5 @@ void check_nb_arg(int nbArgs, char* argv0);
  */
 void set_mode(char* argv1, char* argv0, int* mode);
 
-void set_close_file_mode(FILE * file);
-FILE* set_open_file_mode(FILE * file, const char * argv, const char * mode, const char * string);
+FILE* open_file_mode(const char * argv, const char * mode, const char * string);
 

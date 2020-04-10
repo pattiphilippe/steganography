@@ -24,21 +24,13 @@ void set_mode(char* argv1, char* argv0, int* mode)
   }
 }
 
-FILE* set_open_file_mode(FILE * file, const char * argv, const char * mode, const char * string)
+FILE* open_file_mode(const char * argv, const char * mode, const char * string)
 {
-  file = fopen(argv, mode);
+  FILE *file = fopen(argv, mode);
   if (file == NULL) 
   {
   	fprintf(stderr, string, argv);
 	  exit(1);
   } 
   return file;
-}
-
-void set_close_file_mode(FILE * file)
-{
-  if (file != NULL)
-  {
-    fclose(file);
-  }
 }

@@ -19,14 +19,13 @@
  * @abort if not the right number of args
  * @Todo reduce it to 4 and infer the name of the dest file from the src
  */
-void check_nb_arg(int nbArgs, char* argv0);
+void check_nb_arg(int nbArgs, char *argv0);
 
 /**
  * 
  * Set the program to cipher or decipher mode
  * @abort if not the arg is invalid
  */
-void set_mode(char* argv1, char* argv0, int* mode);
+void set_mode(char *argv1, char *argv0, int *mode);
 
-FILE* open_file_mode(const char * argv, const char * mode, const char * string);
-
+FILE *set_open_file_mode(const char *argv, const char *mode, const char *string);

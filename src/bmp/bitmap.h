@@ -24,7 +24,7 @@ void copy_header(FILE* bmp_src, FILE* bmp_dest);
  * @param the given source file
  * @return the length of the message
  */
-int get_message_input_length(FILE* msg_src_file);
+int get_file_length(FILE* msg_src_file);
 
 
 /**
@@ -36,13 +36,13 @@ int get_message_input_length(FILE* msg_src_file);
 int get_image_data_length(FILE* bmp_src_file);
 
 /**
- * return the bit of the byte specified by wanted_bit.
+ * Return the bit of the byte specified by o.
  * (little endian)
  * @param the byte
- * @param the bit
- * @return the wanted bit
+ * @param the bit index
+ * @return the  bit
  */
-int get_wanted_bit(char byte, int wanted_bit);
+int get_bit(char byte, int i);
 
 /**
  * display the bits contained in a byte as a

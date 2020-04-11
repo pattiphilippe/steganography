@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 
 	int mode;
 	set_mode(argv[1], argv[0], &mode);
+	printf("argv[2] : %s\n",argv[2]);
 
 	FILE *src_img = set_open_file_mode(argv[2], READ, _ERROR_OPEN_FILE_R);
 	FILE *dest = set_open_file_mode(argv[3], WRITE, _ERROR_OPEN_FILE_W);
@@ -69,23 +70,13 @@ unsigned checkLengths(FILE *src_img, FILE *src_secret)
 
 void hideLength(FILE *src_img, FILE *dest, unsigned length)
 {
-	printf("ftell(src_img) : %ld\n", ftell(src_img));
 	unsigned nb_bits = sizeof(length) * 8, div = 1U << (nb_bits - 1);
-	int bit = 0;
-	printf("Length : %d, div : %u\n", length, div);
-	printf("Bits of length : \n");
 	for (int i = nb_bits - 1; i >= 0; i--)
 	{
-		printf("Length : %d, div : %u, length / div : %d\n", length, div, (length / div));
-		bit = length / div;
-		if (!((i + 1) % 4) && i != (nb_bits + 1))
-			printf(" ");
-		printf("bit : %d\n", bit);
+		hideBit(src_img, dest, (length / div));
 		length %= div;
 		div >>= 1;
-		hideBit(src_img, dest, bit);
 	}
-	printf("ftell(src_img) : %ld\n", ftell(src_img));
 }
 
 void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret)

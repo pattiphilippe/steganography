@@ -26,14 +26,16 @@ clean : clean_bmp #clean_gif
 
 
 
+#@./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message.txt
 run_bmp : build_bmp
-	##################################################################################################
-	# Run ReadBMP with "splash_multicolor_src.bmp" and "input_message.txt"                           #
-	#                                                                                                #
+	###################################################################################################
+	# Run ReadBMP with "splash_multicolor_src.bmp" and "input_message.txt"                            #
+	#                                                                                                 #
 	# ./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message.txt #
-	##################################################################################################
+	###################################################################################################
 	@echo
 	@./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message.txt
+	@./dist/bmp/ReadBMP enc rsc/hill_src.bmp rsc/hill_dest.bmp rsc/input_message.txt 
 
 build_bmp : dist/bmp/ReadBMP
 

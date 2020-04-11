@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "bitmap.h"
+//#include "bitmap.h"
 
 #define MODE_ENC "enc"
 #define MODE_DEC "dec"

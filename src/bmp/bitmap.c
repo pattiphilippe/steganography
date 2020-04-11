@@ -2,13 +2,12 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-
 unsigned get_image_src_offset(FILE *bmp_src_file)
 {
-	
 	long save_pos = ftell(bmp_src_file);
 	fseek(bmp_src_file, 10, SEEK_SET);
-	unsigned offset = fgetc(bmp_src_file);
+	unsigned offset;
+	fread(&offset, 4, 1, bmp_src_file);
 	fseek(bmp_src_file, save_pos, SEEK_SET);
 	return offset;
 }
@@ -17,7 +16,7 @@ void copy_header(FILE *bmp_src, FILE *bmp_dest)
 {
 	char buffer;
 	unsigned offset = get_image_src_offset(bmp_src);
-	printf("offset : %d\n", offset);
+	printf("offset : %u\n", offset);
 	for (int i = 0; i < offset; i++)
 	{
 		buffer = fgetc(bmp_src);
@@ -44,7 +43,6 @@ unsigned get_image_data_length(FILE *bmp_src_file)
 {
 	return get_file_length(bmp_src_file) - get_image_src_offset(bmp_src_file);
 }
-
 
 void printBitsOfByte(const char *title, const char *byteSrc)
 {

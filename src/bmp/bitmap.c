@@ -64,6 +64,19 @@ int get_bit(char given_byte, int bit_nb)
 }
 
 
+unsigned checkLengths(FILE *src_img, FILE *src_secret)
+{
+	unsigned secret_length = get_file_length(src_secret);
+	unsigned src_data_length = get_image_data_length(src_img);
+
+	if (((secret_length + 4) * 8) > src_data_length)
+	{
+		fprintf(stderr, "Secret too large for source image!\n");
+		exit(1);
+	}
+	return secret_length;
+}
+
 void encode(const char *src_img_file, const char *dest_file, const char *src_secret_file)
 {
 	FILE *src_img = set_open_file_mode(src_img_file, READ, _ERROR_OPEN_FILE_R);
@@ -84,27 +97,14 @@ void encode(const char *src_img_file, const char *dest_file, const char *src_sec
 
 }
 
-unsigned checkLengths(FILE *src_img, FILE *src_secret)
-{
-	unsigned secret_length = get_file_length(src_secret);
-	unsigned src_data_length = get_image_data_length(src_img);
-
-	if (((secret_length + 4) * 8) > src_data_length)
-	{
-		fprintf(stderr, "Secret too large for source image!\n");
-		exit(1);
-	}
-	return secret_length;
-}
-
 void encodeLength(FILE *src_img, FILE *dest, unsigned length)
 {
-	unsigned nb_bits = sizeof(length) * 8, div = 1U << (nb_bits - 1);
-	for (int i = nb_bits - 1; i >= 0; i--)
+	int bit_msg;
+
+	for(int i = 1; i <= 8; i++)
 	{
-		encodeBit(src_img, dest, (length / div));
-		length %= div;
-		div >>= 1;
+		bit_msg = get_bit(length, i);
+		encodeBit(src_img, dest, bit_msg);
 	}
 }
 
@@ -128,7 +128,6 @@ void encodeSecret(FILE *src_img, FILE *dest, FILE *src_secret)
 void encodeBit(FILE *src_img, FILE *dest, const int secret_bit)
 {
 	char src_img_buffer = fgetc(src_img);
-
 	int img_bit = src_img_buffer & 1;
 
 	if (img_bit != secret_bit)
@@ -151,3 +150,66 @@ void copyRestOfImage(FILE *src_img, FILE *dest)
 	}
 }
 
+
+void decode(const char *src_secret_file, const char *output_text_file)
+{
+	FILE *src_secret = set_open_file_mode(src_secret_file, READ, _ERROR_OPEN_FILE_R);
+	FILE *output_text = set_open_file_mode(output_text_file, WRITE, _ERROR_OPEN_FILE_W);
+
+	int size_text;
+
+	decodeLength(src_secret, &size_text);
+	decodeSecret(size_text, src_secret, output_text);
+
+	fclose(src_secret);
+	fclose(output_text);
+}
+
+void decodeLength(FILE *src_secret, int *size_text)
+{
+	int file_buff = 0;
+	int ch;
+
+	int offset = get_image_src_offset(src_secret);
+	fseek(src_secret, offset, SEEK_SET);
+
+	for (int i = 0; i < 8; i++)
+	{
+		decodeBit(src_secret, &file_buff);
+	}
+	*size_text = file_buff;
+	printf("================================== size text  : %d\n", *size_text);
+}
+
+void decodeBit(FILE *src_secret, int *file_buff)
+{
+	int src_img_buffer = fgetc(src_secret);
+	int bit_msg = src_img_buffer & 1;
+
+	if (bit_msg)
+		*file_buff = (*file_buff << 1) | 1;
+	else
+		*file_buff = *file_buff << 1;
+}
+
+void decodeSecret(int size_text, FILE *src_secret, FILE *output_text)
+{
+	int file_buff=0, j = 0, k = 0;
+	int bit_msg;
+	char output[250] = {0};
+
+	for (int i = 0; i < (size_text * 8); i++)
+	{
+		j++;
+		decodeBit(src_secret, &file_buff);
+
+		if (j == 8)
+		{
+			putc(file_buff, output_text);
+			output[k] = file_buff;
+			j=0;
+			file_buff = 0;
+			k++;
+		}
+	}
+}

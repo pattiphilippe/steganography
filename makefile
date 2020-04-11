@@ -37,8 +37,8 @@ run_bmp : build_bmp
 	@./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message.txt
 	@./dist/bmp/ReadBMP enc rsc/hill_src.bmp rsc/hill_dest.bmp rsc/input_message.txt
  
-	#@./dist/bmp/ReadBMP dec rsc/splash_color_dest.bmp rsc/output_splash_color_message.txt
-	#@./dist/bmp/ReadBMP dec rsc/hill_dest.bmp rsc/output_splash_color_message.txt
+	@./dist/bmp/ReadBMP dec rsc/splash_color_dest.bmp rsc/output_splash_color_message.txt
+	@./dist/bmp/ReadBMP dec rsc/hill_dest.bmp rsc/output_splash_color_message.txt
 
 
 build_bmp : dist/bmp/ReadBMP
@@ -58,8 +58,7 @@ dist/bmp/utils.o: src/bmp/utils.c src/bmp/utils.h
 clean_bmp :
 	@rm -f dist/bmp/*
 	@rm -f rsc/*_dest.bmp
-
-
+	@rm -f rsc/output_*.txt
 
 
 run_gif : build_gif

@@ -98,4 +98,26 @@ void encodeBit(FILE *src_img, FILE *dest, const int secret_bit);
  */
 void copyRestOfImage(FILE *src_img, FILE *dest);
 
+/**
+ * 
+ * 
+ */
+void decode(const char *src_secret_file, const char *output_text_msg);
 
+/**
+ * 
+ * 
+ */
+void decodeLength(FILE *pf1, int *size_txt);
+
+/**
+ * 
+ * 
+ */
+void decodeSecret(int size_text, FILE *file1, FILE *file2);
+
+/**
+ * 
+ * 
+ */
+void decodeBit(FILE *src_secret, int *file_buff);

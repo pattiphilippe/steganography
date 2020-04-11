@@ -11,7 +11,7 @@
  * @param the given bmp source file
  * @return the end position of the header
  */
-int get_image_src_offset(FILE* bmp_src_file);
+unsigned get_image_src_offset(FILE* bmp_src_file);
 
 void copy_header(FILE* bmp_src, FILE* bmp_dest);
 
@@ -24,7 +24,7 @@ void copy_header(FILE* bmp_src, FILE* bmp_dest);
  * @param the given source file
  * @return the length of the message
  */
-int get_file_length(FILE* msg_src_file);
+unsigned get_file_length(FILE* msg_src_file);
 
 
 /**
@@ -33,7 +33,7 @@ int get_file_length(FILE* msg_src_file);
  * @param the bitmap source file
  * @return the number of bytes of raw data
 */
-int get_image_data_length(FILE* bmp_src_file);
+unsigned get_image_data_length(FILE* bmp_src_file);
 
 /**
  * Return the bit of the byte specified by o.

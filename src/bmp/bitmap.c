@@ -3,12 +3,12 @@
 #include <stdio.h>
 
 
-int get_image_src_offset(FILE *bmp_src_file)
+unsigned get_image_src_offset(FILE *bmp_src_file)
 {
 	
 	long save_pos = ftell(bmp_src_file);
 	fseek(bmp_src_file, 10, SEEK_SET);
-	int offset = fgetc(bmp_src_file);
+	unsigned offset = fgetc(bmp_src_file);
 	fseek(bmp_src_file, save_pos, SEEK_SET);
 	return offset;
 }
@@ -16,7 +16,7 @@ int get_image_src_offset(FILE *bmp_src_file)
 void copy_header(FILE *bmp_src, FILE *bmp_dest)
 {
 	char buffer;
-	int offset = get_image_src_offset(bmp_src);
+	unsigned offset = get_image_src_offset(bmp_src);
 	printf("offset : %d\n", offset);
 	for (int i = 0; i < offset; i++)
 	{
@@ -29,18 +29,18 @@ void copy_header(FILE *bmp_src, FILE *bmp_dest)
 /**
  * Returns the length of the message to hide.
  */
-int get_file_length(FILE *file)
+unsigned get_file_length(FILE *file)
 {
 	long save_pos = ftell(file);
 	printf("GET FILE LENGTH  save_pos : %ld\n", save_pos);
 	fseek(file, 0L, SEEK_END);
-	int length = ftell(file);
+	unsigned length = ftell(file);
 	fseek(file, save_pos, SEEK_SET);
 	printf("ftell after : %ld\n", ftell(file));
 	return length;
 }
 
-int get_image_data_length(FILE *bmp_src_file)
+unsigned get_image_data_length(FILE *bmp_src_file)
 {
 	return get_file_length(bmp_src_file) - get_image_src_offset(bmp_src_file);
 }

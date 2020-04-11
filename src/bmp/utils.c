@@ -1,26 +1,35 @@
 #include "utils.h"
 
-void check_nb_arg(int argc, char *argv0)
+void printUsage(const char *program_name, const char *error)
 {
-	if (argc != 5)
-	{
-		printf(_PROGRAMME_);
-		printf(_PROGRAMME_USAGE, argv0);
-		exit(1);
-	}
+	printf(_PROGRAM_);
+	printf(error);
+	printf(_PROGRAM_USAGE, program_name);
+	exit(1);
 }
 
-void set_mode(char *argv1, char *argv0, int *mode)
+void set_mode(char *argv0, char *argv1, int *mode, int argc)
 {
 	if (!strcmp(argv1, MODE_ENC))
-		*mode = 1;
-	else if (!strcmp(argv1, MODE_DEC))
+	{
+		if (argc != 5)
+		{
+			printf("COUCOU\n");
+			printUsage(argv0, _ERROR_NB_ARGS_);
+		}
 		*mode = 0;
+	}
+	else if (!strcmp(argv1, MODE_DEC))
+	{
+		if (argc != 4)
+		{
+			printUsage(argv0, _ERROR_NB_ARGS_);
+		}
+		*mode = 1;
+	}
 	else
 	{
-		printf(_PROGRAMME_);
-		printf(_PROGRAMME_USAGE, argv0);
-		exit(1);
+		printUsage(argv0, _ERROR_UNKNOWN_MODE_);
 	}
 }
 

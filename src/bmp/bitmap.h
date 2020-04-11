@@ -14,6 +14,7 @@
  */
 unsigned get_image_src_offset(FILE *bmp_src_file);
 
+void pass_header(FILE *bmp_src);
 void copy_header(FILE *bmp_src, FILE *bmp_dest);
 
 /**

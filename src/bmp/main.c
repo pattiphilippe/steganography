@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <errno.h>
+#include <stdint.h>
 
 #include "bitmap.h"
 #include "utils.h"

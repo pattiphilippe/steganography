@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+
 int get_image_src_offset(FILE *bmp_src_file)
 {
 	

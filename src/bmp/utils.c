@@ -2,7 +2,7 @@
 
 void check_nb_arg(int argc, char *argv0)
 {
-	if (argc != 5)
+	if (argc != 4 && argc != 5)
 	{
 		printf(_PROGRAMME_);
 		printf(_PROGRAMME_USAGE, argv0);

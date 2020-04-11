@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "utils.h"
+
 
 /**
  * Return the position at which the header ends.
@@ -14,6 +16,10 @@
  */
 unsigned get_image_src_offset(FILE *bmp_src_file);
 
+/**
+ * Copy the header information from the
+ * source file to the destination file.
+ */
 void copy_header(FILE *bmp_src, FILE *bmp_dest);
 
 /**
@@ -37,8 +43,8 @@ unsigned get_image_data_length(FILE *bmp_src_file);
 /**
  * Return the bit of the byte specified by o.
  * (little endian)
- * @param the byte
- * @param the bit index
+ * @param byte the given byte
+ * @param i the bit index
  * @return the  bit
  */
 int get_bit(char byte, int i);
@@ -49,3 +55,47 @@ int get_bit(char byte, int i);
  * (for debug purpose)
  */
 void printBitsOfByte(const char *title, const char *byteSrc);
+
+/**
+ * 
+ * 
+ */
+void encode(const char * src_img_file, const char* dest_file, const char *src_secret_file);
+
+/**
+ * Returns the size of the secret message to hide.
+ * if the size of the secret message is > than 
+ * the size of the section containing raw pixels of 
+ * the source image, it will print the error to 
+ * the standard error stream
+ * @param src_img the bitmap source image
+ * @param src_secret the secret message
+ * 
+ */
+unsigned checkLengths(FILE *src_img, FILE *src_secret);
+
+/**
+ * 
+ * 
+ */
+void encodeSecret(FILE *src_img, FILE *dest, FILE *src_secret);
+
+/**
+ * 
+ *
+ */
+void encodeLength(FILE *src_img, FILE *dest, const unsigned length);
+
+/**
+ * 
+ * 
+ */
+void encodeBit(FILE *src_img, FILE *dest, const int secret_bit);
+
+/**
+ * 
+ * 
+ */
+void copyRestOfImage(FILE *src_img, FILE *dest);
+
+

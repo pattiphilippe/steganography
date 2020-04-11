@@ -35,7 +35,11 @@ run_bmp : build_bmp
 	###################################################################################################
 	@echo
 	@./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message.txt
-	@./dist/bmp/ReadBMP enc rsc/hill_src.bmp rsc/hill_dest.bmp rsc/input_message.txt 
+	@./dist/bmp/ReadBMP enc rsc/hill_src.bmp rsc/hill_dest.bmp rsc/input_message.txt
+ 
+	#@./dist/bmp/ReadBMP dec rsc/splash_color_dest.bmp rsc/output_splash_color_message.txt
+	#@./dist/bmp/ReadBMP dec rsc/hill_dest.bmp rsc/output_splash_color_message.txt
+
 
 build_bmp : dist/bmp/ReadBMP
 

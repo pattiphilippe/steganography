@@ -4,12 +4,12 @@
 
 int get_image_src_offset(FILE *bmp_src_file)
 {
-	/*
+	
 	long save_pos = ftell(bmp_src_file);
 	fseek(bmp_src_file, 10, SEEK_SET);
 	int offset = fgetc(bmp_src_file);
-	fseek(bmp_src_file, save_pos, SEEK_SET);*/
-	return 54;
+	fseek(bmp_src_file, save_pos, SEEK_SET);
+	return offset;
 }
 
 void copy_header(FILE *bmp_src, FILE *bmp_dest)
@@ -44,19 +44,19 @@ int get_image_data_length(FILE *bmp_src_file)
 	return get_file_length(bmp_src_file) - get_image_src_offset(bmp_src_file);
 }
 
-/**
- * for debug purpose
- */
-void fromByteToBitsDisplay(char data)
+
+void printBitsOfByte(const char *title, const char *byteSrc)
 {
-	bool bit[8];
-	printf("%c", "[");
+	char byte = *byteSrc;
+	printf("%s\n", title);
 	for (int i = 0; i < 8; i++)
 	{
-		bit[i] = ((data >> i) & 0x01);
-		printf("%d", bit[i]);
+		if (!(i % 4) && i)
+			printf(" ");
+		printf("%d", (byte & 0x80) ? 1 : 0);
+		byte <<= 1;
 	}
-	printf("%c", "]");
+	printf("\n\n");
 }
 
 /**

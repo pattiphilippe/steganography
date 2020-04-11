@@ -7,8 +7,6 @@
 void encode(FILE *src_img, FILE *dest, const char *src_secret_file);
 void decode();
 
-void printBitsOfByte(const char *title, const unsigned char *byteSrc);
-
 int main(int argc, char *argv[])
 {
 	printf("%s", "Start program\n\n");
@@ -61,9 +59,6 @@ void encode(FILE *src_img, FILE *dest, const char *src_secret_file)
 		{
 			src_img_buffer = fgetc(src_img);
 			printBitsOfByte("GOOD src_img_buffer : ", &src_img_buffer);
-			// printf("\n[Good src_img_buffer : ");
-			// fromByteToBitsDisplay(src_img_buffer);
-			// printf("  ");
 
 			img_bit = src_img_buffer & 1;
 			secret_bit = get_bit(src_msg_buffer, i);
@@ -73,19 +68,12 @@ void encode(FILE *src_img, FILE *dest, const char *src_secret_file)
 				if (secret_bit == 0)
 				{
 					src_img_buffer = (src_img_buffer & ~1);
-					// printf("secret_bit = 0 ");
 					printBitsOfByte("modified and secret_bit = 0 src_img_buffer : ", &src_img_buffer);
-					// printf("src_img_buffer : ");
-					// fromByteToBitsDisplay(src_img_buffer);
-					// printf("]\n");
 				}
 				else
 				{
 					src_img_buffer = (src_img_buffer | 1);
 					printBitsOfByte("modified and secret_bit = 1 src_img_buffer : ", &src_img_buffer);
-					// printf("src_img_buffer : ");
-					// fromByteToBitsDisplay(src_img_buffer);
-					// printf("]\n");
 				}
 			}
 			fputc(src_img_buffer, dest);
@@ -107,16 +95,3 @@ void encode(FILE *src_img, FILE *dest, const char *src_secret_file)
 	fclose(src_secret);
 }
 
-void printBitsOfByte(const char *title, const unsigned char *byteSrc)
-{
-	unsigned char byte = *byteSrc;
-	printf("%s\n", title);
-	for (int i = 0; i < 8; i++)
-	{
-		if (!(i % 4) && i)
-			printf(" ");
-		printf("%d", (byte & 0x80) ? 1 : 0);
-		byte <<= 1;
-	}
-	printf("\n\n");
-}

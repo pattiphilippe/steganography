@@ -49,5 +49,5 @@ int get_bit(char byte, int i);
  * series of eight bits
  * (for debug purpose)
  */
-void fromByteToBitsDisplay(char);
+void printBitsOfByte(const char *title, const char *byteSrc);
 

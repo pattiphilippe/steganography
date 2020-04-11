@@ -40,6 +40,9 @@ run_bmp : build_bmp
 	@./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message.txt
 	@./dist/bmp/ReadBMP enc rsc/hill_src.bmp rsc/hill_dest.bmp rsc/input_message.txt 
 
+	@./dist/bmp/ReadBMP dec rsc/splash_color_dest.bmp rsc/output_message_splash.txt
+	@./dist/bmp/ReadBMP dec rsc/hill_dest.bmp rsc/input_message_hill.txt 
+
 build_bmp : dist/bmp/ReadBMP
 
 dist/bmp/ReadBMP : dist/bmp/main.o dist/bmp/bitmap.o dist/bmp/utils.o

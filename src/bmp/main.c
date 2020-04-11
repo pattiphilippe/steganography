@@ -8,42 +8,54 @@
 void encode(FILE *src_img, FILE *dest, const char *src_secret_file);
 unsigned checkLengths(FILE *src_img, FILE *src_secret);
 void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret);
+void decode_secret(FILE *src_img, FILE *dest, const unsigned length);
 void hideLength(FILE *src_img, FILE *dest, const unsigned length);
 void hideBit(FILE *src_img, FILE *dest, const int secret_bit);
 void copyRestOfImage(FILE *src_img, FILE *dest);
-void decode();
+void decode(FILE *src_img, FILE *dest);
+unsigned decode_length(FILE *src_img);
+int decode_bit(FILE *src_img);
 
 int main(int argc, char *argv[])
 {
-	printf("%s", "Start program\n\n");
+	printf("Start program\n\n");
 
-	check_nb_arg(argc, argv[0]);
+	if (argc < 4)
+		printUsage(argv[0], _ERROR_NB_ARGS_);
+	printf("Using src file : %s\n\n", argv[2]);
 
 	int mode;
-	set_mode(argv[1], argv[0], &mode);
-	printf("argv[2] : %s\n",argv[2]);
+	set_mode(argv[0], argv[1], &mode, argc);
 
 	FILE *src_img = set_open_file_mode(argv[2], READ, _ERROR_OPEN_FILE_R);
 	FILE *dest = set_open_file_mode(argv[3], WRITE, _ERROR_OPEN_FILE_W);
 
-	copy_header(src_img, dest);
-
-	if (mode)
+	if (mode == 0)
 	{
 		encode(src_img, dest, argv[4]);
 	}
 	else
 	{
-		//TODO decode();
+		decode(src_img, dest);
 	}
 
 	fclose(src_img);
 	fclose(dest);
-	printf("%s", "end program\n\n");
+	printf("%s", "end program\n\n\n");
+}
+
+void decode(FILE *src_img, FILE *dest)
+{
+	pass_header(src_img);
+	unsigned length = decode_length(src_img);
+	printf("length decoded : %u\n", length);
+	decode_secret(src_img, dest, length);
 }
 
 void encode(FILE *src_img, FILE *dest, const char *src_secret_file)
 {
+	copy_header(src_img, dest);
+
 	FILE *src_secret = set_open_file_mode(src_secret_file, READ, _ERROR_OPEN_FILE_R);
 
 	unsigned secret_length = checkLengths(src_img, src_secret);
@@ -68,9 +80,21 @@ unsigned checkLengths(FILE *src_img, FILE *src_secret)
 	return secret_length;
 }
 
+unsigned decode_length(FILE *src_img)
+{
+	unsigned nb_bits = sizeof(unsigned) * 8, mult = 1U << (nb_bits - 1), length = 0;
+	for (int i = nb_bits - 1; i >= 0; i--)
+	{
+		int bit = decode_bit(src_img);
+		length += bit * mult;
+		mult >>= 1;
+	}
+	return length;
+}
+
 void hideLength(FILE *src_img, FILE *dest, unsigned length)
 {
-	unsigned nb_bits = sizeof(length) * 8, div = 1U << (nb_bits - 1);
+	unsigned nb_bits = sizeof(unsigned) * 8, div = 1U << (nb_bits - 1);
 	for (int i = nb_bits - 1; i >= 0; i--)
 	{
 		hideBit(src_img, dest, (length / div));
@@ -79,21 +103,43 @@ void hideLength(FILE *src_img, FILE *dest, unsigned length)
 	}
 }
 
+void decode_secret(FILE *src_img, FILE *dest, const unsigned length)
+{
+	char dest_buffer;
+	for (unsigned i = 0; i < length; i++)
+	{
+		dest_buffer = 0;
+		for (int j = 0; j < 8; j++)
+		{
+			dest_buffer <<= 1;
+			int bit = decode_bit(src_img);
+			if (bit == 0)
+				dest_buffer = dest_buffer & ~1;
+			else
+				dest_buffer = dest_buffer | 1;
+		}
+		fputc(dest_buffer, dest);
+	}
+}
+
 void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret)
 {
-	printf("ftell(src_img) : %ld\n", ftell(src_img));
 	char src_msg_buffer = fgetc(src_secret);
 	int secret_bit;
 	while (!feof(src_secret))
 	{
-		for (int i = 1; i <= 8; i++) //TODO check with decode if it encodes the message correctly
+		for (int i = 0; i < 8; i++)
 		{
 			secret_bit = get_bit(src_msg_buffer, i);
 			hideBit(src_img, dest, secret_bit);
 		}
 		src_msg_buffer = fgetc(src_secret);
 	}
-	printf("ftell(src_img) : %ld\n", ftell(src_img));
+}
+
+int decode_bit(FILE *src_img)
+{
+	return fgetc(src_img) & 1;
 }
 
 void hideBit(FILE *src_img, FILE *dest, const int secret_bit)
@@ -111,6 +157,7 @@ void hideBit(FILE *src_img, FILE *dest, const int secret_bit)
 	}
 	fputc(src_img_buffer, dest);
 }
+
 void copyRestOfImage(FILE *src_img, FILE *dest)
 {
 	char src_img_buffer = fgetc(src_img);

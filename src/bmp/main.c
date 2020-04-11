@@ -44,15 +44,14 @@ int main(int argc, char *argv[])
 void encode(FILE *src_img, FILE *dest, const char *src_secret_file)
 {
 	FILE *src_secret = set_open_file_mode(src_secret_file, READ, _ERROR_OPEN_FILE_R);
-	int secret_length = checkLengths(src_img, src_secret);
-	//hideLength(src_img, dest, secret_length);
 
-	//TODO hide message length first, int value on 4 bytes should be enough => +- 2.000.000.000
+	unsigned secret_length = checkLengths(src_img, src_secret);
+	hideLength(src_img, dest, secret_length);
+
 	hideSecret(src_img, dest, src_secret);
 	fclose(src_secret);
 
 	copyRestOfImage(src_img, dest);
-	hideLength(src_img, dest, secret_length);
 }
 
 unsigned checkLengths(FILE *src_img, FILE *src_secret)
@@ -68,29 +67,30 @@ unsigned checkLengths(FILE *src_img, FILE *src_secret)
 	return secret_length;
 }
 
-void hideLength(FILE *src_img, FILE *dest, const unsigned length)
+void hideLength(FILE *src_img, FILE *dest, unsigned length)
 {
-	unsigned temp_length = length;
-	unsigned nb_bits = sizeof(length) * 8;
-	unsigned div = 1U << (nb_bits - 1);
-	unsigned bit = 0;
+	printf("ftell(src_img) : %ld\n", ftell(src_img));
+	unsigned nb_bits = sizeof(length) * 8, div = 1U << (nb_bits - 1);
+	int bit = 0;
 	printf("Length : %d, div : %u\n", length, div);
 	printf("Bits of length : \n");
 	for (int i = nb_bits - 1; i >= 0; i--)
 	{
-		printf("Length : %d, div : %u, length / div : %d\n", temp_length, div, (temp_length / div));
-		bit = (temp_length / div) ? 1 : 0;
+		printf("Length : %d, div : %u, length / div : %d\n", length, div, (length / div));
+		bit = length / div;
 		if (!((i + 1) % 4) && i != (nb_bits + 1))
 			printf(" ");
 		printf("bit : %d\n", bit);
-		temp_length = temp_length % div;
+		length %= div;
 		div >>= 1;
+		hideBit(src_img, dest, bit);
 	}
-	printf("\n\n");
+	printf("ftell(src_img) : %ld\n", ftell(src_img));
 }
 
 void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret)
 {
+	printf("ftell(src_img) : %ld\n", ftell(src_img));
 	char src_msg_buffer = fgetc(src_secret);
 	int secret_bit;
 	while (!feof(src_secret))
@@ -102,6 +102,7 @@ void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret)
 		}
 		src_msg_buffer = fgetc(src_secret);
 	}
+	printf("ftell(src_img) : %ld\n", ftell(src_img));
 }
 
 void hideBit(FILE *src_img, FILE *dest, const int secret_bit)

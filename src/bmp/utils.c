@@ -3,7 +3,7 @@
 void printUsage(const char *program_name, const char *error)
 {
 	printf(_PROGRAM_);
-	printf(error);
+	puts(error);
 	printf(_PROGRAM_USAGE, program_name);
 	exit(1);
 }

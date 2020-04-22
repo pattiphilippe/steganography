@@ -57,12 +57,6 @@ int get_bit(char byte, int i);
 void printBitsOfByte(const char *title, const char *byteSrc);
 
 /**
- * 
- * 
- */
-void encode(const char * src_img_file, const char* dest_file, const char *src_secret_file);
-
-/**
  * Returns the size of the secret message to hide.
  * if the size of the secret message is > than 
  * the size of the section containing raw pixels of 
@@ -75,25 +69,46 @@ void encode(const char * src_img_file, const char* dest_file, const char *src_se
 unsigned checkLengths(FILE *src_img, FILE *src_secret);
 
 /**
+ * Encode the length of the message and the message to the bitmap file
  * 
+ * @param src_img_file the bmp image source file
+ * @param dest_file the bmp destination file
+ * @param src_secret_file the message source file
+ */
+void encode(const char * src_img_file, const char* dest_file, const char *src_secret_file);
+
+/**
+ * Encode the message to the bitmap file
+ * 
+ * @param src_img the bmp image source file
+ * @param dest the bmp destination file
+ * @param src_secret the message source file
  * 
  */
 void encodeSecret(FILE *src_img, FILE *dest, FILE *src_secret);
 
 /**
+ * Encode the length of the message to the bitmap file
  * 
- *
+ * @param src_img the bmp image source file
+ * @param dest the bmp destination file
+ * @param length the length of the message
  */
 void encodeLength(FILE *src_img, FILE *dest, const unsigned length);
 
 /**
+ * Encode one given bit from the bitmap source file to the bitmap destination file
  * 
+ * @param src_img the bmp image source file
+ * @param dest the bmp destination file 
+ * @param secret_bit the given bit
  * 
  */
 void encodeBit(FILE *src_img, FILE *dest, const int secret_bit);
 
 /**
- * 
+ * Copy the rest of the bmp source file to the bmp destination file
+ * from the 
  * 
  */
 void copyRestOfImage(FILE *src_img, FILE *dest);

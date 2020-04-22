@@ -115,7 +115,7 @@ void encodeSecret(FILE *src_img, FILE *dest, FILE *src_secret)
 	int secret_bit;
 	while (!feof(src_secret))
 	{
-		for (int i = 1; i <= 8; i++) //TODO check with decode if it encodes the message correctly
+		for (int i = 1; i <= 8; i++) 
 		{
 			secret_bit = get_bit(src_msg_buffer, i);
 			encodeBit(src_img, dest, secret_bit);
@@ -142,6 +142,7 @@ void encodeBit(FILE *src_img, FILE *dest, const int secret_bit)
 
 void copyRestOfImage(FILE *src_img, FILE *dest)
 {
+	printf("ftell(src_img) : %ld\n", ftell(src_img));
 	char src_img_buffer = fgetc(src_img);
 	while (!feof(src_img))
 	{

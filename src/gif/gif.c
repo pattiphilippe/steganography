@@ -1,7 +1,4 @@
-#include <errno.h>
-#include <math.h>
-#include <stdlib.h>
-#include "util.h"
+#include "gif.h"
 
 bool hasColorTable(const unsigned char *packed_field)
 {
@@ -143,7 +140,7 @@ void passImageDescrBlock(FILE *source)
 	passDataSubBlocks(source);
 }
 
-void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, int sizeGCT, long posGCT)
+void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT)
 {
 	image_descr_t image_descr;
 	char buffer;

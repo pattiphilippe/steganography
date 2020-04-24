@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-//#include "bitmap.h"
-
 #define MODE_ENC "enc"
 #define MODE_DEC "dec"
 #define _PROGRAM_ "Steganograph by LSB substitution\n"
@@ -17,6 +15,11 @@
 
 
 void printUsage(const char *program_name, const char *error);
+void showUsage(const char *name);
+void printBytesHexa(const char *title, const unsigned char *bytes, size_t size);
+void printBitsOfByte(const char *title, const char *byteSrc);
 void set_mode(char *argv0, char *argv1, int *mode, int argc);
 FILE *set_open_file_mode(const char *argv, const char *mode, const char *string);
-void check_nb_param(const unsigned nbParam);
+void check_nb_param(const char *program_name, const unsigned nbParam);
+
+unsigned get_file_length(FILE *msg_src_file);

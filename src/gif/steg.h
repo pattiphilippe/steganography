@@ -1,5 +1,13 @@
-#include "util.h"
+#include <stdio.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <string.h>
 
-void writeGifWithLCT(const char* source, const char* dest);
+#include "gif.h"
 
+void writeGifWithLCT(const char* source, const char* dest,  const char *src_secret);
 int getMaxLCT(const char* source);
+
+unsigned checkLengths(FILE *src_img, FILE *src_secret);
+void hideLength(FILE *src_img, FILE *dest, unsigned length);
+void hideBit(FILE *src_img, FILE *dest, const int secret_bit);

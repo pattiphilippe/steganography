@@ -27,32 +27,9 @@ void copy_header(FILE *bmp_src, FILE *bmp_dest)
 	}
 }
 
-unsigned get_file_length(FILE *file)
-{
-	long save_pos = ftell(file);
-	fseek(file, 0L, SEEK_END);
-	unsigned length = ftell(file);
-	fseek(file, save_pos, SEEK_SET);
-	return length;
-}
-
 unsigned get_image_data_length(FILE *bmp_src_file)
 {
 	return get_file_length(bmp_src_file) - get_image_src_offset(bmp_src_file);
-}
-
-void printBitsOfByte(const char *title, const char *byteSrc)
-{
-	char byte = *byteSrc;
-	printf("%s\n", title);
-	for (int i = 0; i < 8; i++)
-	{
-		if (!(i % 4) && i)
-			printf(" ");
-		printf("%d", (byte & 0x80) ? 1 : 0);
-		byte <<= 1;
-	}
-	printf("\n\n");
 }
 
 /**

@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdbool.h>
-
+#include <errno.h>
+#include <math.h>
+#include <stdlib.h>
+#include "../utils/utils.h"
 /**
  * Logical screen descriptor structure
  */
@@ -51,6 +54,6 @@ void copyDataSubBlocks(FILE *source, FILE *dest);
 void readDataSubBlocks(FILE *source, FILE *dest, bool copy);
 
 void passImageDescrBlock(FILE *source);
-void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, int sizeGCT, long posGCT);
+void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT);
 
 void setPackedFieldLikeGCT(image_descr_t *image_descr, int sizeGCT);

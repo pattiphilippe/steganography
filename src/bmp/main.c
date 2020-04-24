@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
 	printf("Start program\n\n");
 
-	check_nb_param(argc);
+	check_nb_param(argv[0], argc);
 	printf("Using src file : %s\n\n", argv[2]);
 
 	int mode;

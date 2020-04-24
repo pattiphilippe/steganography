@@ -78,7 +78,35 @@ void readHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *p
 	}
 }
 
-void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT)
+void copyGCTEnc(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT)
+{
+	long savePos = ftell(source);
+	fseek(source, posGCT, SEEK_SET);
+	char buffer[6];
+	for (int i = 0; i < sizeGCT; i += 6)
+	{
+		fread(buffer, 6, 1, source);
+
+		if (i % 6 == 0) // to check
+		{
+			char src_msg_buffer = fgetc(secret);
+			int secret_bit;
+
+			if (!feof(secret)) 
+			{	
+				for (int j = 0; j < 8; j++)
+				{
+					secret_bit = get_bit(src_msg_buffer, j);
+					hideBit2(&buffer, secret_bit);
+				}
+			}	
+		}
+		fwrite(buffer, 6, 1, dest);
+	}
+	fseek(source, savePos, SEEK_SET);
+}
+
+void copyGCT(FILE *source, FILE *dest,  int sizeGCT, long posGCT)
 {
 	long savePos = ftell(source);
 	fseek(source, posGCT, SEEK_SET);
@@ -144,6 +172,7 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 {
 	image_descr_t image_descr;
 	char buffer;
+	
 	fread(&image_descr, 1, sizeof(image_descr), source);
 	if (hasColorTable(&(image_descr.packed_field)))
 	{
@@ -151,7 +180,24 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 		fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy image descr read
 		for (int i = 0; i < sizeLCT; i++)					// read and copy LCT, byte by byte
 		{
+
 			fread(&buffer, 1, 1, source);
+
+			//to check
+			if (i == sizeLCT-1)
+			{
+				char src_msg_buffer = fgetc(secret);
+			 	int secret_bit;
+
+				if (!feof(secret)) 
+				{	
+					for (int j = 0; j < 8; j++)
+					{
+						secret_bit = get_bit(src_msg_buffer, j);
+						hideBit2(&buffer, secret_bit);
+					}
+				}	
+			} 
 			fwrite(&buffer, 1, 1, dest);
 		}
 	}
@@ -159,7 +205,7 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 	{
 		setPackedFieldLikeGCT(&image_descr, sizeGCT);
 		fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy modified image descr read
-		copyGCT(source, dest, sizeGCT, posGCT);
+		copyGCTEnc(source, dest, secret, sizeGCT, posGCT);
 	}
 	fread(&buffer, 1, 1, source); // in image data, copying LZW minimum code size byte
 	fwrite(&buffer, 1, 1, dest);

@@ -43,3 +43,9 @@ FILE *set_open_file_mode(const char *argv, const char *mode, const char *string)
 	}
 	return file;
 }
+
+void check_nb_param(const unsigned nbParam)
+{
+	if (nbParam < 4)
+		printUsage(nbParam, _ERROR_NB_ARGS_);
+}

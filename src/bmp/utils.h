@@ -17,12 +17,6 @@
 
 
 void printUsage(const char *program_name, const char *error);
-
-/**
- * 
- * Set the program to cipher or decipher mode
- * @abort if not the arg is invalid
- */
 void set_mode(char *argv0, char *argv1, int *mode, int argc);
-
 FILE *set_open_file_mode(const char *argv, const char *mode, const char *string);
+void check_nb_param(const unsigned nbParam);

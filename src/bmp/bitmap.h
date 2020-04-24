@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <stdbool.h>
+#include "utils.h"
 
 /**
  * Return the position at which the header ends.
@@ -50,3 +51,14 @@ int get_bit(char byte, int i);
  * (for debug purpose)
  */
 void printBitsOfByte(const char *title, const char *byteSrc);
+
+void encode(const char *src_img_file, const char *dest_file, const char *src_secret_file);
+unsigned checkLengths(FILE *src_img, FILE *src_secret);
+void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret);
+void decode_secret(FILE *src_img, FILE *dest, const unsigned length);
+void hideLength(FILE *src_img, FILE *dest, const unsigned length);
+void hideBit(FILE *src_img, FILE *dest, const int secret_bit);
+void copyRestOfImage(FILE *src_img, FILE *dest);
+void decode(const char *src_img_file, const char *dest_file);
+unsigned decode_length(FILE *src_img);
+int decode_bit(FILE *src_img);

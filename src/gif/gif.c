@@ -85,9 +85,9 @@ void copyGCTEnc(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT
 	char buffer[6];
 	for (int i = 0; i < sizeGCT; i += 6)
 	{
-		fread(buffer, 6, 1, source);
+		fread(&buffer, 6, 1, source);
 
-		if (i % 6 == 0) // to check
+		if (i % 6 == 0) // to check + modul
 		{
 			char src_msg_buffer = fgetc(secret);
 			int secret_bit;
@@ -97,11 +97,16 @@ void copyGCTEnc(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT
 				for (int j = 0; j < 8; j++)
 				{
 					secret_bit = get_bit(src_msg_buffer, j);
-					hideBit2(&buffer, secret_bit);
-				}
+					hideBit2(&buffer, dest, secret_bit, 1);
+						
+				}	
+				fwrite(&buffer, 6, 1, dest);
 			}	
-		}
-		fwrite(buffer, 6, 1, dest);
+		} 
+		else
+		{
+			fwrite(&buffer, 6, 1, dest);
+		}	
 	}
 	fseek(source, savePos, SEEK_SET);
 }
@@ -172,7 +177,7 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 {
 	image_descr_t image_descr;
 	char buffer;
-	
+
 	fread(&image_descr, 1, sizeof(image_descr), source);
 	if (hasColorTable(&(image_descr.packed_field)))
 	{
@@ -180,7 +185,6 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 		fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy image descr read
 		for (int i = 0; i < sizeLCT; i++)					// read and copy LCT, byte by byte
 		{
-
 			fread(&buffer, 1, 1, source);
 
 			//to check
@@ -194,11 +198,13 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 					for (int j = 0; j < 8; j++)
 					{
 						secret_bit = get_bit(src_msg_buffer, j);
-						hideBit2(&buffer, secret_bit);
+						hideBit2(&buffer, dest, secret_bit, 1);
 					}
+					fwrite(&buffer, 1, 1, dest);
 				}	
-			} 
-			fwrite(&buffer, 1, 1, dest);
+			} else {
+				fwrite(&buffer, 1, 1, dest);	
+			}	
 		}
 	}
 	else

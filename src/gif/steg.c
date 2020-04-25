@@ -139,17 +139,19 @@ void hideBit(FILE *src_img, FILE *dest, const int secret_bit)
 }
 
 
-void hideBit2(char *src_img_buffer, const int secret_bit)
+void hideBit2(char *src_img_buffer, FILE *dest, const int secret_bit, const int count)
 {
 	int img_bit = *src_img_buffer & 1;
 
 	if (img_bit != secret_bit)
 	{
 		if (secret_bit == 0)
-			src_img_buffer = (*src_img_buffer & ~1);
+			*src_img_buffer = (*src_img_buffer & ~1);
 		else
-			src_img_buffer = (*src_img_buffer | 1);
+			*src_img_buffer = (*src_img_buffer | 1);
 	}
+	//fwrite(src_img_buffer, count, 1, dest);
+	//fputc(*src_img_buffer, dest);
 }
 
 int get_bit(char byte, int bit_nb)

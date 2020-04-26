@@ -83,11 +83,12 @@ void copyGCTEnc(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT
 	long savePos = ftell(source);
 	fseek(source, posGCT, SEEK_SET);
 	char buffer[6];
+
 	for (int i = 0; i < sizeGCT; i += 6)
 	{
 		fread(&buffer, 6, 1, source);
 
-		if (i % 6 == 0) // to check + modul
+		if (i!=0 && i-1 % 6 == 0) // to check + modul
 		{
 			char src_msg_buffer = fgetc(secret);
 			int secret_bit;
@@ -183,12 +184,13 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 	{
 		unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
 		fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy image descr read
+
 		for (int i = 0; i < sizeLCT; i++)					// read and copy LCT, byte by byte
 		{
 			fread(&buffer, 1, 1, source);
 
-			//to check
-			if (i == sizeLCT-1)
+			//to check : on veut la dernière entrée de la lct
+			if (i == sizeLCT-2)
 			{
 				char src_msg_buffer = fgetc(secret);
 			 	int secret_bit;

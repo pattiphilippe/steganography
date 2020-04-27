@@ -32,18 +32,7 @@ unsigned get_image_data_length(FILE *bmp_src_file)
 	return get_file_length(bmp_src_file) - get_image_src_offset(bmp_src_file);
 }
 
-unsigned checkLengths(FILE *src_img, FILE *src_secret)
-{
-	unsigned secret_length = get_file_length(src_secret);
-	unsigned src_data_length = get_image_data_length(src_img);
 
-	if (((secret_length + 4) * 8) > src_data_length)
-	{
-		fprintf(stderr, "Secret too large for source image!\n");
-		exit(1);
-	}
-	return secret_length;
-}
 
 void decode(const char *src_img_file, const char *dest_file)
 {

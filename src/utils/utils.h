@@ -19,7 +19,12 @@ void showUsage(const char *name);
 void printBytesHexa(const char *title, const unsigned char *bytes, size_t size);
 void printBitsOfByte(const char *title, const char *byteSrc);
 void set_mode(char *argv0, char *argv1, int *mode, int argc);
-FILE *set_open_file_mode(const char *argv, const char *mode, const char *string);
+FILE *set_open_file_mode(const char *argv, const char *mode, const char *error_msg);
 void check_nb_param(const char *program_name, const unsigned nbParam);
 
 unsigned get_file_length(FILE *msg_src_file);
+
+int get_bit(char byte, int i);
+void hideLength(FILE *src_img, FILE *dest, const unsigned length);
+void hideBit(FILE *src_img, FILE *dest, const int secret_bit);
+void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret);

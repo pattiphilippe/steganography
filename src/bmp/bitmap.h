@@ -26,22 +26,9 @@ void copy_header(FILE *bmp_src, FILE *bmp_dest);
 */
 unsigned get_image_data_length(FILE *bmp_src_file);
 
-/**
- * Return the bit of the byte specified by o.
- * (little endian)
- * @param the byte
- * @param the bit index
- * @return the  bit
- */
-int get_bit(char byte, int i);
-
-
 void encode(const char *src_img_file, const char *dest_file, const char *src_secret_file);
 unsigned checkLengths(FILE *src_img, FILE *src_secret);
-void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret);
 void decode_secret(FILE *src_img, FILE *dest, const unsigned length);
-void hideLength(FILE *src_img, FILE *dest, const unsigned length);
-void hideBit(FILE *src_img, FILE *dest, const int secret_bit);
 void copyRestOfImage(FILE *src_img, FILE *dest);
 void decode(const char *src_img_file, const char *dest_file);
 unsigned decode_length(FILE *src_img);

@@ -42,13 +42,13 @@ void set_mode(char *argv0, char *argv1, int *mode, int argc)
 	}
 }
 
-FILE *set_open_file_mode(const char *argv, const char *mode, const char *string)
+FILE *set_open_file_mode(const char *argv, const char *mode, const char *error_msg)
 {
 	FILE *file = fopen(argv, mode);
 	if (file == NULL)
 	{
-		//fprintf(stderr, string, argv);
-		perror(strcat(string, argv));
+		//fprintf(stderr, error_msg, argv);
+		perror(strcat(error_msg, argv));
 		exit(1);
 	}
 	return file;
@@ -90,3 +90,48 @@ void printBytesHexa(const char *title, const unsigned char *bytes, size_t size)
 	}
 	printf("\n\n");
 }
+
+void hideLength(FILE *src_img, FILE *dest, unsigned length)
+{
+	unsigned nb_bits = sizeof(unsigned) * 8, div = 1U << (nb_bits - 1);
+	for (int i = nb_bits - 1; i >= 0; i--)
+	{
+		hideBit(src_img, dest, (length / div));
+		length %= div;
+		div >>= 1;
+	}
+}
+
+
+void hideBit(FILE *src_img, FILE *dest, const int secret_bit)
+{
+	char src_img_buffer = fgetc(src_img);
+
+	int img_bit = src_img_buffer & 1; //donne val du lsb
+
+	if (img_bit != secret_bit)
+	{
+		if (secret_bit == 0)
+			src_img_buffer = (src_img_buffer & ~1);
+		else
+			src_img_buffer = (src_img_buffer | 1);
+	}
+	fputc(src_img_buffer, dest);
+}
+
+void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret)
+{
+	char src_msg_buffer = fgetc(src_secret);
+	int secret_bit;
+	while (!feof(src_secret))
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			secret_bit = get_bit(src_msg_buffer, i);
+			hideBit(src_img, dest, secret_bit);
+		}
+		src_msg_buffer = fgetc(src_secret);
+	}
+}
+
+

@@ -32,14 +32,18 @@ unsigned get_image_data_length(FILE *bmp_src_file)
 	return get_file_length(bmp_src_file) - get_image_src_offset(bmp_src_file);
 }
 
-/**
- * Returns the nth bit of the given byte.
- */
-int get_bit(char byte, int bit_nb)
+unsigned checkLengths(FILE *src_img, FILE *src_secret)
 {
-	return (byte >> (7- bit_nb)) & 1;
-}
+	unsigned secret_length = get_file_length(src_secret);
+	unsigned src_data_length = get_image_data_length(src_img);
 
+	if (((secret_length + 4) * 8) > src_data_length)
+	{
+		fprintf(stderr, "Secret too large for source image!\n");
+		exit(1);
+	}
+	return secret_length;
+}
 
 void decode(const char *src_img_file, const char *dest_file)
 {
@@ -76,18 +80,6 @@ void encode(const char * src_img_file, const char *dest_file, const char *src_se
 	fclose(dest);	
 }
 
-unsigned checkLengths(FILE *src_img, FILE *src_secret)
-{
-	unsigned secret_length = get_file_length(src_secret);
-	unsigned src_data_length = get_image_data_length(src_img);
-
-	if (((secret_length + 4) * 8) > src_data_length)
-	{
-		fprintf(stderr, "Secret too large for source image!\n");
-		exit(1);
-	}
-	return secret_length;
-}
 
 unsigned decode_length(FILE *src_img)
 {
@@ -101,16 +93,6 @@ unsigned decode_length(FILE *src_img)
 	return length;
 }
 
-void hideLength(FILE *src_img, FILE *dest, unsigned length)
-{
-	unsigned nb_bits = sizeof(unsigned) * 8, div = 1U << (nb_bits - 1);
-	for (int i = nb_bits - 1; i >= 0; i--)
-	{
-		hideBit(src_img, dest, (length / div));
-		length %= div;
-		div >>= 1;
-	}
-}
 
 void decode_secret(FILE *src_img, FILE *dest, const unsigned length)
 {
@@ -131,41 +113,11 @@ void decode_secret(FILE *src_img, FILE *dest, const unsigned length)
 	}
 }
 
-void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret)
-{
-	char src_msg_buffer = fgetc(src_secret);
-	int secret_bit;
-	while (!feof(src_secret))
-	{
-		for (int i = 0; i < 8; i++)
-		{
-			secret_bit = get_bit(src_msg_buffer, i);
-			hideBit(src_img, dest, secret_bit);
-		}
-		src_msg_buffer = fgetc(src_secret);
-	}
-}
-
 int decode_bit(FILE *src_img)
 {
 	return fgetc(src_img) & 1;
 }
 
-void hideBit(FILE *src_img, FILE *dest, const int secret_bit)
-{
-	char src_img_buffer = fgetc(src_img);
-
-	int img_bit = src_img_buffer & 1; //donne val du lsb
-
-	if (img_bit != secret_bit)
-	{
-		if (secret_bit == 0)
-			src_img_buffer = (src_img_buffer & ~1);
-		else
-			src_img_buffer = (src_img_buffer | 1);
-	}
-	fputc(src_img_buffer, dest);
-}
 
 void copyRestOfImage(FILE *src_img, FILE *dest)
 {

@@ -12,6 +12,7 @@
 #define _ERROR_OPEN_FILE_W "Impossible to create output file %s!\n"
 #define READ "r"
 #define WRITE "w"
+#define BYTE 8
 
 
 void printUsage(const char *program_name, const char *error);

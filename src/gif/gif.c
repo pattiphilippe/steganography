@@ -144,7 +144,7 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 {
 	image_descr_t image_descr;
 	char buffer;
-
+	
 	fread(&image_descr, 1, sizeof(image_descr), source);
 	if (!hasColorTable(&(image_descr.packed_field))) // si pas de lct, copier GCT
 	{

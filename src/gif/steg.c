@@ -58,8 +58,8 @@ void writeGifWithLCT(const char *source, const char *dest,  const char *secret_s
 		case 2: 
 			copyDataSubBlocks(gif_src, gif_dest);
 			break;
-		case 3:
-			hideLength(gif_src, gif_dest, secret_length); //TODO hide Length somewhere with enough space (32 bytes)
+		case 3: 
+			//hideLength(gif_src, gif_dest, secret_length); //TODO hide Length somewhere with enough space (32 bytes)
 			copyDataSubBlocks(gif_src, gif_dest);
 			break;
 		case 4:
@@ -92,4 +92,9 @@ unsigned checkLengths_gif(FILE *src_img, FILE *src_secret) //TODO
 		exit(1);
 	}*/
 	return secret_length;
+}
+
+void encode(const char *src_img, const char *dest, const char *src_secret)
+{
+	writeGifWithLCT(src_img, dest, src_secret);
 }

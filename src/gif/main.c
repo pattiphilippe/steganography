@@ -2,7 +2,7 @@
 #include <errno.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "gif.h"
+#include "steg.h"
 
 void encode(const char *src_img, const char *dest, const char *src_secret);
 

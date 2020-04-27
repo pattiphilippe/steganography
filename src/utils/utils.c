@@ -17,6 +17,11 @@ unsigned get_file_length(FILE *file)
 	return length;
 }
 
+int get_bit(char byte, int bit_nb)
+{
+	return (byte >> (7- bit_nb)) & 1;
+}
+
 void set_mode(char *argv0, char *argv1, int *mode, int argc)
 {
 	if (!strcmp(argv1, MODE_ENC))
@@ -47,8 +52,8 @@ FILE *set_open_file_mode(const char *argv, const char *mode, const char *error_m
 	FILE *file = fopen(argv, mode);
 	if (file == NULL)
 	{
-		//fprintf(stderr, error_msg, argv);
-		perror(strcat(error_msg, argv));
+		fprintf(stderr, error_msg, argv);
+		//perror(strcat(error_msg, argv));
 		exit(1);
 	}
 	return file;

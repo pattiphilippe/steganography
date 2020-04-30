@@ -161,8 +161,7 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 	unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
 
 	//cacher message
-	//hideSecret(source, dest, secret); //TODO check si secret fin avant lct, ou lct fin avant secret
-	hideSecret2(source, dest, secret, &sizeLCT);
+	hideSecret_gif(source, dest, secret, &sizeLCT);  //TODO check si secret fin avant lct, ou lct fin avant secret : résolu si 
 
 	//réécrire image data
 	fread(&buffer, 1, 1, source); // in image data, copying LZW minimum code size byte

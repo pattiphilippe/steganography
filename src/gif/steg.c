@@ -98,3 +98,51 @@ void encode(const char *src_img, const char *dest, const char *src_secret)
 {
 	writeGifWithLCT(src_img, dest, src_secret);
 }
+
+void hideBit_gif(FILE *src_img, FILE *dest, const int secret_bit, long *curr_pos)
+{
+	char src_img_buffer = fgetc(src_img);
+	*curr_pos = ftell(src_img);
+
+	int img_bit = src_img_buffer & 1; //donne val du lsb
+
+	if (img_bit != secret_bit)
+	{
+		if (secret_bit == 0)
+			src_img_buffer = (src_img_buffer & ~1);
+		else
+			src_img_buffer = (src_img_buffer | 1);
+	}
+	fputc(src_img_buffer, dest);
+}
+
+
+void hideSecret_gif(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeLCT)
+{
+	char src_msg_buffer, src_img_buffer;
+	int secret_bit;
+
+	long curr_pos = ftell(src_img);
+	long max_pos = curr_pos + *sizeLCT;
+
+	printf("[curr pos : %ld, max pos for current LCT: %ld]\n", curr_pos, max_pos);
+
+	while (curr_pos <= max_pos)
+	{
+		fread(&src_msg_buffer, 1, 1, src_secret);
+		if (!feof(src_secret))
+		{
+			for (int i = 0; i < BYTE; i++)
+			{
+				secret_bit = get_bit(src_msg_buffer, i);
+				hideBit_gif(src_img, dest, secret_bit, &curr_pos);
+			}
+			fread(&src_msg_buffer, 1, 1, src_secret);
+		} 
+		else 
+		{
+			break;
+		}
+	}
+}
+

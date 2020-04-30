@@ -83,6 +83,22 @@ unsigned decode_length(FILE *src_img)
 }
 
 
+void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret)
+{
+	char src_msg_buffer = fgetc(src_secret);
+	int secret_bit;
+	while (!feof(src_secret))
+	{
+		for (int i = 0; i < BYTE; i++)
+		{
+			secret_bit = get_bit(src_msg_buffer, i);
+			hideBit(src_img, dest, secret_bit);
+		}
+		src_msg_buffer = fgetc(src_secret);
+	}
+}
+
+
 void decode_secret(FILE *src_img, FILE *dest, const unsigned length)
 {
 	char dest_buffer;
@@ -117,3 +133,4 @@ void copyRestOfImage(FILE *src_img, FILE *dest)
 		src_img_buffer = fgetc(src_img);
 	}
 }
+

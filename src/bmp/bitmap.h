@@ -28,6 +28,7 @@ unsigned get_image_data_length(FILE *bmp_src_file);
 
 void encode(const char *src_img_file, const char *dest_file, const char *src_secret_file);
 unsigned checkLengths(FILE *src_img, FILE *src_secret);
+void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret);
 void decode_secret(FILE *src_img, FILE *dest, const unsigned length);
 void copyRestOfImage(FILE *src_img, FILE *dest);
 void decode(const char *src_img_file, const char *dest_file);

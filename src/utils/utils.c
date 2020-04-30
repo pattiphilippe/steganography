@@ -123,68 +123,6 @@ void hideBit(FILE *src_img, FILE *dest, const int secret_bit)
 	fputc(src_img_buffer, dest);
 }
 
-void hideBit2(FILE *src_img, FILE *dest, const int secret_bit, long *curr_pos)
-{
-	char src_img_buffer = fgetc(src_img);
-	*curr_pos = ftell(src_img);
-
-	int img_bit = src_img_buffer & 1; //donne val du lsb
-
-	if (img_bit != secret_bit)
-	{
-		if (secret_bit == 0)
-			src_img_buffer = (src_img_buffer & ~1);
-		else
-			src_img_buffer = (src_img_buffer | 1);
-	}
-	fputc(src_img_buffer, dest);
-}
-
-
-void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret)
-{
-	char src_msg_buffer = fgetc(src_secret);
-	int secret_bit;
-	while (!feof(src_secret))
-	{
-		for (int i = 0; i < BYTE; i++)
-		{
-			secret_bit = get_bit(src_msg_buffer, i);
-			hideBit(src_img, dest, secret_bit);
-		}
-		src_msg_buffer = fgetc(src_secret);
-	}
-}
-
-void hideSecret2(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeLCT)
-{
-	char src_msg_buffer, src_img_buffer;
-	int secret_bit;
-
-	long curr_pos = ftell(src_img);
-	long max_pos = curr_pos + *sizeLCT;
-
-	printf("[curr pos : %ld, max pos for current LCT: %ld]\n", curr_pos, max_pos);
-
-	while (curr_pos <= max_pos)
-	{
-		fread(&src_msg_buffer, 1, 1, src_secret);
-		if (!feof(src_secret))
-		{
-			for (int i = 0; i < BYTE; i++)
-			{
-				secret_bit = get_bit(src_msg_buffer, i);
-				hideBit2(src_img, dest, secret_bit, &curr_pos);
-			}
-			fread(&src_msg_buffer, 1, 1, src_secret);
-		} 
-		else 
-		{
-			break;
-		}
-	}
-}
-
 void hideSecretWithSize(FILE *src_img, FILE *dest, FILE *src_secret, unsigned sizeLCT)
 {
 	/*
@@ -214,6 +152,7 @@ void hideSecretWithSize(FILE *src_img, FILE *dest, FILE *src_secret, unsigned si
 		}
 	}
 
+	//test
 	unsigned nb_entry = sizeLCT / BYTE;
 	unsigned size = sizeof(unsigned) * BYTE;
 

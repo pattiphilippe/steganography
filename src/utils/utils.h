@@ -29,3 +29,7 @@ int get_bit(char byte, int i);
 void hideLength(FILE *src_img, FILE *dest, const unsigned length);
 void hideBit(FILE *src_img, FILE *dest, const int secret_bit);
 void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret);
+
+//test
+void hideSecret2(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeGCT);
+void hideBit2(FILE *dest, char *src_byte, const int secret_bit);

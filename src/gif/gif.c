@@ -148,15 +148,21 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 	fread(&image_descr, 1, sizeof(image_descr), source);
 	if (!hasColorTable(&(image_descr.packed_field))) // si pas de lct, copier GCT
 	{
+		printf("NO LCT");
 		setPackedFieldLikeGCT(&image_descr, sizeGCT);
 		fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy modified image descr read
 		copyGCT(source, dest, sizeGCT, posGCT);
 	}
-	//unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
-	fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy image descr read
+	else
+	{
+		fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy image descr read
+	}
+	
+	unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
 
 	//cacher message
-	hideSecret(source, dest, secret); //TODO check si secret fin avant lct, ou lct fin avant secret
+	//hideSecret(source, dest, secret); //TODO check si secret fin avant lct, ou lct fin avant secret
+	hideSecret2(source, dest, secret, &sizeLCT);
 
 	//réécrire image data
 	fread(&buffer, 1, 1, source); // in image data, copying LZW minimum code size byte

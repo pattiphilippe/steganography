@@ -72,23 +72,38 @@ void readHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *p
 			*sizeGCT = size;
 			*posGCT = ftell(source);
 			fwrite(&header_lsd, 1, sizeof(header_lsd), dest);
-			copyGCT(source, dest, size, *posGCT);
+			copyGCT(source, dest, size, *posGCT, false);
 		}
 		fseek(source, size, SEEK_CUR);
 	}
 }
 
-void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT)
+void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT, bool resetCUR)
 {
-	long savePos = ftell(source);
-	fseek(source, posGCT, SEEK_SET);
+	long savePos_src = ftell(source);
+	long savePos_dest = ftell(dest);
 	char buffer[6];
+
+	if (resetCUR)
+	{
+		printf("{before : %ld, ", savePos_dest);
+	}
+
+	fseek(source, posGCT, SEEK_SET);
+
 	for (int i = 0; i < sizeGCT; i += 6)
 	{
 		fread(buffer, 6, 1, source);
 		fwrite(buffer, 6, 1, dest);
 	}
-	fseek(source, savePos, SEEK_SET);
+	fseek(source, savePos_src, SEEK_SET);
+
+	if(resetCUR) 
+	{
+		fseek(dest, savePos_dest, SEEK_SET);
+		printf("after: %ld}\n", ftell(dest));
+	}
+	
 }
 
 void passDataSubBlocks(FILE *source)
@@ -144,27 +159,26 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 {
 	image_descr_t image_descr;
 	char buffer;
+	bool hasCopyGCT;
 	
 	fread(&image_descr, 1, sizeof(image_descr), source);
 	if (!hasColorTable(&(image_descr.packed_field))) // si pas de lct, copier GCT
 	{
+		hasCopyGCT = true;
 		setPackedFieldLikeGCT(&image_descr, sizeGCT);
 		fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy modified image descr read
-		copyGCT(source, dest, sizeGCT, posGCT);
-		
-		/*printf("-------------------------------------> after copy of lct : %ld\n", ftell(dest));
-		fseek(dest, -sizeGCT, SEEK_CUR); //on se remet au début de la LCT
-		printf("-------------------------------------> after positioning the cursor at start of copied lct : %ld\n", ftell(dest));*/
-	}
+		copyGCT(source, dest, sizeGCT, posGCT, hasCopyGCT);
+	}	
 	else
 	{
+		hasCopyGCT = false;
 		fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy image descr read
 	}
 	
 	unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
 
 	//cacher message
-	hideSecret_gif(source, dest, secret, &sizeLCT);  //check si secret fin avant lct, ou lct fin avant secret : résolu si secret < lct => break sinon suite encodée dans next lct
+	hideSecret_gif(source, dest, secret, &sizeLCT, hasCopyGCT);  //check si secret fin avant lct, ou lct fin avant secret : résolu si secret < lct => break sinon suite encodée dans next lct
 
 	//réécrire image data
 	fread(&buffer, 1, 1, source); // in image data, copying LZW minimum code size byte

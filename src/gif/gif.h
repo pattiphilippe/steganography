@@ -47,7 +47,7 @@ void passHeaderLsdGct(FILE *source);
 void copyHeaderLsdGct(FILE *source, FILE *dest, int *sizeGCT, long *posGCT);
 void readHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *posGCT);
 
-void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT);
+void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT, bool resetCURSOR);
 
 void passDataSubBlocks(FILE *source);
 void copyDataSubBlocks(FILE *source, FILE *dest);

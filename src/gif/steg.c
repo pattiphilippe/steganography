@@ -36,11 +36,11 @@ int getMaxLCT(FILE *gif_src)
 	return maxLCT;
 }
 
-void writeGifWithLCT(const char *source, const char *dest,  const char *secret_src_file)
+void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *secret_src_file)
 {
-	FILE *gif_src = set_open_file_mode(source, READ, _ERROR_OPEN_FILE_R);
-	FILE *gif_dest = set_open_file_mode(dest, WRITE, _ERROR_OPEN_FILE_W);
-	FILE *secret_src = set_open_file_mode(dest, READ, _ERROR_OPEN_FILE_R);
+	FILE *gif_src = set_open_file_mode(src_file, READ, _ERROR_OPEN_FILE_R);
+	FILE *gif_dest = set_open_file_mode(dest_file, WRITE_UP, _ERROR_OPEN_FILE_W);
+	FILE *secret_src = set_open_file_mode(secret_src_file, READ, _ERROR_OPEN_FILE_R);
 
 	int sizeGCT = 0;
 	long posGCT = 0;
@@ -99,50 +99,102 @@ void encode(const char *src_img, const char *dest, const char *src_secret)
 	writeGifWithLCT(src_img, dest, src_secret);
 }
 
-void hideBit_gif(FILE *src_img, FILE *dest, const int secret_bit, long *curr_pos)
+void hideBit_gif(FILE *src, FILE *dest, const int secret_bit, long *curr_pos)
 {
-	char src_img_buffer = fgetc(src_img);
-	*curr_pos = ftell(src_img);
+	char src_buffer = fgetc(src);
+	*curr_pos = ftell(src);
 
-	int img_bit = src_img_buffer & 1; //donne val du lsb
+	int img_bit = src_buffer & 1; //donne val du lsb
 
 	if (img_bit != secret_bit)
 	{
 		if (secret_bit == 0)
-			src_img_buffer = (src_img_buffer & ~1);
+			src_buffer = (src_buffer & ~1);
 		else
-			src_img_buffer = (src_img_buffer | 1);
+			src_buffer = (src_buffer | 1);
 	}
-	fputc(src_img_buffer, dest);
+	
+	if (src == dest) fseek(src, *curr_pos -1, SEEK_SET);  //je recule d'un char pour maj
+
+	fputc(src_buffer, dest);
 }
 
 
-void hideSecret_gif(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeLCT)
+void hideSecret_gif(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeLCT, bool hasCopyGCT)
 {
 	char src_msg_buffer, src_img_buffer;
 	int secret_bit;
 
-	long curr_pos = ftell(src_img);
+	long curr_pos;
+
+	if (hasCopyGCT) 
+	{
+		curr_pos = ftell(dest);
+	}
+	else
+	{
+		curr_pos = ftell(src_img);
+	}	
+
 	long max_pos = curr_pos + *sizeLCT;
 
-	printf("[curr pos : %ld, max pos for current LCT: %ld]\n", curr_pos, max_pos);
+	printf("[curr pos : %ld, size lct : %d, max pos for current LCT: %ld]\n", curr_pos, *sizeLCT, max_pos);
 
-	while (curr_pos <= max_pos)
+	while (curr_pos < max_pos) 
 	{
-		fread(&src_msg_buffer, 1, 1, src_secret);
-		if (!feof(src_secret))
+		if (hasCopyGCT)
 		{
-			for (int i = 0; i < BYTE; i++)
-			{
-				secret_bit = get_bit(src_msg_buffer, i);
-				hideBit_gif(src_img, dest, secret_bit, &curr_pos);
-			}
+			//je travaille avec le fichier dest uniquement
 			fread(&src_msg_buffer, 1, 1, src_secret);
-		} 
-		else 
-		{
-			break;
+			if (!feof(src_secret))
+			{
+				for (int i = 0; i < BYTE; i++)
+				{
+					secret_bit = get_bit(src_msg_buffer, i);
+					hideBit_gif(dest, dest, secret_bit, &curr_pos);
+				}
+				fread(&src_msg_buffer, 1, 1, src_secret);
+			} 
+			else 
+			{
+				break;
+			}
 		}
+		else
+		{
+			fread(&src_msg_buffer, 1, 1, src_secret);
+			if (!feof(src_secret))
+			{
+				for (int i = 0; i < BYTE; i++)
+				{
+					secret_bit = get_bit(src_msg_buffer, i);
+					hideBit_gif(src_img, dest, secret_bit, &curr_pos);
+				}
+				fread(&src_msg_buffer, 1, 1, src_secret);
+			} 
+			else 
+			{
+				break;
+			}
+		}
+	}
+
+	while (curr_pos < max_pos)
+	{
+		if (hasCopyGCT) 
+		{
+			//already written in dest
+			fseek(dest, 1, SEEK_CUR);
+			curr_pos = ftell(dest);
+		}
+		else
+		{
+			//copy rest of LCT from src to dest
+			fread(&src_img_buffer, 1, 1, src_img);
+			fwrite(&src_img_buffer, 1, 1, dest);
+			curr_pos = ftell(src_img);
+		}
+		
 	}
 }
 

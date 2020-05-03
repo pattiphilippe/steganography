@@ -32,5 +32,6 @@ void hideSecret(FILE *src_img, FILE *dest, FILE *src_secret);
 void decode_secret(FILE *src_img, FILE *dest, const unsigned length);
 void copyRestOfImage(FILE *src_img, FILE *dest);
 void decode(const char *src_img_file, const char *dest_file);
+void hideLength(FILE *src_img, FILE *dest, const unsigned length);
 unsigned decode_length(FILE *src_img);
 int decode_bit(FILE *src_img);

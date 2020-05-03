@@ -27,5 +27,5 @@ void check_nb_param(const char *program_name, const unsigned nbParam);
 unsigned get_file_length(FILE *msg_src_file);
 
 int get_bit(char byte, int i);
-void hideLength(FILE *src_img, FILE *dest, const unsigned length);
+
 void hideBit(FILE *src_img, FILE *dest, const int secret_bit);

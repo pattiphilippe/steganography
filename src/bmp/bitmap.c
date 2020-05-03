@@ -83,6 +83,16 @@ void encode(const char * src_img_file, const char *dest_file, const char *src_se
 	fclose(dest);	
 }
 
+void hideLength(FILE *src_img, FILE *dest, unsigned length)
+{
+	unsigned nb_bits = sizeof(unsigned) * BYTE, div = 1U << (nb_bits - 1);
+	for (int i = nb_bits - 1; i >= 0; i--)
+	{
+		hideBit(src_img, dest, (length / div));
+		length %= div;
+		div >>= 1;
+	}
+}
 
 unsigned decode_length(FILE *src_img)
 {

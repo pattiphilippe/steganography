@@ -96,17 +96,6 @@ void printBytesHexa(const char *title, const unsigned char *bytes, size_t size)
 	printf("\n\n");
 }
 
-void hideLength(FILE *src_img, FILE *dest, unsigned length)
-{
-	unsigned nb_bits = sizeof(unsigned) * BYTE, div = 1U << (nb_bits - 1);
-	for (int i = nb_bits - 1; i >= 0; i--)
-	{
-		hideBit(src_img, dest, (length / div));
-		length %= div;
-		div >>= 1;
-	}
-}
-
 void hideBit(FILE *src_img, FILE *dest, const int secret_bit)
 {
 	char src_img_buffer = fgetc(src_img);
@@ -121,42 +110,4 @@ void hideBit(FILE *src_img, FILE *dest, const int secret_bit)
 			src_img_buffer = (src_img_buffer | 1);
 	}
 	fputc(src_img_buffer, dest);
-}
-
-void hideSecretWithSize(FILE *src_img, FILE *dest, FILE *src_secret, unsigned sizeLCT)
-{
-	/*
-	1er cas : GCT existe ET on y encode la taille mais :
-			 + a)  sa taille suffisante pour encoder taille secrète => ok
-			 + b)  sa taille pas suffisante => ?
-	2ème cas : pas de GCT
-			=> copie 1ère LCT à l'emplacement du GCT puis cf 1er cas
-	3ème cas : GCT existe
-			MAIS on décide d'encoder la taille dans la 1ère LCT
-			+ cf 1er cas a)
-			+ cf 1er cas b)
-	*/
-	char src_msg_buffer;
-	int secret_bit;
-	for (unsigned i = 0; i < sizeLCT; ++i)
-	{
-		src_msg_buffer = fgetc(src_secret);
-		if (!feof(src_secret))
-		{
-			break;
-		}
-		for (int i = 0; i < BYTE; i++)
-		{
-			secret_bit = get_bit(src_msg_buffer, i);
-			hideBit(src_img, dest, secret_bit);
-		}
-	}
-
-	//test
-	unsigned nb_entry = sizeLCT / BYTE;
-	unsigned size = sizeof(unsigned) * BYTE;
-
-	if (nb_entry >= get_file_length(src_secret) && nb_entry >= size)
-	{
-	}
 }

@@ -155,7 +155,7 @@ void passImageDescrBlock(FILE *source)
 	passDataSubBlocks(source);
 }
 
-void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT)
+void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT, int *lct_id)
 {
 	image_descr_t image_descr;
 	char buffer;
@@ -176,10 +176,20 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 	}
 	
 	unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
+	unsigned lctID = *lct_id;
 
-	//cacher message
-	hideSecret_gif(source, dest, secret, &sizeLCT, hasCopyGCT);  //check si secret fin avant lct, ou lct fin avant secret : résolu si secret < lct => break sinon suite encodée dans next lct
-
+	if (lctID == 1)
+	{
+		//cacher taille message
+		unsigned secret_length = checkLengths_gif(source, secret, &sizeLCT);
+		hideLength_gif(source, dest, &secret_length, &sizeLCT, hasCopyGCT);
+	} 
+	else 
+	{
+		//cacher message
+		hideSecret_gif(source, dest, secret, &sizeLCT, hasCopyGCT); 
+	}
+	
 	//réécrire image data
 	fread(&buffer, 1, 1, source); // in image data, copying LZW minimum code size byte
 	fwrite(&buffer, 1, 1, dest);
@@ -196,4 +206,21 @@ void setPackedFieldLikeGCT(image_descr_t *image_descr, int sizeGCT)
 		div++;
 	}
 	image_descr->packed_field = (image_descr->packed_field & 0xf8) | div; // set size of color table in packed field
+}
+
+
+unsigned checkLengths_gif(FILE *src_img, FILE *src_secret, int *sizeGCT) //TODO 
+{
+	unsigned secret_length = get_file_length(src_secret);
+	//unsigned max_lct = getMaxLCT(src_img);
+
+	printf(" + secret file length : %d\n", secret_length);
+	//printf(" + max lct : %d\n", max_lct);
+
+	/*if (secret_length > *sizeGCT) 
+	{
+		fprintf(stderr, "Secret too large for source image!\n");
+		exit(1);
+	}*/
+	return secret_length;
 }

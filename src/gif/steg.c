@@ -46,7 +46,7 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 	long posGCT = 0;
 	copyHeaderLsdGct(gif_src, gif_dest, &sizeGCT, &posGCT);	
 
-	unsigned secret_length = checkLengths_gif(gif_src, secret_src);	
+	int lctId = 1;
 
 	gif_section_t section = read_gif_section(gif_src, gif_dest, true);
 	while (section != trailer)
@@ -56,14 +56,12 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 		case 0:
 		case 1:
 		case 2: 
-			copyDataSubBlocks(gif_src, gif_dest);
-			break;
 		case 3: 
-			//hideLength(gif_src, gif_dest, secret_length); //TODO hide Length somewhere with enough space (32 bytes)
 			copyDataSubBlocks(gif_src, gif_dest);
 			break;
 		case 4:
-			copyImageDescrBlockWithLCT(gif_src, gif_dest, secret_src, sizeGCT, posGCT);
+			copyImageDescrBlockWithLCT(gif_src, gif_dest, secret_src, sizeGCT, posGCT, &lctId);
+			lctId++;
 			break;
 		default:
 			errno = 22;
@@ -78,21 +76,7 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 	fclose(secret_src);
 }
 
-unsigned checkLengths_gif(FILE *src_img, FILE *src_secret) //TODO 
-{
-	unsigned secret_length = get_file_length(src_secret);
-	unsigned max_lct = getMaxLCT(src_img);
 
-	printf(" + secret file length : %d\n", secret_length);
-	printf(" + max lct : %d\n", max_lct);
-
-	/*if ((secret_length *8 ) > max_lct)  //todo : nb max clt * size gct * 8 
-	{
-		fprintf(stderr, "Secret too large for source image!\n");
-		exit(1);
-	}*/
-	return secret_length;
-}
 
 void encode(const char *src_img, const char *dest, const char *src_secret)
 {
@@ -140,6 +124,39 @@ void hideSecret_gif(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeLCT, b
 	copyRestOfCT(src_img, dest, &curr_pos, &max_pos, hasCopyGCT);
 }
 
+void hideLength_gif(FILE *src_img, FILE *dest, unsigned *length, int *sizeGCT, bool hasCopyGCT)
+{
+	long curr_pos = hasCopyGCT ? ftell(dest) : ftell(src_img);
+	long max_pos = curr_pos + *sizeGCT;
+
+	if (hasCopyGCT)
+	{
+		hideLength(dest, dest, length, &curr_pos, &max_pos);
+	}
+	else
+	{
+		hideLength(src_img, dest, length, &curr_pos, &max_pos);
+	}
+
+	copyRestOfCT(src_img, dest, &curr_pos, &max_pos, hasCopyGCT);
+}
+
+void hideLength(FILE *src, FILE *dest, unsigned *length, long *curr_pos, long *max_pos)
+{
+	while (*curr_pos < *max_pos)
+	{
+		unsigned nb_bits = sizeof(unsigned) * BYTE, div = 1U << (nb_bits - 1);
+		for (int i = nb_bits - 1; i >= 0; i--)
+		{
+			hideBit_gif(src, dest, (*length / div), curr_pos);
+			*length %= div;
+			div >>= 1;
+		}
+
+		if (*curr_pos == nb_bits) break;
+	}
+}
+
 void hideSecret(FILE *src, FILE *dest, FILE *secret, long *curr_pos, long *max_pos)
 {
 	char src_msg_buffer;
@@ -153,7 +170,7 @@ void hideSecret(FILE *src, FILE *dest, FILE *secret, long *curr_pos, long *max_p
 			for (int i = 0; i < BYTE; i++)
 			{
 				secret_bit = get_bit(src_msg_buffer, i);
-				hideBit_gif(dest, dest, secret_bit, curr_pos);
+				hideBit_gif(src, dest, secret_bit, curr_pos);
 			}
 				fread(&src_msg_buffer, 1, 1, secret);
 		} 

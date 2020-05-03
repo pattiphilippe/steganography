@@ -7,7 +7,6 @@
 
 void writeGifWithLCT(const char* source, const char* dest,  const char *src_secret);
 int getMaxLCT(FILE *source);
-unsigned checkLengths_gif(FILE *src_img, FILE *src_secret);
 
 void encode(const char *src_img, const char *dest, const char *src_secret);
 
@@ -17,4 +16,7 @@ void hideSecret_gif(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeGCT, b
 void copyRestOfCT(FILE *src, FILE *dest, long *curr_pos, long *max_pos, bool hasCopyGCT);
 
 void hideBit_gif(FILE *src_img, FILE *dest, const int secret_bit, long *curr_pos);
+
+void hideLength(FILE *src, FILE *dest, unsigned *length, long *curr_pos, long *max_pos);
+void hideLength_gif(FILE *src_img, FILE *dest, unsigned *length, int *sizeGCT, bool hasCopyGCT);
 

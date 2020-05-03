@@ -21,6 +21,7 @@ void hideLength_gif(FILE *src_img, FILE *dest, unsigned *length, int *sizeGCT, b
 
 void hide_gif(FILE *src_img, FILE *dest, FILE *src_secret, unsigned *lct_id, int *sizeGCT, bool hasCopyGCT);
 
+unsigned checkLengths_gif(FILE *src_img, FILE *src_secret, int *sizeGCT);
 
 //test : pour éviter inclusion mutuelle ! 
 void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT, int *lct_id, const char *mode);

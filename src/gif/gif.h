@@ -57,5 +57,3 @@ void readDataSubBlocks(FILE *source, FILE *dest, bool copy);
 void passImageDescrBlock(FILE *source);
 void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT, int *lct_id, const char *mode);
 void setPackedFieldLikeGCT(image_descr_t *image_descr, int sizeGCT);
-
-unsigned checkLengths_gif(FILE *src_img, FILE *src_secret, int *sizeGCT);

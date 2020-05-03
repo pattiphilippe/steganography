@@ -36,6 +36,22 @@ int getMaxLCT(FILE *gif_src)
 	return maxLCT;
 }
 
+unsigned checkLengths_gif(FILE *src_img, FILE *src_secret, int *sizeGCT) //TODO 
+{
+	unsigned secret_length = get_file_length(src_secret);
+	//unsigned max_lct = getMaxLCT(src_img);
+
+	printf(" + secret file length : %d\n", secret_length);
+	//printf(" + max lct : %d\n", max_lct);
+
+	/*if (secret_length > *sizeGCT) 
+	{
+		fprintf(stderr, "Secret too large for source image!\n");
+		exit(1);
+	}*/
+	return secret_length;
+}
+
 void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *secret_src_file, const char *mode)
 {
 	FILE *gif_src = set_open_file_mode(src_file, READ, _ERROR_OPEN_FILE_R);

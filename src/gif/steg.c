@@ -78,7 +78,14 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 			copyDataSubBlocks(gif_src, gif_dest);
 			break;
 		case 4:
-			copyImageDescrBlockWithLCT(gif_src, gif_dest, secret_src, sizeGCT, posGCT, &lctId, mode);
+			if (strcmp(mode, MODE_ENC) == 0) 
+			{
+				copyImageDescrBlockWithLCT(gif_src, gif_dest, secret_src, sizeGCT, posGCT, &lctId, mode);
+			}
+			else
+			{
+				copyImageDescrBlockWithLCT(gif_src, gif_dest, NULL, sizeGCT, posGCT, &lctId, mode);
+			}
 			lctId++;
 			break;
 		default:
@@ -119,13 +126,13 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 	unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
 	unsigned lctID = *lct_id;
 
-	if (strcmp(mode, MODE_ENC) == 0)
+	if (strcmp(mode, MODE_ENC) == 0 && secret != NULL)
 	{
 		hide_gif(source, dest, secret, &lctID, &sizeLCT, hasCopyGCT);
 	}
 	else if (strcmp(mode, MODE_DEC) == 0)
 	{
-		
+		//
 	}
 
 	//réécrire image data

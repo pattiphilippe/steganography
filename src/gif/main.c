@@ -2,8 +2,7 @@
 #include <errno.h>
 #include <stdbool.h>
 #include <stdlib.h>
-//#include "steg.h"
-#include "gif.h"
+#include "steg.h"
 
 
 int main(int argc, char *argv[])

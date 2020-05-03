@@ -1,12 +1,11 @@
 #include <stdio.h>
-#include <errno.h>
-#include <stdbool.h>
-#include <stdlib.h>
 #include "steg.h"
 
 
 int main(int argc, char *argv[])
 {
+	printf("[Start program]\n\n");
+
 	check_nb_param(argv[0], argc);
 	printf("Using src file : %s\n\n", argv[2]);
 
@@ -19,6 +18,8 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
+		printf("************************************ debug 1");
 		decode(argv[2], argv[3]);
 	}
+	printf("%s", "[end program]\n\n\n");
 }

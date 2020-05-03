@@ -52,6 +52,7 @@ unsigned checkLengths_gif(FILE *src_img, FILE *src_secret, int *sizeGCT) //TODO
 	return secret_length;
 }
 
+//a nettoyer
 void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *secret_src_file, const char *mode)
 {
 	FILE *gif_src = set_open_file_mode(src_file, READ, _ERROR_OPEN_FILE_R);
@@ -62,11 +63,21 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 	
 	int sizeGCT = 0;
 	long posGCT = 0;
-	copyHeaderLsdGct(gif_src, gif_dest, &sizeGCT, &posGCT);	
+	if (strcmp(mode, MODE_ENC) == 0)
+	{
+		copyHeaderLsdGct(gif_src, gif_dest, &sizeGCT, &posGCT);	
+	}
+	else
+	{
+		passHeaderLsdGct_update(gif_src, &sizeGCT, &posGCT);
+	}
 
 	int lctId = 1;
 
-	gif_section_t section = read_gif_section(gif_src, gif_dest, true);
+	bool copy = false;
+	if (strcmp(mode, MODE_ENC) == 0) copy = true;
+
+	gif_section_t section = read_gif_section(gif_src, gif_dest, copy);
 	while (section != trailer)
 	{
 		switch (section)
@@ -75,7 +86,13 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 		case 1:
 		case 2: 
 		case 3: 
-			copyDataSubBlocks(gif_src, gif_dest);
+			if (strcmp(mode, MODE_ENC) == 0)
+			{
+				copyDataSubBlocks(gif_src, gif_dest);
+			} else 
+			{
+				passDataSubBlocks(gif_src);
+			}
 			break;
 		case 4:
 			if (strcmp(mode, MODE_ENC) == 0) 
@@ -93,12 +110,11 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 			perror("Section is yet unknown! GIF structure is bad!\n");
 			exit(1);
 		}
-		section = read_gif_section(gif_src, gif_dest, true);
+		section = read_gif_section(gif_src, gif_dest, copy);
 	}
 
 	fclose(gif_src);
 	fclose(gif_dest);
-	fclose(secret_src);
 
 	if (strcmp(mode, MODE_ENC) == 0 && secret_src != NULL) fclose(secret_src);
 }
@@ -142,10 +158,10 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 	{
 		fseek(source, sizeof(image_descr), SEEK_SET); //je pointe sur ct
 
-		show_gif(source, dest, lct_id, sizeGCT);
-	}
+		printf("************************************** coucou");
+		show_gif(source, dest, lct_id, &sizeGCT);
 
-	
+	}	
 }
 
 
@@ -202,7 +218,30 @@ void hideSecret_gif(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeLCT, b
 
 void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
 {
+	long curr_pos = ftell(src_img);
+	long max_pos = curr_pos + *sizeLCT;
 
+	while (curr_pos < max_pos)
+	{
+		char dest_buffer;
+		for (unsigned i = 0; i < *secret_size; i++)
+		{
+			dest_buffer = 0;
+			for (int j = 0; j < 8; j++)
+			{
+				dest_buffer <<= 1;
+				int bit = decode_bit(src_img);
+				if (bit == 0)
+					dest_buffer = dest_buffer & ~1;
+				else
+					dest_buffer = dest_buffer | 1;
+			}
+			fputc(dest_buffer, dest);
+			curr_pos = ftell(src_img);
+
+			if (curr_pos == max_pos && curr_pos <= *secret_size) break;
+		}
+	}
 }
 
 void hideLength_gif(FILE *src_img, FILE *dest, unsigned *length, int *sizeGCT, bool hasCopyGCT)
@@ -252,6 +291,7 @@ void showLength(FILE *src, FILE *dest, unsigned *length, long *curr_pos, long *m
 		}
 		if (*curr_pos == nb_bits) break;
 	}
+	printf("***************************************** size message%d\n", *length);
 }
 
 void hideSecret(FILE *src, FILE *dest, FILE *secret, long *curr_pos, long *max_pos)
@@ -298,6 +338,7 @@ void show_gif(FILE *src, FILE *dest, unsigned *lct_id, int *sizeGCT)
 	unsigned length = 0;
 	if (*lct_id == 1)
 	{
+		printf("****************************  1rst lct");
 		showLength(src, dest, &length, ftell(src), ftell(src) + *sizeGCT);
 	} else
 	{

@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[])
 {
-	printf("Start program\n\n");
+	printf("[Start program]\n\n");
 
 	check_nb_param(argv[0], argc);
 	printf("Using src file : %s\n\n", argv[2]);
@@ -24,5 +24,5 @@ int main(int argc, char *argv[])
 		decode(argv[2], argv[3]);
 	}
 
-	printf("%s", "end program\n\n\n");
+	printf("%s", "[end program]\n\n\n");
 }

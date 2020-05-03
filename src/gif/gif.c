@@ -48,6 +48,11 @@ void passHeaderLsdGct(FILE *source)
 	readHeaderLsdGct(source, NULL, false, NULL, NULL);
 }
 
+void passHeaderLsdGct_update(FILE *source, int *sizeGCT, long *posGCT)
+{
+	readHeaderLsdGct(source, NULL, false, sizeGCT, posGCT);
+}
+
 void copyHeaderLsdGct(FILE *source, FILE *dest, int *sizeGCT, long *posGCT)
 {
 	readHeaderLsdGct(source, dest, true, sizeGCT, posGCT);

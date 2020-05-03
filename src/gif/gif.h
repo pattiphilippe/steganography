@@ -45,6 +45,7 @@ gif_section_t read_gif_section(FILE *source, FILE *dest, bool copy);
 
 
 void passHeaderLsdGct(FILE *source);
+void passHeaderLsdGct_update(FILE *source, int *sizeGCT, long *posGCT);
 void copyHeaderLsdGct(FILE *source, FILE *dest, int *sizeGCT, long *posGCT);
 void readHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *posGCT);
 

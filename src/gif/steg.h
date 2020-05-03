@@ -2,7 +2,6 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "gif.h"
 
 void writeGifWithLCT(const char* source, const char* dest,  const char *src_secret, const char *mode);
@@ -17,7 +16,12 @@ void hideSecret_gif(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeGCT, b
 void copyRestOfCT(FILE *src, FILE *dest, long *curr_pos, long *max_pos, bool hasCopyGCT);
 
 void hideBit_gif(FILE *src_img, FILE *dest, const int secret_bit, long *curr_pos);
-
 void hideLength(FILE *src, FILE *dest, unsigned *length, long *curr_pos, long *max_pos);
 void hideLength_gif(FILE *src_img, FILE *dest, unsigned *length, int *sizeGCT, bool hasCopyGCT);
+
+void hide_gif(FILE *src_img, FILE *dest, FILE *src_secret, unsigned *lct_id, int *sizeGCT, bool hasCopyGCT);
+
+
+//test : pour éviter inclusion mutuelle ! 
+void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT, int *lct_id, const char *mode);
 

@@ -154,8 +154,8 @@ void passImageDescrBlock(FILE *source)
 	fseek(source, 1, SEEK_CUR); // in image data, passing LZW minimum code size byte
 	passDataSubBlocks(source);
 }
-
-void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT, int *lct_id)
+/*
+void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT, int *lct_id, const char *mode)
 {
 	image_descr_t image_descr;
 	char buffer;
@@ -178,6 +178,11 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 	unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
 	unsigned lctID = *lct_id;
 
+	/*if (strcmp(mode, MODE_ENC))
+	{
+		hide_gif(source, dest, secret, &lctID, &sizeLCT, hasCopyGCT);
+	}
+
 	if (lctID == 1)
 	{
 		//cacher taille message
@@ -189,12 +194,12 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 		//cacher message
 		hideSecret_gif(source, dest, secret, &sizeLCT, hasCopyGCT); 
 	}
-	
+
 	//réécrire image data
 	fread(&buffer, 1, 1, source); // in image data, copying LZW minimum code size byte
 	fwrite(&buffer, 1, 1, dest);
 	copyDataSubBlocks(source, dest);
-}
+}*/
 
 void setPackedFieldLikeGCT(image_descr_t *image_descr, int sizeGCT)
 {

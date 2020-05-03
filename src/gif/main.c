@@ -19,5 +19,6 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
+		decode(argv[2], argv[3]);
 	}
 }

@@ -36,12 +36,14 @@ int getMaxLCT(FILE *gif_src)
 	return maxLCT;
 }
 
-void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *secret_src_file)
+void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *secret_src_file, const char *mode)
 {
 	FILE *gif_src = set_open_file_mode(src_file, READ, _ERROR_OPEN_FILE_R);
 	FILE *gif_dest = set_open_file_mode(dest_file, WRITE_UP, _ERROR_OPEN_FILE_W);
-	FILE *secret_src = set_open_file_mode(secret_src_file, READ, _ERROR_OPEN_FILE_R);
 
+	FILE *secret_src = NULL;
+	if (strcmp(mode, MODE_ENC) == 0 && secret_src_file != NULL) secret_src = set_open_file_mode(secret_src_file, READ, _ERROR_OPEN_FILE_R);
+	
 	int sizeGCT = 0;
 	long posGCT = 0;
 	copyHeaderLsdGct(gif_src, gif_dest, &sizeGCT, &posGCT);	
@@ -74,13 +76,20 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 	fclose(gif_src);
 	fclose(gif_dest);
 	fclose(secret_src);
+
+	if (strcmp(mode, MODE_ENC) == 0 && secret_src != NULL) fclose(secret_src);
 }
 
 
 
 void encode(const char *src_img, const char *dest, const char *src_secret)
 {
-	writeGifWithLCT(src_img, dest, src_secret);
+	writeGifWithLCT(src_img, dest, src_secret, MODE_ENC);
+}
+
+void decode(const char *src_img, const char *dest)
+{
+	writeGifWithLCT(src_img, dest, NULL, MODE_DEC);
 }
 
 void hideBit_gif(FILE *src, FILE *dest, const int secret_bit, long *curr_pos)

@@ -25,6 +25,7 @@ FILE *set_open_file_mode(const char *argv, const char *mode, const char *error_m
 void check_nb_param(const char *program_name, const unsigned nbParam);
 
 unsigned get_file_length(FILE *msg_src_file);
+unsigned decode_length(FILE *src_img);
 
 int get_bit(char byte, int i);
 

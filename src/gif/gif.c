@@ -103,7 +103,6 @@ void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT, bool resetCUR)
 		fseek(dest, savePos_dest, SEEK_SET);
 		printf("after: %ld}\n", ftell(dest));
 	}
-	
 }
 
 void passDataSubBlocks(FILE *source)

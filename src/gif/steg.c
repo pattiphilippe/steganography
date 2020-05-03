@@ -108,37 +108,44 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 	image_descr_t image_descr;
 	char buffer;
 	bool hasCopyGCT;
-	
-	fread(&image_descr, 1, sizeof(image_descr), source);
-	if (!hasColorTable(&(image_descr.packed_field))) // si pas de lct, copier GCT
-	{
-		hasCopyGCT = true;
-		setPackedFieldLikeGCT(&image_descr, sizeGCT);
-		fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy modified image descr read
-		copyGCT(source, dest, sizeGCT, posGCT, hasCopyGCT);
-	}	
-	else
-	{
-		hasCopyGCT = false;
-		fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy image descr read
-	}
-	
-	unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
-	unsigned lctID = *lct_id;
 
+	fread(&image_descr, 1, sizeof(image_descr), source);
+
+	//ENCRYPTION
 	if (strcmp(mode, MODE_ENC) == 0 && secret != NULL)
 	{
+		if (!hasColorTable(&(image_descr.packed_field))) // si pas de lct, copier GCT
+		{
+			hasCopyGCT = true;
+			setPackedFieldLikeGCT(&image_descr, sizeGCT);
+			fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy modified image descr read
+			copyGCT(source, dest, sizeGCT, posGCT, hasCopyGCT);
+		}	
+		else
+		{
+			hasCopyGCT = false;
+			fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy image descr read
+		}
+		
+		unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
+		unsigned lctID = *lct_id;
+
 		hide_gif(source, dest, secret, &lctID, &sizeLCT, hasCopyGCT);
+
+		//réécrire image data
+		fread(&buffer, 1, 1, source); // in image data, copying LZW minimum code size byte
+		fwrite(&buffer, 1, 1, dest);
+		copyDataSubBlocks(source, dest);
 	}
+	//DECRYPTION
 	else if (strcmp(mode, MODE_DEC) == 0)
 	{
-		//
+		fseek(source, sizeof(image_descr), SEEK_SET); //je pointe sur ct
+
+		show_gif(source, dest, lct_id, sizeGCT);
 	}
 
-	//réécrire image data
-	fread(&buffer, 1, 1, source); // in image data, copying LZW minimum code size byte
-	fwrite(&buffer, 1, 1, dest);
-	copyDataSubBlocks(source, dest);
+	
 }
 
 
@@ -193,6 +200,11 @@ void hideSecret_gif(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeLCT, b
 	copyRestOfCT(src_img, dest, &curr_pos, &max_pos, hasCopyGCT);
 }
 
+void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
+{
+
+}
+
 void hideLength_gif(FILE *src_img, FILE *dest, unsigned *length, int *sizeGCT, bool hasCopyGCT)
 {
 	long curr_pos = hasCopyGCT ? ftell(dest) : ftell(src_img);
@@ -222,6 +234,22 @@ void hideLength(FILE *src, FILE *dest, unsigned *length, long *curr_pos, long *m
 			div >>= 1;
 		}
 
+		if (*curr_pos == nb_bits) break;
+	}
+}
+
+void showLength(FILE *src, FILE *dest, unsigned *length, long *curr_pos, long *max_pos)
+{
+	while (*curr_pos < *max_pos)
+	{
+		unsigned nb_bits = sizeof(unsigned) * 8, mult = 1U << (nb_bits - 1);
+		for (int i = nb_bits - 1; i >= 0; i--)
+		{
+			int bit = decode_bit(src);
+			*length += bit * mult;
+			*curr_pos = ftell(src);
+			mult >>= 1;
+		}
 		if (*curr_pos == nb_bits) break;
 	}
 }
@@ -264,6 +292,19 @@ void hide_gif(FILE *source, FILE *dest, FILE *secret,  unsigned *lct_id, int *si
 		//cacher message
 		hideSecret_gif(source, dest, secret, sizeLCT, hasCopyGCT); 
 	}
+}
+void show_gif(FILE *src, FILE *dest, unsigned *lct_id, int *sizeGCT)
+{
+	unsigned length = 0;
+	if (*lct_id == 1)
+	{
+		showLength(src, dest, &length, ftell(src), ftell(src) + *sizeGCT);
+	} else
+	{
+		if (length == 0) fprintf(stderr, "================+> LONGUEUR DU MESSAGE EST NULLE !!!!");//error 
+		showSecret_gif(src, dest, sizeGCT, &length);
+	}
+	
 }
 
 void copyRestOfCT(FILE *src, FILE *dest, long *curr_pos, long *max_pos, bool hasCopyGCT)

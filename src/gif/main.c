@@ -18,7 +18,6 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("************************************ debug 1");
 		decode(argv[2], argv[3]);
 	}
 	printf("%s", "[end program]\n\n\n");

@@ -4,7 +4,7 @@
 #include <string.h>
 #include "gif.h"
 
-void writeGifWithLCT(const char* source, const char* dest,  const char *src_secret, const char *mode);
+void writeGifWithLCT(const char* source, const char* dest,  const char *src_secret);
 int getMaxLCT(FILE *source);
 
 void hideSecret(FILE *src, FILE *dest, FILE *secret, long *curr_pos, long *max_pos);
@@ -27,7 +27,7 @@ void show_gif(FILE *src, FILE *dest, unsigned *lct_id, int *sizeGCT);
 unsigned checkLengths_gif(FILE *src_img, FILE *src_secret, int *sizeGCT);
 
 //test : pour éviter inclusion mutuelle ! 
-void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT, int *lct_id, const char *mode);
+void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT, int *lct_id);
 
 void encode(const char *src_img, const char *dest, const char *src_secret);
 void decode(const char *src_img, const char *dest);

@@ -53,31 +53,28 @@ unsigned checkLengths_gif(FILE *src_img, FILE *src_secret, int *sizeGCT) //TODO
 }
 
 //a nettoyer
-void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *secret_src_file, const char *mode)
+void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *secret_src_file)
 {
 	FILE *gif_src = set_open_file_mode(src_file, READ, _ERROR_OPEN_FILE_R);
 	FILE *gif_dest = set_open_file_mode(dest_file, WRITE_UP, _ERROR_OPEN_FILE_W);
 
 	FILE *secret_src = NULL;
-	if (strcmp(mode, MODE_ENC) == 0 && secret_src_file != NULL) secret_src = set_open_file_mode(secret_src_file, READ, _ERROR_OPEN_FILE_R);
+
+	bool encryption = secret_src_file != NULL ? true : false;
+	if(encryption) secret_src = set_open_file_mode(secret_src_file, READ, _ERROR_OPEN_FILE_R);
 	
 	int sizeGCT = 0;
 	long posGCT = 0;
-	if (strcmp(mode, MODE_ENC) == 0)
-	{
+	int lctId = 0;
+
+	if (encryption) 
 		copyHeaderLsdGct(gif_src, gif_dest, &sizeGCT, &posGCT);	
-	}
-	else
-	{
+	else 
 		passHeaderLsdGct_update(gif_src, &sizeGCT, &posGCT);
-	}
 
-	int lctId = 1;
+	printf("********************** test %d, %d\n",sizeGCT, posGCT);
 
-	bool copy = false;
-	if (strcmp(mode, MODE_ENC) == 0) copy = true;
-
-	gif_section_t section = read_gif_section(gif_src, gif_dest, copy);
+	gif_section_t section = read_gif_section(gif_src, gif_dest, encryption);
 	while (section != trailer)
 	{
 		switch (section)
@@ -86,23 +83,13 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 		case 1:
 		case 2: 
 		case 3: 
-			if (strcmp(mode, MODE_ENC) == 0)
-			{
+			if (encryption)
 				copyDataSubBlocks(gif_src, gif_dest);
-			} else 
-			{
+			else 
 				passDataSubBlocks(gif_src);
-			}
 			break;
 		case 4:
-			if (strcmp(mode, MODE_ENC) == 0) 
-			{
-				copyImageDescrBlockWithLCT(gif_src, gif_dest, secret_src, sizeGCT, posGCT, &lctId, mode);
-			}
-			else
-			{
-				copyImageDescrBlockWithLCT(gif_src, gif_dest, NULL, sizeGCT, posGCT, &lctId, mode);
-			}
+			copyImageDescrBlockWithLCT(gif_src, gif_dest, secret_src, sizeGCT, posGCT, &lctId);
 			lctId++;
 			break;
 		default:
@@ -110,25 +97,26 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 			perror("Section is yet unknown! GIF structure is bad!\n");
 			exit(1);
 		}
-		section = read_gif_section(gif_src, gif_dest, copy);
+		section = read_gif_section(gif_src, gif_dest, encryption);
 	}
 
 	fclose(gif_src);
 	fclose(gif_dest);
 
-	if (strcmp(mode, MODE_ENC) == 0 && secret_src != NULL) fclose(secret_src);
+	if (encryption) fclose(secret_src);
 }
 
-void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT, int *lct_id, const char *mode)
+void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT, int *lct_id)
 {
 	image_descr_t image_descr;
 	char buffer;
 	bool hasCopyGCT;
+	bool encryption = (secret == NULL) ? false : true;
 
 	fread(&image_descr, 1, sizeof(image_descr), source);
 
 	//ENCRYPTION
-	if (strcmp(mode, MODE_ENC) == 0 && secret != NULL)
+	if (encryption)
 	{
 		if (!hasColorTable(&(image_descr.packed_field))) // si pas de lct, copier GCT
 		{
@@ -154,25 +142,34 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 		copyDataSubBlocks(source, dest);
 	}
 	//DECRYPTION
-	else if (strcmp(mode, MODE_DEC) == 0)
+	else 
 	{
-		fseek(source, sizeof(image_descr), SEEK_SET); //je pointe sur ct
+		unsigned pos_curr = ftell(source);
+		unsigned max_pos = pos_curr + sizeGCT;
+		printf("==================++> %d\n", pos_curr);
 
-		printf("************************************** coucou");
 		show_gif(source, dest, lct_id, &sizeGCT);
 
+		/*while (pos_curr < max_pos)
+		{
+			fread(&buffer, 1, 1, source);
+			pos_curr = ftell(source);
+		}*/
+
+		fread(&buffer, 1, 1, source); // in image data, copying LZW minimum code size byte
+		passDataSubBlocks(source);
 	}	
 }
 
 
 void encode(const char *src_img, const char *dest, const char *src_secret)
 {
-	writeGifWithLCT(src_img, dest, src_secret, MODE_ENC);
+	writeGifWithLCT(src_img, dest, src_secret);
 }
 
 void decode(const char *src_img, const char *dest)
 {
-	writeGifWithLCT(src_img, dest, NULL, MODE_DEC);
+	writeGifWithLCT(src_img, dest, NULL);
 }
 
 void hideBit_gif(FILE *src, FILE *dest, const int secret_bit, long *curr_pos)
@@ -292,6 +289,13 @@ void showLength(FILE *src, FILE *dest, unsigned *length, long *curr_pos, long *m
 		if (*curr_pos == nb_bits) break;
 	}
 	printf("***************************************** size message%d\n", *length);
+
+	/*char buffer;
+	while (*curr_pos < *max_pos)
+	{
+		fread(&buffer, 1, 1, src);
+		*curr_pos = ftell(src);
+	}*/
 }
 
 void hideSecret(FILE *src, FILE *dest, FILE *secret, long *curr_pos, long *max_pos)
@@ -321,7 +325,7 @@ void hideSecret(FILE *src, FILE *dest, FILE *secret, long *curr_pos, long *max_p
 
 void hide_gif(FILE *source, FILE *dest, FILE *secret,  unsigned *lct_id, int *sizeLCT, bool hasCopyGCT)
 {
-	if (*lct_id == 1)
+	if (*lct_id == 0)
 	{
 		//cacher taille message
 		unsigned secret_length = checkLengths_gif(source, secret, sizeLCT);
@@ -336,16 +340,36 @@ void hide_gif(FILE *source, FILE *dest, FILE *secret,  unsigned *lct_id, int *si
 void show_gif(FILE *src, FILE *dest, unsigned *lct_id, int *sizeGCT)
 {
 	unsigned length = 0;
-	if (*lct_id == 1)
+	if (*lct_id == 0)
 	{
 		printf("****************************  1rst lct");
-		showLength(src, dest, &length, ftell(src), ftell(src) + *sizeGCT);
-	} else
-	{
-		if (length == 0) fprintf(stderr, "================+> LONGUEUR DU MESSAGE EST NULLE !!!!");//error 
-		showSecret_gif(src, dest, sizeGCT, &length);
+
+		long curr_pos = ftell(src);
+		long max_pos = ftell(src) + *sizeGCT;
+
+		showLength(src, dest, &length, &curr_pos, &max_pos);
+		/*unsigned pos_curr = ftell(src);
+		unsigned max_pos = pos_curr + *sizeGCT;
+		char buffer;
+		while (pos_curr < max_pos)
+		{
+			fread(&buffer, 1, 1, src);
+			pos_curr = ftell(src);
+		}*/
 	}
-	
+	else
+	{
+		/*if (length == 0) fprintf(stderr, "================+> LONGUEUR DU MESSAGE EST NULLE !!!!");//error 
+		showSecret_gif(src, dest, sizeGCT, &length);*/
+		unsigned pos_curr = ftell(src);
+		unsigned max_pos = pos_curr + *sizeGCT;
+		char buffer;
+		while (pos_curr < max_pos)
+		{
+			fread(&buffer, 1, 1, src);
+			pos_curr = ftell(src);
+		}
+	}
 }
 
 void copyRestOfCT(FILE *src, FILE *dest, long *curr_pos, long *max_pos, bool hasCopyGCT)

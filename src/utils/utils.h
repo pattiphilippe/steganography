@@ -28,3 +28,4 @@ unsigned get_file_length(FILE *msg_src_file);
 unsigned decode_length(FILE *src_img);
 
 int get_bit(char byte, int i);
+void hideBit(FILE *src_img, FILE *dest, const int secret_bit);

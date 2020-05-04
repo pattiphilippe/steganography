@@ -66,31 +66,21 @@ void readHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *p
 	if (hasGCT)
 	{
 		int size = sizeOfColorTable(&(header_lsd.packed_field));
-		/*if (copy)
-		{*/
-			/*if (dest == NULL)
+		
+		*sizeGCT = size;
+		*posGCT = ftell(source);
+		
+		if (copy)
+		{
+			if (dest == NULL)
 			{
 				errno = 22;
 				perror("gif_util.c::copyHeaderLSDGCT : dest = NULL");
 				exit(0);
-			}*/
-			*sizeGCT = size;
-			*posGCT = ftell(source);
-			//fwrite(&header_lsd, 1, sizeof(header_lsd), dest);
-			//copyGCT(source, dest, size, *posGCT, false);
-			if (copy)
-			{
-				if (dest == NULL)
-				{
-					errno = 22;
-					perror("gif_util.c::copyHeaderLSDGCT : dest = NULL");
-					exit(0);
-				}
-				fwrite(&header_lsd, 1, sizeof(header_lsd), dest);
-				copyGCT(source, dest, size, *posGCT, false);
 			}
-		
-		//}
+			fwrite(&header_lsd, 1, sizeof(header_lsd), dest);
+			copyGCT(source, dest, size, *posGCT, false);
+		}
 		fseek(source, size, SEEK_CUR);
 	}
 }

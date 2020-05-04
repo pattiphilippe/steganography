@@ -22,12 +22,6 @@ int get_bit(char byte, int bit_nb)
 	return (byte >> (7 - bit_nb)) & 1;
 }
 
-int decode_bit(FILE *src_img)
-{
-	return fgetc(src_img) & 1;
-}
-
-
 void set_mode(char *argv0, char *argv1, int *mode, int argc)
 {
 	if (!strcmp(argv1, MODE_ENC))

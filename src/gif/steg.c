@@ -36,24 +36,24 @@ int getMaxLCT(FILE *gif_src)
 	return maxLCT;
 }
 
-unsigned checkLengths_gif(FILE *src_img, FILE *src_secret, int *sizeGCT) //TODO 
+unsigned checkLengths_gif(FILE *src_img, FILE *src_secret, int *sizeGCT) //TODO à check
 {
 	unsigned secret_length = get_file_length(src_secret);
-	//unsigned max_lct = getMaxLCT(src_img);
 
-	printf(" + secret file length : %d\n", secret_length);
-	//printf(" + max lct : %d\n", max_lct);
+	printf("secret file length : %d\n", secret_length);
 
-	/*if (secret_length > *sizeGCT) 
+	size_t size_secret = sizeof(secret_length);
+	size_t size_max = sizeof(unsigned) * BYTE; //on encode sur 32 bytes
+
+	if (size_secret > size_max) 
 	{
 		fprintf(stderr, "Secret too large for source image!\n");
 		exit(1);
-	}*/
+	}
 	return secret_length;
 }
 
-//a nettoyer
-void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *secret_src_file)
+void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *secret_src_file) //à nettoyer
 {
 	FILE *gif_src = set_open_file_mode(src_file, READ, _ERROR_OPEN_FILE_R);
 
@@ -71,7 +71,9 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 		gif_dest = set_open_file_mode(dest_file, WRITE, _ERROR_OPEN_FILE_W);
 	}
 
-	printf("test 1 dest file size : %d\n", get_file_length(gif_dest)); 	
+	//souci : beaucoup trop de char écrits dans dest lors du décodage => trouver la cause
+
+	printf("test 1 : dest file size : %d\n", get_file_length(gif_dest)); 	
 
 	int sizeGCT = 0;
 	long posGCT = 0;
@@ -81,9 +83,8 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 		copyHeaderLsdGct(gif_src, gif_dest, &sizeGCT, &posGCT);	
 	else 
 		passHeaderLsdGct_update(gif_src, &sizeGCT, &posGCT);
-
 	
-	printf("test 2 dest file size : %d\n", get_file_length(gif_dest));
+	printf("test 2 : dest file size : %d\n", get_file_length(gif_dest));
 	
 	gif_section_t section = read_gif_section(gif_src, gif_dest, encryption);
 	while (section != trailer)
@@ -100,7 +101,7 @@ void writeGifWithLCT(const char *src_file, const char *dest_file,  const char *s
 				passDataSubBlocks(gif_src);
 			break;
 		
-		printf("test 3 dest file size : %d\n", get_file_length(gif_dest));
+		printf("test 3 : dest file size : %d\n", get_file_length(gif_dest));
 	
 		case 4:
 			copyImageDescrBlockWithLCT(gif_src, gif_dest, secret_src, sizeGCT, posGCT, &lctId);
@@ -230,6 +231,7 @@ void hideSecret_gif(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeLCT, b
 	copyRestOfCT(src_img, dest, &curr_pos, &max_pos, hasCopyGCT);
 }
 
+//here is the problem !
 void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
 {
 	long curr_pos = ftell(src_img);
@@ -254,7 +256,7 @@ void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
 
 			*secret_size--;
 
-			if (curr_pos == max_pos) break;
+			if (curr_pos == max_pos) break;   //suite secret dans la lct suivante
 		}
 	}
 }

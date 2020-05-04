@@ -2,6 +2,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include "gif.h"
 
 void writeGifWithLCT(const char* source, const char* dest,  const char *src_secret);

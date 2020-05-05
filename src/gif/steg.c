@@ -1,13 +1,14 @@
 #include "steg.h"
 
-int getMaxLCT(FILE *gif_src)
+int getMaxSecretLength(FILE *gif_src)
 {
 	long save_pos = ftell(gif_src);
 	fseek(gif_src, 0L, SEEK_SET);
 
-	passHeaderLsdGct(gif_src);
+	int sizeGCT = 0, maxLCT = 0;
+	long posGCT = 0;
+	passHeaderLsdGct(gif_src, &sizeGCT, &posGCT);
 
-	int maxLCT = 0;
 	gif_section_t section = read_gif_section(gif_src, NULL, false);
 	while (section != trailer)
 	{
@@ -33,21 +34,18 @@ int getMaxLCT(FILE *gif_src)
 
 	fseek(gif_src, save_pos, SEEK_SET);
 
-	return maxLCT;
+	return maxLCT * sizeGCT;
 }
 
 //TODO marquer hypothèse au moins 2 lct, gif pas seulement une image
-unsigned checkLengths_gif(FILE *src_img, FILE *src_secret, int *sizeGCT) //TODO à check
+unsigned checkLengths_gif(FILE *src_img, FILE *src_secret) //TODO à check
 {
 	unsigned secret_length = get_file_length(src_secret);
-	//int max_lct = getMaxLCT(src_img);
+	int max_secret_length = getMaxSecretLength(src_img);
 
 	printf("secret file length : %d\n", secret_length);
 
-	size_t size_secret = sizeof(secret_length);
-	size_t size_max = sizeof(unsigned) * BYTE; //on encode sur 32 bytes
-
-	if (size_secret > size_max)
+	if (((secret_length + sizeof(unsigned)) * 8) > max_secret_length)
 	{
 		fprintf(stderr, "Secret too large for source image!\n");
 		exit(1);
@@ -55,36 +53,20 @@ unsigned checkLengths_gif(FILE *src_img, FILE *src_secret, int *sizeGCT) //TODO 
 	return secret_length;
 }
 
-void writeGifWithLCT(const char *src_file, const char *dest_file, const char *secret_src_file) //à nettoyer
+void writeGifWithLCT(FILE *gif_src, FILE *gif_dest, FILE *secret_src) //TODO à nettoyer
 {
-	FILE *gif_src = set_open_file_mode(src_file, READ, _ERROR_OPEN_FILE_R);
-
-	FILE *gif_dest = NULL;
-	FILE *secret_src = NULL;
-
-	bool encryption = secret_src_file != NULL ? true : false;
-	if (encryption)
-	{
-		secret_src = set_open_file_mode(secret_src_file, READ, _ERROR_OPEN_FILE_R);
-		gif_dest = set_open_file_mode(dest_file, WRITE_UP, _ERROR_OPEN_FILE_W);
-	}
-	else
-	{
-		gif_dest = set_open_file_mode(dest_file, WRITE, _ERROR_OPEN_FILE_W);
-	}
-
-	//souci : beaucoup trop de char écrits dans dest lors du décodage => trouver la cause
+	//TODO souci : beaucoup trop de char écrits dans dest lors du décodage => trouver la cause
 
 	//printf("test 1 : dest file size : %d\n", get_file_length(gif_dest));
 
-	int sizeGCT = 0;
+	int sizeGCT = 0, lctId = 0;
 	long posGCT = 0;
-	int lctId = 0;
 
+	bool encryption = secret_src != NULL;
 	if (encryption)
 		copyHeaderLsdGct(gif_src, gif_dest, &sizeGCT, &posGCT);
 	else
-		passHeaderLsdGct_update(gif_src, &sizeGCT, &posGCT);
+		passHeaderLsdGct(gif_src, &sizeGCT, &posGCT);
 
 	//printf("test 2 : dest file size : %d\n", get_file_length(gif_dest));
 
@@ -113,23 +95,14 @@ void writeGifWithLCT(const char *src_file, const char *dest_file, const char *se
 		}
 		section = read_gif_section(gif_src, gif_dest, encryption);
 	}
-
-	fclose(gif_src);
-	fclose(gif_dest);
-
-	if (encryption)
-		fclose(secret_src);
 }
 
 void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int sizeGCT, long posGCT, int *lct_id)
 {
 	image_descr_t image_descr;
 	char buffer;
-	bool encryption;
-
-	encryption = (secret != NULL) ? true : false;
-
-	long save_pos;
+	bool encryption = secret != NULL;
+	long save_pos = 0;
 
 	fread(&image_descr, 1, sizeof(image_descr), source);
 
@@ -143,8 +116,7 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 			save_pos = ftell(source);
 			fseek(source, posGCT, SEEK_SET);
 
-			unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
-			hide_gif(source, dest, secret, lct_id, &sizeLCT);
+			hide_gif(source, dest, secret, lct_id, &sizeGCT);
 
 			fseek(source, save_pos, SEEK_SET);
 		}
@@ -156,7 +128,6 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 			hide_gif(source, dest, secret, lct_id, &sizeLCT);
 		}
 
-		//réécrire image data
 		fread(&buffer, 1, 1, source); // in image data, copying LZW minimum code size byte
 		fwrite(&buffer, 1, 1, dest);
 		copyDataSubBlocks(source, dest);
@@ -173,14 +144,29 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 	}
 }
 
-void encode(const char *src_img, const char *dest, const char *src_secret)
+void encode(const char *src_img_file, const char *dest_file, const char *src_secret_file)
 {
+	FILE *src_img = set_open_file_mode(src_img_file, READ, _ERROR_OPEN_FILE_R);
+	FILE *dest = set_open_file_mode(dest_file, WRITE_UP, _ERROR_OPEN_FILE_W);
+	FILE *src_secret = set_open_file_mode(src_secret_file, READ, _ERROR_OPEN_FILE_R);
+
+	checkLengths_gif(src_img, src_secret);
 	writeGifWithLCT(src_img, dest, src_secret);
+
+	fclose(src_img);
+	fclose(dest);
+	fclose(src_secret);
 }
 
-void decode(const char *src_img, const char *dest)
+void decode(const char *src_img_file, const char *dest_secret_file)
 {
-	writeGifWithLCT(src_img, dest, NULL);
+	FILE *src_img = set_open_file_mode(src_img_file, READ, _ERROR_OPEN_FILE_R);
+	FILE *dest_secret = set_open_file_mode(dest_secret_file, READ, _ERROR_OPEN_FILE_R);
+
+	writeGifWithLCT(src_img, dest_secret, NULL);
+
+	fclose(src_img);
+	fclose(dest_secret);
 }
 
 void hideBit_gif(FILE *src, FILE *dest, const int secret_bit, long *curr_pos)
@@ -197,9 +183,6 @@ void hideBit_gif(FILE *src, FILE *dest, const int secret_bit, long *curr_pos)
 		else
 			src_buffer = (src_buffer | 1);
 	}
-
-	if (src == dest)
-		fseek(src, -1, SEEK_CUR); //je recule d'un char pour maj
 
 	fputc(src_buffer, dest);
 }
@@ -319,12 +302,11 @@ void hideSecret(FILE *src, FILE *dest, FILE *secret, long *curr_pos, long *max_p
 
 void hide_gif(FILE *source, FILE *dest, FILE *secret, unsigned *lct_id, int *sizeLCT)
 {
-	printf("*****************************************lct id : %d\n", *lct_id);
 	if (*lct_id == 0)
 	{
 		//cacher taille message
 		printf("before checkLengths_gif \n");
-		unsigned secret_length = checkLengths_gif(source, secret, sizeLCT);
+		unsigned secret_length = checkLengths_gif(source, secret);
 		hideLength_gif(source, dest, &secret_length, sizeLCT);
 		printf("after hideLength_gif \n");
 	}

@@ -5,6 +5,7 @@
 #define MODE_ENC "enc"
 #define MODE_DEC "dec"
 #define _PROGRAM_ "Steganograph by LSB substitution\n"
+//TODO usage for dec
 #define _PROGRAM_USAGE "Usage: %s [enc][dec] <source> <dest> <input text>\n enc : Write your text TO image\n dec : Read your hidden text FROM image\n"
 #define _ERROR_NB_ARGS_ "Argument number error!\n"
 #define _ERROR_UNKNOWN_MODE_ "Unknown mode!\n"

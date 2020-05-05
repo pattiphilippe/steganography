@@ -43,12 +43,7 @@ gif_section_t read_gif_section(FILE *source, FILE *dest, bool copy)
 	exit(0);
 }
 
-void passHeaderLsdGct(FILE *source)
-{
-	readHeaderLsdGct(source, NULL, false, NULL, NULL);
-}
-
-void passHeaderLsdGct_update(FILE *source, int *sizeGCT, long *posGCT)
+void passHeaderLsdGct(FILE *source, int *sizeGCT, long *posGCT)
 {
 	readHeaderLsdGct(source, NULL, false, sizeGCT, posGCT);
 }
@@ -66,10 +61,10 @@ void readHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *p
 	if (hasGCT)
 	{
 		int size = sizeOfColorTable(&(header_lsd.packed_field));
-		
+
 		*sizeGCT = size;
 		*posGCT = ftell(source);
-		
+
 		if (copy)
 		{
 			if (dest == NULL)
@@ -105,7 +100,7 @@ void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT, bool resetCUR)
 	}
 	fseek(source, savePos_src, SEEK_SET);
 
-	if(resetCUR) 
+	if (resetCUR)
 	{
 		fseek(dest, savePos_dest, SEEK_SET);
 		printf("after: %ld}\n", ftell(dest));

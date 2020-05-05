@@ -7,3 +7,6 @@ Pour générer le rapport depuis les sources tex, exécuter rapport/makefile.
 ## Comment exécuter le projet ##
 Exécuter le /makefile.
 Des commandes sont expliquées dans ce makefile. Celles -ci sont reprises dans le rapport/rapport.pdf.
+
+
+//TODO expliquer structure répertoires, quels fichiers sont où?

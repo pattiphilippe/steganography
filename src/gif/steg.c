@@ -264,18 +264,12 @@ void hideLength(FILE *src, FILE *dest, unsigned *length, long *curr_pos, long *m
 
 void showLength(FILE *src, unsigned *length, long *curr_pos, long *max_pos)
 {
-	while (*curr_pos < *max_pos)
+	unsigned nb_bits = sizeof(unsigned) * 8, mult = 1U << (nb_bits - 1);
+	for (int i = nb_bits - 1; i >= 0; i--)
 	{
-		unsigned nb_bits = sizeof(unsigned) * 8, mult = 1U << (nb_bits - 1);
-		for (int i = nb_bits - 1; i >= 0; i--)
-		{
-			int bit = decodeBit_gif(src, curr_pos);
-			*length += bit * mult;
-			mult >>= 1;
-		}
-
-		if (*curr_pos == nb_bits - 1)
-			break;
+		int bit = decodeBit_gif(src, curr_pos);
+		*length += bit * mult;
+		mult >>= 1;
 	}
 
 	passRestOfCT(src, curr_pos, max_pos);

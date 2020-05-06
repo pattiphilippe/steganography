@@ -55,8 +55,6 @@ unsigned checkLengths_gif(FILE *src_img, FILE *src_secret) //TODO à check
 
 void writeGifWithLCT(FILE *gif_src, FILE *gif_dest, FILE *secret_src) //TODO à nettoyer
 {
-	//TODO souci : beaucoup trop de char écrits dans dest lors du décodage => trouver la cause
-
 	int sizeGCT = 0, lctId = 0;
 	long posGCT = 0;
 
@@ -98,7 +96,7 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 	image_descr_t image_descr;
 	char buffer;
 	bool encryption = secret != NULL;
-	long save_pos = 0;
+	long save_pos;
 
 	fread(&image_descr, 1, sizeof(image_descr), source);
 
@@ -207,7 +205,7 @@ void hideSecret_gif(FILE *src_img, FILE *dest, FILE *src_secret, int *sizeLCT)
 void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
 {
 	long curr_pos = ftell(src_img);
-	long max_pos = curr_pos + *sizeLCT;
+	//long max_pos = curr_pos + *sizeLCT;  //a retirer
 
 	char dest_buffer;
 	int index = *secret_size >= *sizeLCT ? *sizeLCT : *secret_size;
@@ -227,6 +225,20 @@ void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
 		}
 		fputc(dest_buffer, dest);
 	}
+	
+	if (*secret_size >= *sizeLCT) 
+	{
+		*secret_size -= *sizeLCT;
+	}
+	else 
+	{
+		//length < sizeGCT
+		*secret_size = 0;
+		printf ("length after : %d\n", *secret_size);
+
+		exit(0);
+	}
+	
 }
 
 //TODO hypothese que au moins 16 couleurs diff dans gif, pour taille min d'une LCT
@@ -234,8 +246,6 @@ void hideLength_gif(FILE *src_img, FILE *dest, unsigned *length, int *sizeGCT)
 {
 	long curr_pos = ftell(src_img);
 	long max_pos = curr_pos + *sizeGCT;
-
-	//printf("test 3 : dest file size : %d\n", get_file_length(dest));
 
 	hideLength(src_img, dest, length, &curr_pos, &max_pos);
 	copyRestOfCT(src_img, dest, &curr_pos, &max_pos);
@@ -304,11 +314,11 @@ void show_gif(FILE *src, FILE *dest, unsigned *lct_id, int *sizeGCT)
 {
 	static unsigned length = -1;
 
-	long curr_pos = ftell(src);
-	long max_pos = ftell(src) + *sizeGCT;
-
 	if (*lct_id == 0) //si 1ère lct
 	{
+		long curr_pos = ftell(src);
+		long max_pos = ftell(src) + *sizeGCT;
+
 		showLength(src, &length, &curr_pos, &max_pos);
 	}
 	else
@@ -317,23 +327,11 @@ void show_gif(FILE *src, FILE *dest, unsigned *lct_id, int *sizeGCT)
 		{
 			fprintf(stderr, "LONGUEUR DU MESSAGE EST NULLE !!!!"); //error
 			exit(1);
-		} else
+		} 
+		else
 		{
 			printf ("length before : %d\n", length);
 			showSecret_gif(src, dest, sizeGCT, &length);
-			
-			if (length >= *sizeGCT) 
-			{
-				length -= *sizeGCT;
-			}
-			else 
-			{
-				//length < sizeGCT
-				length = 0;
-				printf ("length after : %d\n", length);
-
-				exit(0);
-			}
 		}	
 	}
 }

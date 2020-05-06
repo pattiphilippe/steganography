@@ -95,5 +95,5 @@ dist/gif/gif.o : src/gif/gif.c src/gif/gif.h
 
 clean_gif :
 	@rm -f dist/gif/* rsc/steg.gif rsc/read_gif.log
-	#@rm -f rsc/*_dest.gif
+	@rm -f rsc/*_dest.gif
 	@rm -f rsc/output_*.txt

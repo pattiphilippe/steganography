@@ -113,8 +113,9 @@ void copyImageDescrBlockWithLCT(FILE *source, FILE *dest, FILE *secret, int size
 		{
 			setPackedFieldLikeGCT(&image_descr, sizeGCT);
 			fwrite(&image_descr, 1, sizeof(image_descr), dest); //copy modified image descr read
+			
 			save_pos = ftell(source);
-			fseek(source, posGCT, SEEK_SET);
+			fseek(source, posGCT, SEEK_SET); 
 
 			hide_gif(source, dest, secret, lct_id, &sizeGCT);
 
@@ -161,7 +162,7 @@ void encode(const char *src_img_file, const char *dest_file, const char *src_sec
 void decode(const char *src_img_file, const char *dest_secret_file)
 {
 	FILE *src_img = set_open_file_mode(src_img_file, READ, _ERROR_OPEN_FILE_R);
-	FILE *dest_secret = set_open_file_mode(dest_secret_file, READ, _ERROR_OPEN_FILE_R);
+	FILE *dest_secret = set_open_file_mode(dest_secret_file, WRITE, _ERROR_OPEN_FILE_R);
 
 	writeGifWithLCT(src_img, dest_secret, NULL);
 
@@ -299,10 +300,8 @@ void hide_gif(FILE *source, FILE *dest, FILE *secret, unsigned *lct_id, int *siz
 	if (*lct_id == 0)
 	{
 		//cacher taille message
-		printf("before checkLengths_gif \n");
 		unsigned secret_length = checkLengths_gif(source, secret);
 		hideLength_gif(source, dest, &secret_length, sizeLCT);
-		printf("after hideLength_gif \n");
 	}
 	else
 	{
@@ -323,8 +322,7 @@ void show_gif(FILE *src, FILE *dest, unsigned *lct_id, int *sizeGCT)
 	}
 	else
 	{
-		if (length == 0)
-			fprintf(stderr, "LONGUEUR DU MESSAGE EST NULLE !!!!"); //error
+		if (length == 0) fprintf(stderr, "LONGUEUR DU MESSAGE EST NULLE !!!!"); //error
 
 		showSecret_gif(src, dest, sizeGCT, &length);
 	}

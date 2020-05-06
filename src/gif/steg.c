@@ -210,17 +210,15 @@ void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
 	long max_pos = curr_pos + *sizeLCT;
 
 	char dest_buffer;
+	int index = *secret_size >= *sizeLCT ? *sizeLCT : *secret_size;
 
-	for (unsigned i = 0; i < *secret_size; i++)
-	{
-		if (curr_pos == max_pos)
-			break; //secret length > sizeLCT
-
+	for (unsigned i = 0; i < index; i++)
+	{ 
 		dest_buffer = 0;
 		for (int j = 0; j < 8; j++)
 		{
 			dest_buffer <<= 1;
-			int bit = decodeBit_gif(src_img, &curr_pos);
+			int bit = decodeBit_gif(src_img, &curr_pos); //reutiliser decodeBit 
 
 			if (bit == 0)
 				dest_buffer = dest_buffer & ~1;
@@ -229,9 +227,6 @@ void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
 		}
 		fputc(dest_buffer, dest);
 	}
-
-	passRestOfCT(src_img, &curr_pos, &max_pos);
-
 }
 
 //TODO hypothese que au moins 16 couleurs diff dans gif, pour taille min d'une LCT

@@ -3,7 +3,6 @@
 #include <string.h>
 
 #define _PROGRAM_ "Steganography by LSB substitution\n"
-//TODO usage for dec
 #define _PROGRAM_USAGE "Usage %s : \n enc <source> <dest> <input text>\t enc : Encode text in dest with source image\n dec <source> <dest text>\t\t dec : Decode text in dest from source image\n"
 #define MODE_ENC "enc"
 #define MODE_DEC "dec"

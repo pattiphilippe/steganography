@@ -39,8 +39,8 @@ gif_section_t read_gif_section(FILE *source, FILE *dest, bool copy)
 		}
 	} while (again);
 	errno = 22;
-	perror("unknown section");
-	exit(0);
+	perror("Section is yet unknown! GIF structure corrupted!\n");
+	exit(1);
 }
 
 void passHeaderLsdGct(FILE *source, int *sizeGCT, long *posGCT)

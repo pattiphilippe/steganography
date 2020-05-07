@@ -12,4 +12,4 @@ rapport.pdf:	rapport.tex  intro.tex bitmap.tex gif.tex conclusion.tex
 	@pdflatex rapport.tex
 
 clean : 
-	rm *.aux *.toc *.log *.pdf 
+	rm *.aux *.log *.pdf 

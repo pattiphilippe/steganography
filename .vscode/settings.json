@@ -3,6 +3,10 @@
         "gif_util.h": "c",
         "bitmap.h": "c",
         "steg.h": "c",
-        "util.h": "c"
+        "util.h": "c",
+        "stdio.h": "c",
+        "gif.h": "c",
+        "stdlib.h": "c",
+        "stdint.h": "c"
     }
 }

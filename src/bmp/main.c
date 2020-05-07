@@ -4,19 +4,25 @@
 
 #include "bitmap.h"
 
+
 int main(int argc, char *argv[])
 {
-	printf("Start program\n\n");
+	printf("[Start program]\n\n");
+
+	check_nb_param(argv[0], argc);
+	printf("Using src file : %s\n\n", argv[2]);
 
 	int mode;
+	set_mode(argv[0], argv[1], &mode, argc);
 
-	check_nb_arg(argc, argv[0]);
-	set_mode(argv[1], argv[0], &mode);
-
-	if (mode)
+	if (mode == 0)
+	{
 		encode(argv[2], argv[3], argv[4]);
+	}
 	else
+	{
 		decode(argv[2], argv[3]);
+	}
 
-	printf("End program\n\n");
+	printf("%s", "[end program]\n\n\n");
 }

@@ -100,14 +100,14 @@ void hideBit(FILE *src_img, FILE *dest, const int secret_bit)
 {
 	char src_img_buffer = fgetc(src_img);
 
-	int img_bit = src_img_buffer & 1; //donne val du lsb
+	int img_bit = src_img_buffer & 0x80; //donne val du msb
 
 	if (img_bit != secret_bit)
 	{
 		if (secret_bit == 0)
-			src_img_buffer = (src_img_buffer & ~1);
+			src_img_buffer = src_img_buffer & 0x7F;
 		else
-			src_img_buffer = (src_img_buffer | 1);
+			src_img_buffer = src_img_buffer | 0x80;
 	}
 	fputc(src_img_buffer, dest);
 }

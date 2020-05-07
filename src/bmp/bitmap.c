@@ -94,16 +94,12 @@ void hideLength(FILE *src_img, FILE *dest, unsigned length)
 
 unsigned decode_length(FILE *src_img)
 {
-	unsigned nb_bits = sizeof(unsigned) * BYTE, length = 0; //, mult = 1U << (nb_bits - 1)
+	unsigned nb_bits = sizeof(unsigned) * BYTE, length = 0, bit;
 	for (int i = nb_bits - 1; i >= 0; i--)
 	{
-		int bit = decode_bit(src_img);
+		bit = decode_bit(src_img);
 		length <<= 1;
-		printf("length after <<=1 : %u, bit = %d\n", length, bit);
 		length += bit;
-		printf("length after += bit : %u\n", length);
-		// length += bit * mult;
-		// mult >>= 1;
 	}
 	return length;
 }

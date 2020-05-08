@@ -17,7 +17,7 @@
 # make build_gif   : compile uniquement la demo pour le format GIF
 # make clean_gif   : supprime uniquement les fichiers generes lies au format GIF
 
-run : run_gif #run_bmp
+run : run_gif run_bmp
 
 build : build_gif build_bmp
 
@@ -35,11 +35,11 @@ run_bmp : build_bmp
 	# ./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message.txt #
 	###################################################################################################
 	@echo
-	@./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message_splash.txt
-	@./dist/bmp/ReadBMP enc rsc/hill_src.bmp rsc/hill_dest.bmp rsc/input_message_hill.txt 
+	#@./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message_splash.txt
+	#@./dist/bmp/ReadBMP enc rsc/hill_src.bmp rsc/hill_dest.bmp rsc/input_message_hill.txt 
 
 	@./dist/bmp/ReadBMP dec rsc/splash_color_dest.bmp rsc/output_message_splash.txt
-	@./dist/bmp/ReadBMP dec rsc/hill_dest.bmp rsc/output_message_hill.txt 
+	#@./dist/bmp/ReadBMP dec rsc/hill_dest.bmp rsc/output_message_hill.txt 
 
 build_bmp : dist/bmp/ReadBMP
 
@@ -57,7 +57,7 @@ dist/bmp/utils.o: src/utils/utils.c src/utils/utils.h
 
 clean_bmp :
 	@rm -f dist/bmp/*
-	@rm -f rsc/*_dest.bmp
+	#@rm -f rsc/*_dest.bmp
 	@rm -f rsc/output_*.txt
 
 

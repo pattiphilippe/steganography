@@ -10,7 +10,7 @@ void decode(const char *src_img_file, const char *dest_file)
     pass_header(src_img);
 
     unsigned length = decode_length(src_img);
-    printf("length decoded : %u\n", length);
+    printf("Length decoded : %u\n\n", length);
     decode_secret(src_img, dest, length);
 
     fclose(src_img);

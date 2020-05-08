@@ -11,6 +11,7 @@ void encode(const char *src_img_file, const char *dest_file, const char *src_sec
     copy_header(src_img, dest);
 
     unsigned secret_length = check_lengths(src_img, src_secret);
+    printf("Length coded : %u\n\n", secret_length);
     hide_length(src_img, dest, secret_length);
 
     hide_secret(src_img, dest, src_secret);

@@ -1,5 +1,7 @@
 #include "utils.h"
 
+#define LSB 1
+
 // USAGE FUNCTIONS
 
 void check_nb_param(const char *program_name, const unsigned nbParam)
@@ -64,14 +66,20 @@ void hide_bit(FILE *src_img, FILE *dest, const int secret_bit)
 {
 	char src_img_buffer = fgetc(src_img);
 
+#if LSB
 	int img_bit = src_img_buffer & 1; //donne val du lsb
+#else 
+	int img_bit = (src_img_buffer & 0x80) >> 7; for MSB
+#endif
 
 	if (img_bit != secret_bit)
 	{
 		if (secret_bit == 0)
 			src_img_buffer = (src_img_buffer & ~1);
+			// src_img_buffer = src_img_buffer & 0x7F; for MSB
 		else
 			src_img_buffer = (src_img_buffer | 1);
+			// src_img_buffer = src_img_buffer | 0x80; for MSB
 	}
 	fputc(src_img_buffer, dest);
 }
@@ -79,6 +87,7 @@ void hide_bit(FILE *src_img, FILE *dest, const int secret_bit)
 int decode_bit(FILE *src_img)
 {
 	return fgetc(src_img) & 1;
+	//return (fgetc(src_img) >> 7) & 1; for MSB
 }
 
 // FILE INFO FUNCTIONS

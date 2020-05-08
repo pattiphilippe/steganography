@@ -54,20 +54,6 @@ dist/bmp/decode_bmp.o : src/bmp/decode_bmp.h src/bmp/decode_bmp.c src/utils/util
 dist/utils/utils.o: src/utils/utils.c src/utils/utils.h
 	gcc -std=c99 -Wall -pedantic src/utils/utils.c -c -o dist/utils/utils.o
 
-# build_bmp : dist/bmp/ReadBMP
-
-# dist/bmp/ReadBMP : dist/bmp/main.o dist/bmp/bitmap.o dist/bmp/utils.o
-# 	gcc dist/bmp/main.o dist/bmp/bitmap.o dist/bmp/utils.o -o dist/bmp/ReadBMP
-
-# dist/bmp/main.o : src/bmp/main.c src/bmp/bitmap.h src/utils/utils.h
-# 	gcc -std=c99 -Wall -pedantic src/bmp/main.c -c -o dist/bmp/main.o
-
-# dist/bmp/bitmap.o : src/bmp/bitmap.c src/bmp/bitmap.h
-# 	gcc -std=c99 -Wall -pedantic src/bmp/bitmap.c -c -o dist/bmp/bitmap.o
-
-# dist/bmp/utils.o: src/utils/utils.c src/utils/utils.h
-# 	gcc -std=c99 -Wall -pedantic src/utils/utils.c -c -o dist/bmp/utils.o
-
 clean_bmp :
 	@rm -f dist/bmp/*
 	@rm -f rsc/*_dest.bmp

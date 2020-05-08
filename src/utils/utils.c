@@ -60,25 +60,47 @@ int get_bit(char byte, int bit_nb)
 	return (byte >> (7 - bit_nb)) & 1;
 }
 
+#define LSB 1
+
 void hide_bit(FILE *src_img, FILE *dest, const int secret_bit)
 {
+#if LSB
 	char src_img_buffer = fgetc(src_img);
 
-	int img_bit = src_img_buffer & 1; //donne val du lsb
+	int img_bit = src_img_buffer & 1; // donne val du lsb
 
 	if (img_bit != secret_bit)
 	{
 		if (secret_bit == 0)
-			src_img_buffer = (src_img_buffer & ~1);
+			src_img_buffer = src_img_buffer & ~1; // met le dernier bit à 0
 		else
-			src_img_buffer = (src_img_buffer | 1);
+			src_img_buffer = src_img_buffer | 1; // met le dernier à 1
 	}
 	fputc(src_img_buffer, dest);
+
+#else
+	char src_img_buffer = fgetc(src_img);
+
+	int img_bit = (src_img_buffer & 0x80) >> 7; // donne val du msb
+
+	if (img_bit != secret_bit)
+	{
+		if (secret_bit == 0)
+			src_img_buffer = src_img_buffer & 0x7F; // met le premier bit à 0
+		else
+			src_img_buffer = src_img_buffer | 0x80; // met le premier bit à 1
+	}
+	fputc(src_img_buffer, dest);
+#endif
 }
 
 int decode_bit(FILE *src_img)
 {
+#if LSB
 	return fgetc(src_img) & 1;
+#else
+	return (fgetc(src_img) >> 7) & 1;
+#endif
 }
 
 // FILE INFO FUNCTIONS

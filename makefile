@@ -17,8 +17,7 @@
 # make build_gif   : compile uniquement la demo pour le format GIF
 # make clean_gif   : supprime uniquement les fichiers generes lies au format GIF
 
-
-run : run_gif #run_bmp
+run : run_gif run_bmp
 
 build : build_gif build_bmp
 
@@ -29,11 +28,10 @@ clean : clean_gif clean_bmp
 
 run_bmp : build_bmp
 	@echo
-	#@./dist/bmp/stegBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message_splash.txt
-	#@./dist/bmp/stegBMP enc rsc/hill_src.bmp rsc/hill_dest.bmp rsc/input_message_hill.txt 
+	@./dist/bmp/stegBMP enc rsc/bmp/splash_color_src.bmp rsc/bmp/splash_color_dest.bmp rsc/bmp/input_message.txt
 
-	@./dist/bmp/stegBMP dec rsc/splash_color_dest.bmp rsc/output_message_splash.txt
-	#@./dist/bmp/stegBMP dec rsc/hill_dest.bmp rsc/output_message_hill.txt 
+	@./dist/bmp/stegBMP dec rsc/bmp/splash_color_dest.bmp rsc/bmp/output_message.txt
+
 
 build_bmp : dist/bmp/stegBMP
 
@@ -62,11 +60,10 @@ clean_bmp :
 
 run_gif : build_gif
 	@echo
-	@./dist/gif/ReadGIF enc rsc/murica_src.gif rsc/murica_dest.gif rsc/input_message_splash.txt
-	@./dist/gif/ReadGIF enc rsc/dog.gif rsc/dog_dest.gif rsc/input_message_hill.txt 
+	@./dist/gif/ReadGIF enc rsc/gif/dog.gif rsc/gif/dog_dest.gif rsc/gif/input_message.txt
 
-	@./dist/gif/ReadGIF dec rsc/murica_dest.gif rsc/output_message_murica.txt
-	@./dist/gif/ReadGIF dec rsc/dog_dest.gif rsc/output_message_dog.txt 
+	@./dist/gif/ReadGIF dec rsc/gif/dog_dest.gif rsc/gif/output_message_dog.txt 
+
 
 build_gif : dist/gif/ReadGIF 
 
@@ -74,16 +71,16 @@ dist/gif/ReadGIF : dist/gif/gif.o dist/gif/steg.o dist/gif/utils.o dist/gif/main
 	gcc -o dist/gif/ReadGIF dist/gif/main.o dist/gif/steg.o dist/gif/utils.o  dist/gif/gif.o -lm 
 
 dist/gif/main.o : src/gif/main.c src/gif/steg.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif/main.o -c src/gif/main.c   
+	gcc -std=c99 src/gif/main.c -c -o dist/gif/main.o 
 
 dist/gif/steg.o : src/gif/steg.c src/gif/steg.h src/gif/gif.h 
-	gcc -std=c99 -Wall -pedantic -o dist/gif/steg.o -c src/gif/steg.c 
+	gcc -std=c99 src/gif/steg.c -c -o dist/gif/steg.o 
 
 dist/gif/utils.o : src/utils/utils.c src/utils/utils.h
-	gcc -std=c99 -Wall -pedantic src/utils/utils.c -c -o dist/gif/utils.o
+	gcc -std=c99 src/utils/utils.c -c -o dist/gif/utils.o
 
 dist/gif/gif.o : src/gif/gif.c src/gif/gif.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif/gif.o -c src/gif/gif.c 
+	gcc -std=c99 src/gif/gif.c -c -o dist/gif/gif.o 
 
 clean_gif :
 	@rm -f dist/gif/* rsc/steg.gif rsc/read_gif.log

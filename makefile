@@ -33,6 +33,7 @@ run_bmp : build_bmp
 
 	@./dist/bmp/stegBMP dec rsc/bmp/splash_color_dest.bmp rsc/bmp/output_message.txt
 
+
 build_bmp : dist/bmp/stegBMP
 
 dist/bmp/stegBMP : dist/bmp/main.o dist/bmp/encode_bmp.o dist/bmp/decode_bmp.o dist/utils/utils.o 
@@ -60,9 +61,10 @@ clean_bmp :
 
 run_gif : build_gif
 	@echo
-	@./dist/gif/ReadGIF enc rsc/gif/dog.gif rsc/gif/dog_dest.gif rsc/gif/input_message.txt 
+	@./dist/gif/ReadGIF enc rsc/gif/dog.gif rsc/gif/dog_dest.gif rsc/gif/input_message.txt
 
 	@./dist/gif/ReadGIF dec rsc/gif/dog_dest.gif rsc/gif/output_message_dog.txt 
+
 
 build_gif : dist/gif/ReadGIF 
 

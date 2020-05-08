@@ -27,7 +27,7 @@ void hide_length(FILE *src_img, FILE *dest, unsigned length)
     unsigned nb_bits = sizeof(unsigned) * BYTE, div = 1U << (nb_bits - 1);
     for (int i = nb_bits - 1; i >= 0; i--)
     {
-        hideBit(src_img, dest, (length / div));
+        hide_bit(src_img, dest, (length / div));
         length %= div;
         div >>= 1;
     }
@@ -42,7 +42,7 @@ void hide_secret(FILE *src_img, FILE *dest, FILE *src_secret)
         for (int i = 0; i < BYTE; i++)
         {
             secret_bit = get_bit(src_msg_buffer, i);
-            hideBit(src_img, dest, secret_bit);
+            hide_bit(src_img, dest, secret_bit);
         }
         src_msg_buffer = fgetc(src_secret);
     }

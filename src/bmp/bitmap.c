@@ -142,10 +142,6 @@ void decode_secret(FILE *src_img, FILE *dest, const unsigned length)
 	}
 }
 
-int decode_bit(FILE *src_img)
-{
-	return fgetc(src_img) & 1;
-}
 
 
 void copyRestOfImage(FILE *src_img, FILE *dest)

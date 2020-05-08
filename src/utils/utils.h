@@ -24,8 +24,10 @@ void set_mode(char *argv0, char *argv1, int *mode, int argc);
 FILE *set_open_file_mode(const char *argv, const char *mode, const char *error_msg);
 void check_nb_param(const char *program_name, const unsigned nbParam);
 
-unsigned get_file_length(FILE *msg_src_file);
-unsigned decode_length(FILE *src_img);
-
 int get_bit(char byte, int i);
 void hideBit(FILE *src_img, FILE *dest, const int secret_bit);
+int decode_bit(FILE *src_img);
+
+unsigned get_file_length(FILE *file);
+unsigned get_bmp_offset(FILE *bmp_file);
+unsigned get_bmp_data_length(FILE *bmp_file);

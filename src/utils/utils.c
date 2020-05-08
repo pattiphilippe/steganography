@@ -8,15 +8,6 @@ void printUsage(const char *program_name, const char *error)
 	exit(1);
 }
 
-unsigned get_file_length(FILE *file)
-{
-	long save_pos = ftell(file);
-	fseek(file, 0L, SEEK_END);
-	unsigned length = ftell(file);
-	fseek(file, save_pos, SEEK_SET);
-	return length;
-}
-
 int get_bit(char byte, int bit_nb)
 {
 	return (byte >> (7 - bit_nb)) & 1;
@@ -110,4 +101,33 @@ void hideBit(FILE *src_img, FILE *dest, const int secret_bit)
 			src_img_buffer = (src_img_buffer | 1);
 	}
 	fputc(src_img_buffer, dest);
+}
+
+int decode_bit(FILE *src_img)
+{
+	return fgetc(src_img) & 1;
+}
+
+unsigned get_file_length(FILE *file)
+{
+	long save_pos = ftell(file);
+	fseek(file, 0L, SEEK_END);
+	unsigned length = ftell(file);
+	fseek(file, save_pos, SEEK_SET);
+	return length;
+}
+
+unsigned get_bmp_offset(FILE *bmp_file)
+{
+	long save_pos = ftell(bmp_file);
+	fseek(bmp_file, 10, SEEK_SET);
+	unsigned offset;
+	fread(&offset, 4, 1, bmp_file);
+	fseek(bmp_file, save_pos, SEEK_SET);
+	return offset;
+}
+
+unsigned get_bmp_data_length(FILE *bmp_file)
+{
+	return get_file_length(bmp_file) - get_bmp_offset(bmp_file);
 }

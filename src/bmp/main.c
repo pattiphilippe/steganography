@@ -2,8 +2,10 @@
 #include <errno.h>
 #include <stdint.h>
 
-#include "bitmap.h"
-
+// #include "bitmap.h"
+#include "../utils/utils.h"
+#include "encode_bmp.h"
+#include "decode_bmp.h"
 
 int main(int argc, char *argv[])
 {

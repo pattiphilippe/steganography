@@ -17,6 +17,7 @@
 # make build_gif   : compile uniquement la demo pour le format GIF
 # make clean_gif   : supprime uniquement les fichiers generes lies au format GIF
 
+
 run : run_gif #run_bmp
 
 build : build_gif build_bmp
@@ -26,14 +27,13 @@ clean : clean_gif clean_bmp
 
 
 
-
 run_bmp : build_bmp
 	@echo
-	@./dist/bmp/stegBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message_splash.txt
-	@./dist/bmp/stegBMP enc rsc/hill_src.bmp rsc/hill_dest.bmp rsc/input_message_hill.txt 
+	#@./dist/bmp/stegBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message_splash.txt
+	#@./dist/bmp/stegBMP enc rsc/hill_src.bmp rsc/hill_dest.bmp rsc/input_message_hill.txt 
 
 	@./dist/bmp/stegBMP dec rsc/splash_color_dest.bmp rsc/output_message_splash.txt
-	@./dist/bmp/stegBMP dec rsc/hill_dest.bmp rsc/output_message_hill.txt 
+	#@./dist/bmp/stegBMP dec rsc/hill_dest.bmp rsc/output_message_hill.txt 
 
 build_bmp : dist/bmp/stegBMP
 
@@ -42,8 +42,6 @@ dist/bmp/stegBMP : dist/bmp/main.o dist/bmp/encode_bmp.o dist/bmp/decode_bmp.o d
 
 dist/bmp/main.o : src/bmp/main.c src/bmp/encode_bmp.h src/bmp/decode_bmp.h src/utils/utils.h
 	gcc -std=c99 -Wall -pedantic src/bmp/main.c -c -o dist/bmp/main.o
-
-
 
 dist/bmp/encode_bmp.o : src/bmp/encode_bmp.h src/bmp/encode_bmp.c src/utils/utils.h
 	gcc -std=c99 -Wall -pedantic src/bmp/encode_bmp.c -c -o dist/bmp/encode_bmp.o
@@ -54,20 +52,6 @@ dist/bmp/decode_bmp.o : src/bmp/decode_bmp.h src/bmp/decode_bmp.c src/utils/util
 dist/utils/utils.o: src/utils/utils.c src/utils/utils.h
 	gcc -std=c99 -Wall -pedantic src/utils/utils.c -c -o dist/utils/utils.o
 
-# build_bmp : dist/bmp/ReadBMP
-
-# dist/bmp/ReadBMP : dist/bmp/main.o dist/bmp/bitmap.o dist/bmp/utils.o
-# 	gcc dist/bmp/main.o dist/bmp/bitmap.o dist/bmp/utils.o -o dist/bmp/ReadBMP
-
-# dist/bmp/main.o : src/bmp/main.c src/bmp/bitmap.h src/utils/utils.h
-# 	gcc -std=c99 -Wall -pedantic src/bmp/main.c -c -o dist/bmp/main.o
-
-# dist/bmp/bitmap.o : src/bmp/bitmap.c src/bmp/bitmap.h
-# 	gcc -std=c99 -Wall -pedantic src/bmp/bitmap.c -c -o dist/bmp/bitmap.o
-
-# dist/bmp/utils.o: src/utils/utils.c src/utils/utils.h
-# 	gcc -std=c99 -Wall -pedantic src/utils/utils.c -c -o dist/bmp/utils.o
-
 clean_bmp :
 	@rm -f dist/bmp/*
 	@rm -f rsc/*_dest.bmp
@@ -77,11 +61,6 @@ clean_bmp :
 
 
 run_gif : build_gif
-	###########################################################################
-	# Run ReadGIF with "hacker.gif" as source file and "steg.gif as dest file #
-	#                                                                         #
-	# ./dist/gif/ReadGIF rsc/hacker.gif rsc/steg.gif                          #
-	###########################################################################
 	@echo
 	@./dist/gif/ReadGIF enc rsc/murica_src.gif rsc/murica_dest.gif rsc/input_message_splash.txt
 	@./dist/gif/ReadGIF enc rsc/dog.gif rsc/dog_dest.gif rsc/input_message_hill.txt 

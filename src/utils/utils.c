@@ -72,7 +72,7 @@ void hide_bit(FILE *src_img, FILE *dest, const int secret_bit)
 	if (img_bit != secret_bit)
 	{
 		if (secret_bit == 0)
-			src_img_buffer = src_img_buffer & ~1; // met le dernier bit à 0
+			src_img_buffer = src_img_buffer & ~1; // todo use xor operator met le dernier bit à 0 
 		else
 			src_img_buffer = src_img_buffer | 1; // met le dernier à 1
 	}

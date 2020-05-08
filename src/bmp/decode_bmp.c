@@ -35,7 +35,7 @@ void decode_secret(FILE *src_img, FILE *dest, const unsigned length)
     for (unsigned i = 0; i < length; i++)
     {
         dest_buffer = 0;
-        for (int j = 0; j < 8; j++)
+        for (int j = 0; j < BYTE; j++)
         {
             dest_buffer <<= 1;
             int bit = decode_bit(src_img);

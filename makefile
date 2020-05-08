@@ -52,15 +52,15 @@ dist/utils/utils.o: src/utils/utils.c src/utils/utils.h
 
 clean_bmp :
 	@rm -f dist/bmp/*
-	@rm -f rsc/*_dest.bmp
-	@rm -f rsc/output_*.txt
+	@rm -f rsc/bmp/*_dest.bmp
+	@rm -f rsc/bmp/output_*.txt
 
 
 
 
 run_gif : build_gif
 	@echo
-	@./dist/gif/ReadGIF enc rsc/gif/dog.gif rsc/gif/dog_dest.gif rsc/gif/input_message.txt
+	@./dist/gif/ReadGIF enc rsc/gif/dog_src.gif rsc/gif/dog_dest.gif rsc/gif/input_message.txt
 
 	@./dist/gif/ReadGIF dec rsc/gif/dog_dest.gif rsc/gif/output_message_dog.txt 
 
@@ -84,5 +84,5 @@ dist/gif/gif.o : src/gif/gif.c src/gif/gif.h
 
 clean_gif :
 	@rm -f dist/gif/* rsc/steg.gif rsc/read_gif.log
-	@rm -f rsc/*_dest.gif
-	@rm -f rsc/output_*.txt
+	@rm -f rsc/gif/*_dest.gif
+	@rm -f rsc/gif/output_*.txt

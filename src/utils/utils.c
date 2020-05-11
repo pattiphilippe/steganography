@@ -72,7 +72,7 @@ void hide_bit(FILE *src_img, FILE *dest, const int secret_bit)
 	if (img_bit != secret_bit)
 	{
 		if (secret_bit == 0)
-			src_img_buffer = src_img_buffer & ~1; // todo use xor operator met le dernier bit à 0 
+			src_img_buffer = src_img_buffer & ~1; // TODO use xor operator met le dernier bit à 0 
 		else
 			src_img_buffer = src_img_buffer | 1; // met le dernier à 1
 	}
@@ -157,7 +157,7 @@ void printBytesHexa(const char *title, const unsigned char *bytes, size_t size)
 	printf("\n\n");
 }
 
-//todo rearrange utils.c?
+//TODO rearrange utils.c?
 void hide_length(FILE *src_img, FILE *dest, unsigned length)
 {
     unsigned nb_bits = sizeof(unsigned) * BYTE, div = 1U << (nb_bits - 1);

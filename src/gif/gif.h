@@ -57,6 +57,6 @@ void readDataSubBlocks(FILE *source, FILE *dest, bool copy);
 void passImageDescrBlock(FILE *source);
 void setPackedFieldLikeGCT(image_descr_t *image_descr, int sizeGCT);
 
-//todo find good place for checkLengths methods
+//TODO find good place for checkLengths methods
 unsigned checkLengths_gif(FILE *src_img, FILE *src_secret);
 int getMaxSecretLength(FILE *source);

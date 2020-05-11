@@ -8,6 +8,7 @@
         "gif.h": "c",
         "stdlib.h": "c",
         "stdint.h": "c",
-        "encode_bmp.h": "c"
+        "encode_bmp.h": "c",
+        "decode_gif.h": "c"
     }
 }

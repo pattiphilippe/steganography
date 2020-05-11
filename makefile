@@ -59,8 +59,10 @@ clean_bmp :
 run_gif : build_gif
 	@echo
 	@./dist/gif/ReadGIF enc rsc/gif/dog_src.gif rsc/gif/dog_dest.gif rsc/gif/input_message.txt
+	@./dist/gif/ReadGIF enc rsc/gif/murica_src.gif rsc/gif/murica_dest.gif rsc/gif/input_message.txt
 
 	@./dist/gif/ReadGIF dec rsc/gif/dog_dest.gif rsc/gif/output_message_dog.txt 
+	@./dist/gif/ReadGIF dec rsc/gif/murica_dest.gif rsc/gif/output_message_murica.txt
 
 
 build_gif : dist/gif/ReadGIF 

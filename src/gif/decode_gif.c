@@ -37,17 +37,18 @@ void decodeLCTs(FILE *gif_src, FILE *dest_secret)
 }
 
 //todo write in readme : no test if lct present, hypothese that u use this decode program after encode
-void decodeLCT(FILE *gif_src, FILE *dest_secret, int * secret_length, int sizeGCT, long posGCT, int lct_id)
+void decodeLCT(FILE *gif_src, FILE *dest_secret, int *secret_length, int sizeGCT, long posGCT, int lct_id)
 {
     image_descr_t image_descr;
     fread(&image_descr, 1, sizeof(image_descr), gif_src);
     //todo read sizeLct from packed field?
     //todo size GCT and size LCT in packed field should be same type
-
+    printf("in decode LCT, before, secret_length : %d\n", *secret_length);
     if (lct_id == 0)
         *secret_length = showLength(gif_src, sizeGCT);
     else
         showSecret_gif(gif_src, dest_secret, sizeGCT, secret_length);
+    printf("in decode LCT, after, secret_length : %d\n", *secret_length);
 
     fseek(gif_src, 1, SEEK_CUR); // in image data, passing LZW minimum code size byte
     passDataSubBlocks(gif_src);
@@ -66,17 +67,17 @@ unsigned showLength(FILE *src_gif, int sizeGCT)
         length += bit;
     }
 
-    curr_pos = ftell(src_gif); // equivalent to: curr_pos += 32;
+    curr_pos = ftell(src_gif);                    // equivalent to: curr_pos += 32;
     fseek(src_gif, max_pos - curr_pos, SEEK_CUR); //pass rest of color table
     return length;
 }
 
-void showSecret_gif(FILE *src_img, FILE *dest, int sizeLCT, int *secret_size)
+void showSecret_gif(FILE *src_img, FILE *dest, int sizeLCT, int *secret_length)
 {
     char dest_buffer;
-    int bytes_to_decode = *secret_size >= sizeLCT ? sizeLCT : *secret_size;
+    int bytes_to_decode_in_lct = *secret_length >= sizeLCT/BYTE ? sizeLCT/BYTE : *secret_length;
 
-    for (unsigned i = 0; i < bytes_to_decode; i++)
+    for (unsigned i = 0; i < bytes_to_decode_in_lct; i++)
     {
         dest_buffer = 0;
         for (int j = 0; j < 8; j++)
@@ -92,8 +93,11 @@ void showSecret_gif(FILE *src_img, FILE *dest, int sizeLCT, int *secret_size)
         fputc(dest_buffer, dest);
     }
 
-    if (*secret_size >= sizeLCT)
+    if (*secret_length >= (sizeLCT/BYTE))
+        *secret_length -= (sizeLCT/BYTE);
+    else
     {
-        *secret_size -= sizeLCT;
+        fseek(src_img, sizeLCT - (*secret_length*8), SEEK_CUR);
+        *secret_length = 0;
     }
 }

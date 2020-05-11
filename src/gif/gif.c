@@ -80,6 +80,7 @@ void readHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *p
 	}
 }
 
+//todo delete all unnecessary prints 
 void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT, bool resetCUR)
 {
 	long savePos_src = ftell(source);

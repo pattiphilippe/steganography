@@ -26,7 +26,7 @@ void decodeLCTs(FILE *gif_src, FILE *dest_secret)
         switch (section)
         {
         case 4:
-            decodeLCT(gif_src, dest_secret, sizeGCT, posGCT, &lctId);
+            decodeLCT(gif_src, dest_secret, sizeGCT, posGCT, lctId);
             lctId++;
             break;
         default:
@@ -36,34 +36,25 @@ void decodeLCTs(FILE *gif_src, FILE *dest_secret)
     }
 }
 
-void decodeLCT(FILE *gif_src, FILE *dest_secret, int sizeGCT, long posGCT, int *lct_id)
+//todo write in readme : no test if lct present, hypothese that u use this decode program after encode
+void decodeLCT(FILE *gif_src, FILE *dest_secret, int sizeGCT, long posGCT, int lct_id)
 {
-
     image_descr_t image_descr;
     fread(&image_descr, 1, sizeof(image_descr), gif_src);
     //todo read sizeLct from packed field?
-    //todo write in readme : no test if lct present, hypothese that u use this decode program after encode
 
-    show_gif(gif_src, dest_secret, lct_id, &sizeGCT);
+    show_gif(gif_src, dest_secret, lct_id, sizeGCT);
 
-    //todo switch read to fseek +1
-    char buffer;
-    fread(&buffer, 1, 1, gif_src); // in image data, passing LZW minimum code size byte
+    fseek(gif_src, 1, SEEK_CUR); // in image data, passing LZW minimum code size byte
     passDataSubBlocks(gif_src);
 }
 
-void show_gif(FILE *src, FILE *dest, int *lct_id, int *sizeGCT)
+void show_gif(FILE *src, FILE *dest, int lct_id, int sizeGCT)
 {
     static unsigned length = -1;
 
-    if (*lct_id == 0) //si 1ère lct
-    {
-        long curr_pos = ftell(src);
-        long max_pos = ftell(src) + *sizeGCT;
-
-        length = showLength(src, &curr_pos, &max_pos);
-        printf("length decoded : %d\n", length);
-    }
+    if (lct_id == 0)
+        length = showLength(src, sizeGCT);
     else
     {
         if (length == -1)
@@ -76,17 +67,21 @@ void show_gif(FILE *src, FILE *dest, int *lct_id, int *sizeGCT)
     }
 }
 
-unsigned showLength(FILE *src, long *curr_pos, long *max_pos)
+unsigned showLength(FILE *src_gif, int sizeGCT)
 {
+    long curr_pos = ftell(src_gif);
+    long max_pos = ftell(src_gif) + sizeGCT;
+
     unsigned nb_bits = sizeof(unsigned) * 8, length = 0;
     for (int i = nb_bits - 1, bit = 0; i >= 0; i--)
     {
-        bit = decodeBit_gif(src, curr_pos);
+        bit = decode_bit(src_gif);
         length <<= 1;
         length += bit;
     }
 
-    passRestOfCT(src, curr_pos, max_pos);
+    curr_pos = ftell(src_gif); // equivalent to: curr_pos += 32;
+    fseek(src_gif, max_pos - curr_pos, SEEK_CUR); //pass rest of color table
     return length;
 }
 
@@ -105,7 +100,8 @@ void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
         for (int j = 0; j < 8; j++)
         {
             dest_buffer <<= 1;
-            int bit = decodeBit_gif(src_img, &curr_pos); //todo reutiliser decodeBit
+            int bit = decode_bit(src_img);
+            curr_pos++;
 
             if (bit == 0)
                 dest_buffer = dest_buffer & ~1;
@@ -127,25 +123,5 @@ void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
 
         exit(1); //todo check if this error makes the program quit before end program
                  //todo always exit with 1 or -1?
-    }
-}
-
-int decodeBit_gif(FILE *src_img, long *curr_pos)
-{
-    char byte = fgetc(src_img);
-    int bit = byte & 1;
-
-    *curr_pos = ftell(src_img);
-
-    return bit;
-}
-
-void passRestOfCT(FILE *src, long *curr_pos, long *max_pos)
-{
-    char buffer;                 //TODO try to change it to fseek instead of reading all bytes?
-    while (*curr_pos < *max_pos) //pour arriver à la fin de la lct
-    {
-        fread(&buffer, 1, 1, src);
-        *curr_pos = ftell(src);
     }
 }

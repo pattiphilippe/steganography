@@ -1,5 +1,13 @@
 #include "utils.h"
 
+// USAGE FUNCTIONS
+
+void check_nb_param(const char *program_name, const unsigned nbParam)
+{
+	if (nbParam < 4)
+		printUsage(program_name, _ERROR_NB_ARGS_);
+}
+
 void printUsage(const char *program_name, const char *error)
 {
 	printf(_PROGRAM_);
@@ -8,19 +16,7 @@ void printUsage(const char *program_name, const char *error)
 	exit(1);
 }
 
-unsigned get_file_length(FILE *file)
-{
-	long save_pos = ftell(file);
-	fseek(file, 0L, SEEK_END);
-	unsigned length = ftell(file);
-	fseek(file, save_pos, SEEK_SET);
-	return length;
-}
-
-int get_bit(char byte, int bit_nb)
-{
-	return (byte >> (7 - bit_nb)) & 1;
-}
+// OPEN FILE MODE FUNCTIONS
 
 void set_mode(char *argv0, char *argv1, int *mode, int argc)
 {
@@ -28,7 +24,6 @@ void set_mode(char *argv0, char *argv1, int *mode, int argc)
 	{
 		if (argc != 5)
 		{
-			printf("COUCOU\n");
 			printUsage(argv0, _ERROR_NB_ARGS_);
 		}
 		*mode = 0;
@@ -53,17 +48,88 @@ FILE *set_open_file_mode(const char *argv, const char *mode, const char *error_m
 	if (file == NULL)
 	{
 		fprintf(stderr, error_msg, argv);
-		//perror(strcat(error_msg, argv));
 		exit(1);
 	}
 	return file;
 }
 
-void check_nb_param(const char *program_name, const unsigned nbParam)
+// BIT FUNCTIONS
+
+int get_bit(char byte, int bit_nb)
 {
-	if (nbParam < 4)
-		printUsage(program_name, _ERROR_NB_ARGS_);
+	return (byte >> (7 - bit_nb)) & 1;
 }
+
+#define LSB 1
+
+void hide_bit(FILE *src_img, FILE *dest, const int secret_bit)
+{
+#if LSB
+	char src_img_buffer = fgetc(src_img);
+
+	int img_bit = src_img_buffer & 1; // donne val du lsb
+
+	if (img_bit != secret_bit)
+	{
+		if (secret_bit == 0)
+			src_img_buffer = src_img_buffer & ~1; // todo use xor operator met le dernier bit à 0 
+		else
+			src_img_buffer = src_img_buffer | 1; // met le dernier à 1
+	}
+	fputc(src_img_buffer, dest);
+
+#else
+	char src_img_buffer = fgetc(src_img);
+
+	int img_bit = (src_img_buffer & 0x80) >> 7; // donne val du msb
+
+	if (img_bit != secret_bit)
+	{
+		if (secret_bit == 0)
+			src_img_buffer = src_img_buffer & 0x7F; // met le premier bit à 0
+		else
+			src_img_buffer = src_img_buffer | 0x80; // met le premier bit à 1
+	}
+	fputc(src_img_buffer, dest);
+#endif
+}
+
+int decode_bit(FILE *src_img)
+{
+#if LSB
+	return fgetc(src_img) & 1;
+#else
+	return (fgetc(src_img) >> 7) & 1;
+#endif
+}
+
+// FILE INFO FUNCTIONS
+
+unsigned get_file_length(FILE *file)
+{
+	long save_pos = ftell(file);
+	fseek(file, 0L, SEEK_END);
+	unsigned length = ftell(file);
+	fseek(file, save_pos, SEEK_SET);
+	return length;
+}
+
+unsigned get_bmp_offset(FILE *bmp_file)
+{
+	long save_pos = ftell(bmp_file);
+	fseek(bmp_file, 10, SEEK_SET);
+	unsigned offset;
+	fread(&offset, 4, 1, bmp_file);
+	fseek(bmp_file, save_pos, SEEK_SET);
+	return offset;
+}
+
+unsigned get_bmp_data_length(FILE *bmp_file)
+{
+	return get_file_length(bmp_file) - get_bmp_offset(bmp_file);
+}
+
+// PRINT FUNCTIONS
 
 void printBitsOfByte(const char *title, const char *byteSrc)
 {
@@ -79,11 +145,6 @@ void printBitsOfByte(const char *title, const char *byteSrc)
 	printf("\n\n");
 }
 
-void showUsage(const char *name)
-{
-	printf("Usage : %s SOURCE DESTINATION\n\n", name);
-}
-
 void printBytesHexa(const char *title, const unsigned char *bytes, size_t size)
 {
 	printf("%s\n", title);
@@ -94,20 +155,4 @@ void printBytesHexa(const char *title, const unsigned char *bytes, size_t size)
 		printf("0x%02x ", bytes[i]);
 	}
 	printf("\n\n");
-}
-
-void hideBit(FILE *src_img, FILE *dest, const int secret_bit)
-{
-	char src_img_buffer = fgetc(src_img);
-
-	int img_bit = src_img_buffer & 1; //donne val du lsb
-
-	if (img_bit != secret_bit)
-	{
-		if (secret_bit == 0)
-			src_img_buffer = (src_img_buffer & ~1);
-		else
-			src_img_buffer = (src_img_buffer | 1);
-	}
-	fputc(src_img_buffer, dest);
 }

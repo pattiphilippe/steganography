@@ -16,16 +16,24 @@
 #define BYTE 8
 
 
+// USAGE FUNCTIONS
+void check_nb_param(const char *program_name, const unsigned nbParam);
 void printUsage(const char *program_name, const char *error);
-void showUsage(const char *name);
-void printBytesHexa(const char *title, const unsigned char *bytes, size_t size);
-void printBitsOfByte(const char *title, const char *byteSrc);
+
+// OPEN FILE MODE FUNCTIONS
 void set_mode(char *argv0, char *argv1, int *mode, int argc);
 FILE *set_open_file_mode(const char *argv, const char *mode, const char *error_msg);
-void check_nb_param(const char *program_name, const unsigned nbParam);
 
-unsigned get_file_length(FILE *msg_src_file);
-unsigned decode_length(FILE *src_img);
-
+// BIT FUNCTIONS
 int get_bit(char byte, int i);
-void hideBit(FILE *src_img, FILE *dest, const int secret_bit);
+void hide_bit(FILE *src_img, FILE *dest, const int secret_bit);
+int decode_bit(FILE *src_img);
+
+// FILE INFO FUNCTIONS
+unsigned get_file_length(FILE *file);
+unsigned get_bmp_offset(FILE *bmp_file);
+unsigned get_bmp_data_length(FILE *bmp_file);
+
+// PRINT FUNCTIONS
+void printBytesHexa(const char *title, const unsigned char *bytes, size_t size);
+void printBitsOfByte(const char *title, const char *byteSrc);

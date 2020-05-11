@@ -26,63 +26,50 @@ clean : clean_gif clean_bmp
 
 
 
-
-#@./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message.txt
 run_bmp : build_bmp
-	###################################################################################################
-	# Run ReadBMP with "splash_multicolor_src.bmp" and "input_message.txt"                            #
-	#                                                                                                 #
-	# ./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message.txt #
-	###################################################################################################
 	@echo
-	#@./dist/bmp/ReadBMP enc rsc/splash_color_src.bmp rsc/splash_color_dest.bmp rsc/input_message_splash.txt
-	#@./dist/bmp/ReadBMP enc rsc/hill_src.bmp rsc/hill_dest.bmp rsc/input_message_hill.txt 
+	@./dist/bmp/stegBMP enc rsc/bmp/splash_color_src.bmp rsc/bmp/splash_color_dest.bmp rsc/bmp/input_message.txt
 
-	@./dist/bmp/ReadBMP dec rsc/splash_color_dest.bmp rsc/output_message_splash.txt
-	#@./dist/bmp/ReadBMP dec rsc/hill_dest.bmp rsc/output_message_hill.txt 
+	@./dist/bmp/stegBMP dec rsc/bmp/splash_color_dest.bmp rsc/bmp/output_message.txt
 
-build_bmp : dist/bmp/ReadBMP
 
-dist/bmp/ReadBMP : dist/bmp/main.o dist/bmp/bitmap.o dist/bmp/utils.o
-	gcc dist/bmp/main.o dist/bmp/bitmap.o dist/bmp/utils.o -o dist/bmp/ReadBMP
+build_bmp : dist/bmp/stegBMP
 
-dist/bmp/main.o : src/bmp/main.c src/bmp/bitmap.h src/utils/utils.h
+dist/bmp/stegBMP : dist/bmp/main.o dist/bmp/encode_bmp.o dist/bmp/decode_bmp.o dist/utils/utils.o 
+	gcc dist/bmp/main.o dist/bmp/encode_bmp.o dist/bmp/decode_bmp.o dist/utils/utils.o -o dist/bmp/stegBMP 
+
+dist/bmp/main.o : src/bmp/main.c src/bmp/encode_bmp.h src/bmp/decode_bmp.h src/utils/utils.h
 	gcc -std=c99 -Wall -pedantic src/bmp/main.c -c -o dist/bmp/main.o
 
-dist/bmp/bitmap.o : src/bmp/bitmap.c src/bmp/bitmap.h
-	gcc -std=c99 -Wall -pedantic src/bmp/bitmap.c -c -o dist/bmp/bitmap.o
+dist/bmp/encode_bmp.o : src/bmp/encode_bmp.h src/bmp/encode_bmp.c src/utils/utils.h
+	gcc -std=c99 -Wall -pedantic src/bmp/encode_bmp.c -c -o dist/bmp/encode_bmp.o
 
-dist/bmp/utils.o: src/utils/utils.c src/utils/utils.h
-	gcc -std=c99 -Wall -pedantic src/utils/utils.c -c -o dist/bmp/utils.o
+dist/bmp/decode_bmp.o : src/bmp/decode_bmp.h src/bmp/decode_bmp.c src/utils/utils.h
+	gcc -std=c99 -Wall -pedantic src/bmp/decode_bmp.c -c -o dist/bmp/decode_bmp.o
+
 
 clean_bmp :
 	@rm -f dist/bmp/*
-	#@rm -f rsc/*_dest.bmp
-	@rm -f rsc/output_*.txt
+	@rm -f rsc/bmp/*_dest.bmp
+	@rm -f rsc/bmp/output_*.txt
 
 
 
 
 run_gif : build_gif
-	###########################################################################
-	# Run ReadGIF with "hacker.gif" as source file and "steg.gif as dest file #
-	#                                                                         #
-	# ./dist/gif/ReadGIF rsc/hacker.gif rsc/steg.gif                          #
-	###########################################################################
 	@echo
-	@./dist/gif/ReadGIF enc rsc/murica_src.gif rsc/murica_dest.gif rsc/input_message_splash.txt
-	@./dist/gif/ReadGIF enc rsc/dog.gif rsc/dog_dest.gif rsc/input_message_hill.txt 
+	@./dist/gif/ReadGIF enc rsc/gif/dog_src.gif rsc/gif/dog_dest.gif rsc/gif/input_message.txt
 
-	@./dist/gif/ReadGIF dec rsc/murica_dest.gif rsc/output_message_murica.txt
-	@./dist/gif/ReadGIF dec rsc/dog_dest.gif rsc/output_message_dog.txt 
+	@./dist/gif/ReadGIF dec rsc/gif/dog_dest.gif rsc/gif/output_message_dog.txt 
+
 
 build_gif : dist/gif/ReadGIF 
 
-dist/gif/ReadGIF : dist/gif/gif.o dist/gif/encode_gif.o dist/gif/decode_gif.o dist/gif/utils.o dist/gif/main.o 
-	gcc -o dist/gif/ReadGIF dist/gif/main.o dist/gif/encode_gif.o dist/gif/decode_gif.o dist/gif/utils.o  dist/gif/gif.o -lm 
+dist/gif/ReadGIF : dist/gif/gif.o dist/gif/encode_gif.o dist/gif/decode_gif.o dist/utils/utils.o dist/gif/main.o 
+	gcc -o dist/gif/ReadGIF dist/gif/main.o dist/gif/encode_gif.o dist/gif/decode_gif.o dist/utils/utils.o  dist/gif/gif.o -lm 
 
-dist/gif/main.o : src/gif/main.c src/gif/steg.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif/main.o -c src/gif/main.c   
+dist/gif/main.o : src/gif/main.c src/gif/encode_gif.h src/gif/decode_gif.h src/utils/utils.h
+	gcc -std=c99 src/gif/main.c -c -o dist/gif/main.o 
 
 dist/gif/encode_gif.o : src/gif/encode_gif.c src/gif/encode_gif.h src/gif/gif.h 
 	gcc -std=c99 -Wall -pedantic -o dist/gif/encode_gif.o -c src/gif/encode_gif.c
@@ -90,14 +77,17 @@ dist/gif/encode_gif.o : src/gif/encode_gif.c src/gif/encode_gif.h src/gif/gif.h
 dist/gif/decode_gif.o : src/gif/decode_gif.c src/gif/decode_gif.h src/gif/gif.h 
 	gcc -std=c99 -Wall -pedantic -o dist/gif/decode_gif.o -c src/gif/decode_gif.c
 
-dist/gif/utils.o : src/utils/utils.c src/utils/utils.h
-	gcc -std=c99 -Wall -pedantic src/utils/utils.c -c -o dist/gif/utils.o
-
 dist/gif/gif.o : src/gif/gif.c src/gif/gif.h
-	gcc -std=c99 -Wall -pedantic -o dist/gif/gif.o -c src/gif/gif.c 
+	gcc -std=c99 src/gif/gif.c -c -o dist/gif/gif.o 
 
 #todo update clean for last rsc versions
 clean_gif :
 	@rm -f dist/gif/* rsc/steg.gif rsc/read_gif.log
-	@rm -f rsc/*_dest.gif
-	@rm -f rsc/output_*.txt
+	@rm -f rsc/gif/*_dest.gif
+	@rm -f rsc/gif/output_*.txt
+
+
+
+
+dist/utils/utils.o: src/utils/utils.c src/utils/utils.h
+	gcc -std=c99 -Wall -pedantic src/utils/utils.c -c -o dist/utils/utils.o

@@ -37,3 +37,6 @@ unsigned get_bmp_data_length(FILE *bmp_file);
 // PRINT FUNCTIONS
 void printBytesHexa(const char *title, const unsigned char *bytes, size_t size);
 void printBitsOfByte(const char *title, const char *byteSrc);
+
+
+void hide_length(FILE *src_img, FILE *dest, const unsigned length);

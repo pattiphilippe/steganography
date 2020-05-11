@@ -23,17 +23,6 @@ void encode(const char *src_img_file, const char *dest_file, const char *src_sec
     fclose(dest);
 }
 
-void hide_length(FILE *src_img, FILE *dest, unsigned length)
-{
-    unsigned nb_bits = sizeof(unsigned) * BYTE, div = 1U << (nb_bits - 1);
-    for (int i = nb_bits - 1; i >= 0; i--)
-    {
-        hide_bit(src_img, dest, (length / div));
-        length %= div;
-        div >>= 1;
-    }
-}
-
 void hide_secret(FILE *src_img, FILE *dest, FILE *src_secret)
 {
     char src_msg_buffer = fgetc(src_secret);

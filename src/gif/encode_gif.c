@@ -8,6 +8,7 @@ void encode(const char *src_img_file, const char *dest_file, const char *src_sec
     FILE *dest = set_open_file_mode(dest_file, WRITE_UP, _ERROR_OPEN_FILE_W);
     FILE *src_secret = set_open_file_mode(src_secret_file, READ, _ERROR_OPEN_FILE_R);
 
+    //todo checkLengths once
     checkLengths_gif(src_img, src_secret);
     writeGifWithLCT(src_img, dest, src_secret);
 
@@ -16,6 +17,7 @@ void encode(const char *src_img_file, const char *dest_file, const char *src_sec
     fclose(src_secret);
 }
 
+//todo check if stop creating lct when full secret has been coded
 void writeGifWithLCT(FILE *gif_src, FILE *gif_dest, FILE *secret_src)
 {
     int sizeGCT = 0, lctId = 0;

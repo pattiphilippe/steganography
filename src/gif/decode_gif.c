@@ -14,19 +14,19 @@ void decode(const char *src_img_file, const char *dest_secret_file)
 
 void decodeLCTs(FILE *gif_src, FILE *dest_secret)
 {
-    int sizeGCT = 0, lctId = 0;
+    int secret_length = -1, sizeGCT = 0, lctId = 0;
     long posGCT = 0;
 
     passHeaderLsdGct(gif_src, &sizeGCT, &posGCT);
 
     gif_section_t section = read_gif_section(gif_src, NULL, false);
-    while (section != trailer)
+    while (secret_length != 0 && section != trailer)
     {
         printf("read section : %d\n", section);
         switch (section)
         {
         case 4:
-            decodeLCT(gif_src, dest_secret, sizeGCT, posGCT, lctId);
+            decodeLCT(gif_src, dest_secret, &secret_length, sizeGCT, posGCT, lctId);
             lctId++;
             break;
         default:
@@ -37,34 +37,20 @@ void decodeLCTs(FILE *gif_src, FILE *dest_secret)
 }
 
 //todo write in readme : no test if lct present, hypothese that u use this decode program after encode
-void decodeLCT(FILE *gif_src, FILE *dest_secret, int sizeGCT, long posGCT, int lct_id)
+void decodeLCT(FILE *gif_src, FILE *dest_secret, int * secret_length, int sizeGCT, long posGCT, int lct_id)
 {
     image_descr_t image_descr;
     fread(&image_descr, 1, sizeof(image_descr), gif_src);
     //todo read sizeLct from packed field?
+    //todo size GCT and size LCT in packed field should be same type
 
-    show_gif(gif_src, dest_secret, lct_id, sizeGCT);
+    if (lct_id == 0)
+        *secret_length = showLength(gif_src, sizeGCT);
+    else
+        showSecret_gif(gif_src, dest_secret, sizeGCT, secret_length);
 
     fseek(gif_src, 1, SEEK_CUR); // in image data, passing LZW minimum code size byte
     passDataSubBlocks(gif_src);
-}
-
-void show_gif(FILE *src, FILE *dest, int lct_id, int sizeGCT)
-{
-    static unsigned length = -1;
-
-    if (lct_id == 0)
-        length = showLength(src, sizeGCT);
-    else
-    {
-        if (length == -1)
-        {
-            fprintf(stderr, "LONGUEUR DU MESSAGE EST NULLE !!!!"); //todo always print errors the same way
-            exit(1);
-        }
-        printf("length before : %d\n", length);
-        showSecret_gif(src, dest, sizeGCT, &length);
-    }
 }
 
 unsigned showLength(FILE *src_gif, int sizeGCT)
@@ -85,23 +71,18 @@ unsigned showLength(FILE *src_gif, int sizeGCT)
     return length;
 }
 
-//here is the problem !
-void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
+void showSecret_gif(FILE *src_img, FILE *dest, int sizeLCT, int *secret_size)
 {
-    long curr_pos = ftell(src_img);
-    //long max_pos = curr_pos + *sizeLCT;  //a retirer
-
     char dest_buffer;
-    int index = *secret_size >= *sizeLCT ? *sizeLCT : *secret_size;
+    int bytes_to_decode = *secret_size >= sizeLCT ? sizeLCT : *secret_size;
 
-    for (unsigned i = 0; i < index; i++)
+    for (unsigned i = 0; i < bytes_to_decode; i++)
     {
         dest_buffer = 0;
         for (int j = 0; j < 8; j++)
         {
             dest_buffer <<= 1;
             int bit = decode_bit(src_img);
-            curr_pos++;
 
             if (bit == 0)
                 dest_buffer = dest_buffer & ~1;
@@ -111,17 +92,8 @@ void showSecret_gif(FILE *src_img, FILE *dest, int *sizeLCT, int *secret_size)
         fputc(dest_buffer, dest);
     }
 
-    if (*secret_size >= *sizeLCT)
+    if (*secret_size >= sizeLCT)
     {
-        *secret_size -= *sizeLCT;
-    }
-    else
-    {
-        //length < sizeGCT
-        *secret_size = 0;
-        printf("Error in decode_gif.c::showSecret_gif : length after : %d\n", *secret_size);
-
-        exit(1); //todo check if this error makes the program quit before end program
-                 //todo always exit with 1 or -1?
+        *secret_size -= sizeLCT;
     }
 }

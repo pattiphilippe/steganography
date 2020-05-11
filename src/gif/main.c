@@ -4,7 +4,6 @@
 #include "decode_gif.h"
 #include "../utils/utils.h"
 
-
 int main(int argc, char *argv[])
 {
 	printf("[Start program]\n\n");

@@ -78,14 +78,17 @@ run_gif : build_gif
 
 build_gif : dist/gif/ReadGIF 
 
-dist/gif/ReadGIF : dist/gif/gif.o dist/gif/steg.o dist/gif/utils.o dist/gif/main.o 
-	gcc -o dist/gif/ReadGIF dist/gif/main.o dist/gif/steg.o dist/gif/utils.o  dist/gif/gif.o -lm 
+dist/gif/ReadGIF : dist/gif/gif.o dist/gif/encode_gif.o dist/gif/decode_gif.o dist/gif/utils.o dist/gif/main.o 
+	gcc -o dist/gif/ReadGIF dist/gif/main.o dist/gif/encode_gif.o dist/gif/decode_gif.o dist/gif/utils.o  dist/gif/gif.o -lm 
 
 dist/gif/main.o : src/gif/main.c src/gif/steg.h
 	gcc -std=c99 -Wall -pedantic -o dist/gif/main.o -c src/gif/main.c   
 
-dist/gif/steg.o : src/gif/steg.c src/gif/steg.h src/gif/gif.h 
-	gcc -std=c99 -Wall -pedantic -o dist/gif/steg.o -c src/gif/steg.c 
+dist/gif/encode_gif.o : src/gif/encode_gif.c src/gif/encode_gif.h src/gif/gif.h 
+	gcc -std=c99 -Wall -pedantic -o dist/gif/encode_gif.o -c src/gif/encode_gif.c
+
+dist/gif/decode_gif.o : src/gif/decode_gif.c src/gif/decode_gif.h src/gif/gif.h 
+	gcc -std=c99 -Wall -pedantic -o dist/gif/decode_gif.o -c src/gif/decode_gif.c
 
 dist/gif/utils.o : src/utils/utils.c src/utils/utils.h
 	gcc -std=c99 -Wall -pedantic src/utils/utils.c -c -o dist/gif/utils.o
@@ -93,6 +96,7 @@ dist/gif/utils.o : src/utils/utils.c src/utils/utils.h
 dist/gif/gif.o : src/gif/gif.c src/gif/gif.h
 	gcc -std=c99 -Wall -pedantic -o dist/gif/gif.o -c src/gif/gif.c 
 
+#todo update clean for last rsc versions
 clean_gif :
 	@rm -f dist/gif/* rsc/steg.gif rsc/read_gif.log
 	@rm -f rsc/*_dest.gif

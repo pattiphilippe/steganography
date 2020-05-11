@@ -167,3 +167,48 @@ void setPackedFieldLikeGCT(image_descr_t *image_descr, int sizeGCT)
 	}
 	image_descr->packed_field = (image_descr->packed_field & 0xf8) | div; // set size of color table in packed field
 }
+
+//TODO marquer hypothèse au moins 2 lct, gif pas seulement une image
+unsigned checkLengths_gif(FILE *src_img, FILE *src_secret) //TODO à check
+{
+	unsigned secret_length = get_file_length(src_secret);
+	int max_secret_length = getMaxSecretLength(src_img);
+
+	printf("secret file length : %d\n", secret_length);
+
+	if (((secret_length + sizeof(unsigned)) * 8) > max_secret_length)
+	{
+		fprintf(stderr, "Secret too large for source image!\n");
+		exit(1);
+	}
+	return secret_length;
+}
+
+int getMaxSecretLength(FILE *gif_src)
+{
+	long save_pos = ftell(gif_src);
+	fseek(gif_src, 0L, SEEK_SET);
+
+	int sizeGCT = 0, maxLCT = 0;
+	long posGCT = 0;
+	passHeaderLsdGct(gif_src, &sizeGCT, &posGCT);
+
+	gif_section_t section = read_gif_section(gif_src, NULL, false);
+	while (section != trailer)
+	{
+		switch (section)
+		{
+		case 4:
+			maxLCT++;
+			passImageDescrBlock(gif_src);
+			break;
+		default:
+			passDataSubBlocks(gif_src);
+		}
+		section = read_gif_section(gif_src, NULL, false);
+	}
+
+	fseek(gif_src, save_pos, SEEK_SET);
+
+	return maxLCT * sizeGCT;
+}

@@ -1,5 +1,8 @@
 #include <stdio.h>
-#include "steg.h"
+
+#include "encode_gif.h"
+#include "decode_gif.h"
+#include "../utils/utils.h"
 
 
 int main(int argc, char *argv[])

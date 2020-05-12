@@ -12,7 +12,4 @@
 \contentsline {subsection}{Application du LSB}{7}
 \contentsline {section}{GIF}{8}
 \contentsline {subsection}{Pourquoi le GIF?}{8}
-\contentsline {subsection}{Application du LSB}{8}
-\contentsline {subsection}{Avancement}{8}
-\contentsline {subsubsection}{Lecture}{8}
-\contentsline {subsubsection}{Lecture}{9}
+\contentsline {subsection}{Application du LSB}{9}

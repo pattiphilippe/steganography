@@ -13,25 +13,22 @@ La structure du format GIF est connue et disponible en ligne. En voici un schém
 \includegraphics[width=15cm]{gif_structure.eps}
 
 
+\newpage
 \subsection{Application du LSB}
-Nous avons choisi de cacher des informations dans les couleurs qui se trouvent dans les Local Color Table. 
-Cette section facultative peut revenir devant chaque bloc image data. Si cette section n'existe pas, nous la rajoutons.\\\\
+Nous avons choisi de cacher des informations dans les pixels qui se trouvent dans les Local Color Table car il s'agit d'une
+suite de pixels qui ne sont soumis à aucune compression contrairement au segment d'image data.
+Cette section facultative peut revenir devant chaque bloc image data. Si cette section n'existe pas, nous la rajoutons en copiant
+alors la global color table à l'emplacement où elle aurait été c'est-à-dire juste devant le bloc image data.
+On aura autant de color table qu'il n'y a de blocs image data.
 
 Il est possible de calculer la taille maximale du message cachée à l'avance : 
 en comptant le nombre de bloc image data et en le multipliant par le nombre de byte dans la Global Color Table.
 
+\vspace{1.5cm}
 
-\subsection{Avancement}
-\subsubsection{Lecture}
-Le programme peut déja lire un gif en entier, section par section. 
-Les tailles des sections sont indiquées à des endroits différents par sections. 
-La lecture se fait donc différemment en fonction de la section.\\\\
-
-De plus, on peut déja savoir le nombre maximal de Local Color Table pour le fichier modifié.
-
-\subsubsection{Lecture}
-Le programme réécrit le gif dans un nouveau fichier, en insérant des Local Color Table, identique à la Global Color Table. 
-Ceci permettra d'y insérer un message. 
-L'insertion du message devrait être évidente, vue qu'elle sera presque identique à la stéganographie dans un fichier bitmap.\\\\
-
-Il y a toutefois encore un bug dans la réécriture du fichier gif, probablement à l'écriture des nouvelles Local Color Table.
+\includemedia[width=0.45\linewidth,height=0.45\linewidth,activate=pageopen,
+passcontext,
+transparent,
+addresource=dog_src.mp4,
+flashvars={source=dog_src.mp4}
+]{\includegraphics[width=0.45\linewidth]{dog_src.png}}{VPlayer.swf}

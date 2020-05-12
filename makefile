@@ -84,7 +84,6 @@ dist/gif/decode_gif.o : src/gif/decode_gif.c src/gif/decode_gif.h src/gif/gif.h 
 dist/gif/gif.o : src/gif/gif.c src/gif/gif.h src/utils/bmp.h
 	gcc -std=c99 src/gif/gif.c -c -o dist/gif/gif.o 
 
-#TODO update clean for last rsc versions
 clean_gif :
 	@rm -f dist/gif/* 
 	@rm -f rsc/gif/*_dest.gif

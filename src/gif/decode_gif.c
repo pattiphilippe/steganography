@@ -63,7 +63,6 @@ unsigned decode_length_gif(FILE *gif_src, int size_lct)
     return length;
 }
 
-//TODO use NB_BITS instead of 8? BYTE... :/ meh
 void decode_secret_gif(FILE *gif_src, FILE *gif_dest, int *secret_length, int size_lct)
 {
     int bytes_to_decode_in_lct = *secret_length >= size_lct / 8 ? size_lct / 8 : *secret_length;

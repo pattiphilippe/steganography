@@ -1,12 +1,9 @@
 #include <stdio.h>
 
-//TODO always use same names for params
-void decode(const char *src_img, const char *dest);
+//TODO always use same names for params, and order of importance
+void decode_gif(const char *gif_src_file, const char *secret_dest_file);
 
-void decodeLCTs(FILE * src_img, FILE* dest_secret);
+void decode_lct(FILE *gif_src, FILE *secret_dest, int * secret_length, int lct_id);
 
-//TODO use less params for decodeLCT
-void decodeLCT(FILE *gif_src, FILE *dest_secret, int * secret_length, int sizeGCT, long posGCT, int lct_id);
-
-unsigned showLength(FILE *src_gif, int sizeGCT);
-void showSecret_gif(FILE *src_img, FILE *dest, int sizeLCT, int *secret_size);
+unsigned decode_length_gif(FILE *gif_src, int size_lct);
+void decode_secret_gif(FILE *gif_src, FILE *secret_dest, int size_lct, int *secret_size);

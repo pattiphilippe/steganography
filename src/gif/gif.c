@@ -1,12 +1,59 @@
 #include "gif.h"
 
+#include "../utils/bmp.h"
+
 bool hasColorTable(const unsigned char *packed_field)
 {
 	return *packed_field & (1 << 7);
 }
-unsigned sizeOfColorTable(const unsigned char *packed_field)
+
+int sizeOfColorTable(const unsigned char *packed_field)
 {
 	return 3 * pow(2.0, ((*packed_field & 0x07) + 1));
+}
+
+//TODO marquer hypothèse au moins 2 lct, gif pas seulement une image
+//TODO rapport : fonctionne avec la taille limite de chars accepté
+//TODO essayer avec une image
+unsigned check_lengths_gif(FILE *src_img, FILE *src_secret)
+{
+	unsigned secret_length = get_file_length(src_secret);
+	int max_secret_length = getMaxSecretLength(src_img);
+
+	if (secret_length > max_secret_length)
+	{
+		fprintf(stderr, "Secret too large for source gif, use maximum %d characters! (%d chars in secret)\n", max_secret_length, secret_length);
+		exit(1);
+	}
+	return secret_length;
+}
+
+int getMaxSecretLength(FILE *gif_src)
+{
+	long save_pos = ftell(gif_src);
+	fseek(gif_src, 0L, SEEK_SET);
+
+	int sizeGCT = 0, maxLCT = 0;
+	passHeaderLsdGct(gif_src, &sizeGCT, NULL);
+
+	gif_section_t section = read_gif_section(gif_src, NULL, false);
+	while (section != trailer)
+	{
+		switch (section)
+		{
+		case 4:
+			maxLCT++;
+			passImageDescrBlock(gif_src);
+			break;
+		default:
+			passDataSubBlocks(gif_src);
+		}
+		section = read_gif_section(gif_src, NULL, false);
+	}
+
+	fseek(gif_src, save_pos, SEEK_SET);
+
+	return (maxLCT - 1) * (sizeGCT / 8);
 }
 
 gif_section_t read_gif_section(FILE *source, FILE *dest, bool copy)
@@ -16,9 +63,9 @@ gif_section_t read_gif_section(FILE *source, FILE *dest, bool copy)
 	do
 	{
 		again = false;
-		fread(&buffer, 1, 1, source);
+		buffer = fgetc(source);
 		if (copy)
-			fwrite(&buffer, 1, 1, dest);
+			fputc(buffer, dest);
 		switch (buffer)
 		{
 		case 0X2C:
@@ -62,8 +109,10 @@ void readHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *p
 	{
 		int size = sizeOfColorTable(&(header_lsd.packed_field));
 
-		*sizeGCT = size;
-		*posGCT = ftell(source);
+		if (sizeGCT != NULL)
+			*sizeGCT = size;
+		if (posGCT != NULL)
+			*posGCT = ftell(source);
 
 		if (copy)
 		{
@@ -74,37 +123,21 @@ void readHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *p
 				exit(0);
 			}
 			fwrite(&header_lsd, 1, sizeof(header_lsd), dest);
-			copyGCT(source, dest, size, *posGCT, false);
+			copyGCT(source, dest, size);
 		}
-		fseek(source, size, SEEK_CUR);
+		else
+			fseek(source, size, SEEK_CUR);
 	}
 }
 
-//TODO delete all unnecessary prints 
-void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT, bool resetCUR)
+//TODO delete all unnecessary prints
+void copyGCT(FILE *source, FILE *dest, int sizeGCT)
 {
-	long savePos_src = ftell(source);
-	long savePos_dest = ftell(dest);
-	char buffer[6];
-
-	if (resetCUR)
+	char buffer;
+	for (int i = 0; i < sizeGCT; i++)
 	{
-		printf("{before : %ld, ", savePos_dest);
-	}
-
-	fseek(source, posGCT, SEEK_SET);
-
-	for (int i = 0; i < sizeGCT; i += 6)
-	{
-		fread(buffer, 6, 1, source);
-		fwrite(buffer, 6, 1, dest);
-	}
-	fseek(source, savePos_src, SEEK_SET);
-
-	if (resetCUR)
-	{
-		fseek(dest, savePos_dest, SEEK_SET);
-		printf("after: %ld}\n", ftell(dest));
+		buffer = fgetc(source);
+		fputc(buffer, dest);
 	}
 }
 
@@ -120,28 +153,27 @@ void copyDataSubBlocks(FILE *source, FILE *dest)
 
 void readDataSubBlocks(FILE *source, FILE *dest, bool copy)
 {
-	unsigned char size;
 	char buffer;
-	fread(&size, 1, 1, source);
+	unsigned char size = fgetc(source);
 	while (size)
 	{
 		if (copy)
 		{
-			fwrite(&size, 1, 1, dest); //copy size read
+			fputc(size, dest); // copy size read
 			for (int i = 0; i < size; i++)
 			{
-				fread(&buffer, 1, 1, source);
-				fwrite(&buffer, 1, 1, dest);
+				buffer = fgetc(source);
+				fputc(buffer, dest);
 			}
 		}
 		else
 		{
 			fseek(source, size, SEEK_CUR);
 		}
-		fread(&size, 1, 1, source);
+		size = fgetc(source);
 	}
 	if (copy)
-		fwrite(&size, 1, 1, dest); //copy block terminator (00)
+		fputc(size, dest); // copy block terminator (00)
 }
 
 void passImageDescrBlock(FILE *source)
@@ -150,8 +182,8 @@ void passImageDescrBlock(FILE *source)
 	fread(&image_descr, 1, sizeof(image_descr), source);
 	if (hasColorTable(&(image_descr.packed_field)))
 	{
-		unsigned sizeLCT = sizeOfColorTable(&(image_descr.packed_field));
-		fseek(source, sizeLCT, SEEK_CUR);
+		unsigned size_lct = sizeOfColorTable(&(image_descr.packed_field));
+		fseek(source, size_lct, SEEK_CUR);
 	}
 	fseek(source, 1, SEEK_CUR); // in image data, passing LZW minimum code size byte
 	passDataSubBlocks(source);
@@ -163,53 +195,8 @@ void setPackedFieldLikeGCT(image_descr_t *image_descr, int sizeGCT)
 	int x = (sizeGCT / 3), div = 0;
 	while (x != 2)
 	{
-		x /= 2;
+		x >>= 1;
 		div++;
 	}
 	image_descr->packed_field = (image_descr->packed_field & 0xf8) | div; // set size of color table in packed field
-}
-
-//TODO marquer hypothèse au moins 2 lct, gif pas seulement une image
-unsigned checkLengths_gif(FILE *src_img, FILE *src_secret) //TODO à check
-{
-	unsigned secret_length = get_file_length(src_secret);
-	int max_secret_length = getMaxSecretLength(src_img);
-
-	printf("secret file length : %d\n", secret_length);
-
-	if (((secret_length + sizeof(unsigned)) * 8) > max_secret_length)
-	{
-		fprintf(stderr, "Secret too large for source image!\n");
-		exit(1);
-	}
-	return secret_length;
-}
-
-int getMaxSecretLength(FILE *gif_src)
-{
-	long save_pos = ftell(gif_src);
-	fseek(gif_src, 0L, SEEK_SET);
-
-	int sizeGCT = 0, maxLCT = 0;
-	long posGCT = 0;
-	passHeaderLsdGct(gif_src, &sizeGCT, &posGCT);
-
-	gif_section_t section = read_gif_section(gif_src, NULL, false);
-	while (section != trailer)
-	{
-		switch (section)
-		{
-		case 4:
-			maxLCT++;
-			passImageDescrBlock(gif_src);
-			break;
-		default:
-			passDataSubBlocks(gif_src);
-		}
-		section = read_gif_section(gif_src, NULL, false);
-	}
-
-	fseek(gif_src, save_pos, SEEK_SET);
-
-	return maxLCT * sizeGCT;
 }

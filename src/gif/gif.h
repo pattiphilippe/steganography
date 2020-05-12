@@ -3,7 +3,6 @@
 #include <errno.h>
 #include <math.h>
 #include <stdlib.h>
-#include "../utils/utils.h"
 
 /**
  * Logical screen descriptor structure
@@ -40,15 +39,17 @@ typedef enum gif_section_t
 } gif_section_t;
 
 bool hasColorTable(const unsigned char *packed_field);
-unsigned sizeOfColorTable(const unsigned char *packed_field);
+int sizeOfColorTable(const unsigned char *packed_field);
 gif_section_t read_gif_section(FILE *source, FILE *dest, bool copy);
 
+unsigned check_lengths_gif(FILE *src_img, FILE *src_secret);
+int getMaxSecretLength(FILE *source);
 
 void passHeaderLsdGct(FILE *source, int *sizeGCT, long *posGCT);
 void copyHeaderLsdGct(FILE *source, FILE *dest, int *sizeGCT, long *posGCT);
 void readHeaderLsdGct(FILE *source, FILE *dest, bool copy, int *sizeGCT, long *posGCT);
 
-void copyGCT(FILE *source, FILE *dest, int sizeGCT, long posGCT, bool resetCURSOR);
+void copyGCT(FILE *source, FILE *dest, int sizeGCT);
 
 void passDataSubBlocks(FILE *source);
 void copyDataSubBlocks(FILE *source, FILE *dest);
@@ -56,7 +57,3 @@ void readDataSubBlocks(FILE *source, FILE *dest, bool copy);
 
 void passImageDescrBlock(FILE *source);
 void setPackedFieldLikeGCT(image_descr_t *image_descr, int sizeGCT);
-
-//TODO find good place for checkLengths methods
-unsigned checkLengths_gif(FILE *src_img, FILE *src_secret);
-int getMaxSecretLength(FILE *source);

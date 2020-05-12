@@ -9,6 +9,8 @@
         "stdlib.h": "c",
         "stdint.h": "c",
         "encode_bmp.h": "c",
-        "decode_gif.h": "c"
+        "decode_gif.h": "c",
+        "decode_bmp.h": "c",
+        "general.h": "c"
     }
 }

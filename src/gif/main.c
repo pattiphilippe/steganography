@@ -2,7 +2,7 @@
 
 #include "encode_gif.h"
 #include "decode_gif.h"
-#include "../utils/utils.h"
+#include "../utils/general.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,11 +16,11 @@ int main(int argc, char *argv[])
 
 	if (mode == 0)
 	{
-		encode(argv[2], argv[3], argv[4]);
+		encode_gif(argv[2], argv[3], argv[4]);
 	}
 	else
 	{
-		decode(argv[2], argv[3]);
+		decode_gif(argv[2], argv[3]);
 	}
-	printf("%s", "[end program]\n\n\n");
+	printf("[end program]\n\n\n");
 }

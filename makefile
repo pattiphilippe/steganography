@@ -17,11 +17,11 @@
 # make build_gif   : compile uniquement la demo pour le format GIF
 # make clean_gif   : supprime uniquement les fichiers generes lies au format GIF
 
-run : run_gif run_bmp
+run : run_bmp run_gif 
 
-build : build_gif build_bmp
+build : build_bmp build_gif
 
-clean : clean_gif clean_bmp
+clean : clean_bmp clean_gif
 
 
 
@@ -35,16 +35,16 @@ run_bmp : build_bmp
 
 build_bmp : dist/bmp/stegBMP
 
-dist/bmp/stegBMP : dist/bmp/main.o dist/bmp/encode_bmp.o dist/bmp/decode_bmp.o dist/utils/utils.o 
-	gcc dist/bmp/main.o dist/bmp/encode_bmp.o dist/bmp/decode_bmp.o dist/utils/utils.o -o dist/bmp/stegBMP 
+dist/bmp/stegBMP : dist/bmp/main.o dist/bmp/encode_bmp.o dist/bmp/decode_bmp.o dist/utils/general.o dist/utils/bmp.o
+	gcc dist/bmp/main.o dist/bmp/encode_bmp.o dist/bmp/decode_bmp.o dist/utils/general.o dist/utils/bmp.o -o dist/bmp/stegBMP 
 
-dist/bmp/main.o : src/bmp/main.c src/bmp/encode_bmp.h src/bmp/decode_bmp.h src/utils/utils.h
+dist/bmp/main.o : src/bmp/main.c src/bmp/encode_bmp.h src/bmp/decode_bmp.h src/utils/general.h
 	gcc -std=c99 -Wall -pedantic src/bmp/main.c -c -o dist/bmp/main.o
 
-dist/bmp/encode_bmp.o : src/bmp/encode_bmp.h src/bmp/encode_bmp.c src/utils/utils.h
+dist/bmp/encode_bmp.o : src/bmp/encode_bmp.h src/bmp/encode_bmp.c src/utils/general.h
 	gcc -std=c99 -Wall -pedantic src/bmp/encode_bmp.c -c -o dist/bmp/encode_bmp.o
 
-dist/bmp/decode_bmp.o : src/bmp/decode_bmp.h src/bmp/decode_bmp.c src/utils/utils.h
+dist/bmp/decode_bmp.o : src/bmp/decode_bmp.h src/bmp/decode_bmp.c src/utils/general.h
 	gcc -std=c99 -Wall -pedantic src/bmp/decode_bmp.c -c -o dist/bmp/decode_bmp.o
 
 
@@ -67,19 +67,19 @@ run_gif : build_gif
 
 build_gif : dist/gif/ReadGIF 
 
-dist/gif/ReadGIF : dist/gif/gif.o dist/gif/encode_gif.o dist/gif/decode_gif.o dist/utils/utils.o dist/gif/main.o 
-	gcc -o dist/gif/ReadGIF dist/gif/main.o dist/gif/encode_gif.o dist/gif/decode_gif.o dist/utils/utils.o  dist/gif/gif.o -lm 
+dist/gif/ReadGIF : dist/gif/gif.o dist/gif/encode_gif.o dist/gif/decode_gif.o dist/utils/general.o dist/gif/main.o dist/utils/bmp.o 
+	gcc -o dist/gif/ReadGIF dist/gif/main.o dist/gif/encode_gif.o dist/gif/decode_gif.o dist/gif/gif.o dist/utils/general.o  dist/utils/bmp.o  -lm 
 
-dist/gif/main.o : src/gif/main.c src/gif/encode_gif.h src/gif/decode_gif.h src/utils/utils.h
+dist/gif/main.o : src/gif/main.c src/gif/encode_gif.h src/gif/decode_gif.h src/utils/general.h
 	gcc -std=c99 src/gif/main.c -c -o dist/gif/main.o 
 
-dist/gif/encode_gif.o : src/gif/encode_gif.c src/gif/encode_gif.h src/gif/gif.h 
+dist/gif/encode_gif.o : src/gif/encode_gif.c src/gif/encode_gif.h src/gif/gif.h src/utils/bmp.h
 	gcc -std=c99 -Wall -pedantic -o dist/gif/encode_gif.o -c src/gif/encode_gif.c
 
-dist/gif/decode_gif.o : src/gif/decode_gif.c src/gif/decode_gif.h src/gif/gif.h 
+dist/gif/decode_gif.o : src/gif/decode_gif.c src/gif/decode_gif.h src/gif/gif.h src/utils/bmp.h
 	gcc -std=c99 -Wall -pedantic -o dist/gif/decode_gif.o -c src/gif/decode_gif.c
 
-dist/gif/gif.o : src/gif/gif.c src/gif/gif.h
+dist/gif/gif.o : src/gif/gif.c src/gif/gif.h src/utils/bmp.h
 	gcc -std=c99 src/gif/gif.c -c -o dist/gif/gif.o 
 
 #todo update clean for last rsc versions
@@ -90,6 +90,8 @@ clean_gif :
 
 
 
+dist/utils/general.o: src/utils/general.c src/utils/general.h
+	gcc -std=c99 -Wall -pedantic src/utils/general.c -c -o dist/utils/general.o
 
-dist/utils/utils.o: src/utils/utils.c src/utils/utils.h
-	gcc -std=c99 -Wall -pedantic src/utils/utils.c -c -o dist/utils/utils.o
+dist/utils/bmp.o: src/utils/bmp.c src/utils/bmp.h
+	gcc -std=c99 -Wall -pedantic src/utils/bmp.c -c -o dist/utils/bmp.o

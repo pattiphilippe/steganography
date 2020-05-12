@@ -1,51 +1,51 @@
 #include "encode_bmp.h"
 
-#include "../utils/utils.h"
+#include "../utils/general.h"
+#include "../utils/bmp.h"
 
-void encode(const char *src_img_file, const char *dest_file, const char *src_secret_file)
+void encode(const char *bmp_src_file, const char *bmp_dest_file, const char *secret_src_file)
 {
-    FILE *src_img = set_open_file_mode(src_img_file, READ, _ERROR_OPEN_FILE_R);
-    FILE *dest = set_open_file_mode(dest_file, WRITE, _ERROR_OPEN_FILE_W);
-    FILE *src_secret = set_open_file_mode(src_secret_file, READ, _ERROR_OPEN_FILE_R);
+    FILE *src_img = set_open_file_mode(bmp_src_file, READ, _ERROR_OPEN_FILE_R);
+    FILE *dest = set_open_file_mode(bmp_dest_file, WRITE, _ERROR_OPEN_FILE_W);
+    FILE *secret_src = set_open_file_mode(secret_src_file, READ, _ERROR_OPEN_FILE_R);
 
     copy_header(src_img, dest);
 
-    unsigned secret_length = check_lengths(src_img, src_secret);
-    printf("Length coded : %u\n\n", secret_length);
-    hide_length(src_img, dest, secret_length);
+    unsigned secret_length = check_lengths(src_img, secret_src);
+    hide_length_bmp(src_img, dest, secret_length);
 
-    hide_secret(src_img, dest, src_secret);
+    hide_secret(src_img, dest, secret_src);
 
     copy_rest_of_image(src_img, dest);
 
-    fclose(src_secret);
+    fclose(secret_src);
     fclose(src_img);
     fclose(dest);
 }
 
-void hide_secret(FILE *src_img, FILE *dest, FILE *src_secret)
+void hide_secret(FILE *src_img, FILE *dest, FILE *secret_src)
 {
-    char src_msg_buffer = fgetc(src_secret);
+    char src_msg_buffer = fgetc(secret_src);
     int secret_bit;
-    while (!feof(src_secret))
+    while (!feof(secret_src))
     {
-        for (int i = 0; i < BYTE; i++)
+        for (int i = 0; i < 8; i++)
         {
             secret_bit = get_bit(src_msg_buffer, i);
             hide_bit(src_img, dest, secret_bit);
         }
-        src_msg_buffer = fgetc(src_secret);
+        src_msg_buffer = fgetc(secret_src);
     }
 }
 
-unsigned check_lengths(FILE *src_img, FILE *src_secret)
+unsigned check_lengths(FILE *src_img, FILE *secret_src)
 {
-    unsigned secret_length = get_file_length(src_secret);
-    unsigned src_data_length = get_bmp_data_length(src_img);
+    unsigned secret_length = get_file_length(secret_src);
+    unsigned max_secret_length = get_max_secret_length_bmp(src_img);
 
-    if (((secret_length + 4) * 8) > src_data_length)
+    if (secret_length > max_secret_length)
     {
-        fprintf(stderr, "Secret too large for source image!\n");
+		fprintf(stderr, "Secret too large for source bmp, use maximum %d characters! (%d chars in secret)\n", max_secret_length, secret_length);
         exit(1);
     }
     return secret_length;

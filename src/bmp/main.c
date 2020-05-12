@@ -4,7 +4,7 @@
 
 #include "encode_bmp.h"
 #include "decode_bmp.h"
-#include "../utils/utils.h"
+#include "../utils/general.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		decode(argv[2], argv[3]);
+		decode_bmp(argv[2], argv[3]);
 	}
 
 	printf("%s", "[end program]\n\n\n");

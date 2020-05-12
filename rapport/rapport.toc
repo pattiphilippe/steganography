@@ -1,16 +1,7 @@
 \babel@toc {french}{}
-\contentsline {section}{\numberline {1}Introduction}{2}
-\contentsline {section}{\numberline {2}St\IeC {\'e}ganographie : D\IeC {\'e}finition}{2}
-\contentsline {section}{\numberline {3}Technique utilis\IeC {\'e}e}{2}
-\contentsline {section}{\numberline {4}Guide pratique}{2}
-\contentsline {section}{\numberline {5}Bitmap}{4}
-\contentsline {subsection}{\numberline {5.1}Pourquoi le bitmap?}{4}
-\contentsline {subsection}{\numberline {5.2}Application du LSB}{4}
-\contentsline {subsection}{\numberline {5.3}Avancement}{5}
-\contentsline {section}{\numberline {6}GIF}{6}
-\contentsline {subsection}{\numberline {6.1}Pourquoi le GIF?}{6}
-\contentsline {subsection}{\numberline {6.2}Application du LSB}{6}
-\contentsline {subsection}{\numberline {6.3}Avancement}{6}
-\contentsline {subsubsection}{\numberline {6.3.1}Lecture}{6}
-\contentsline {subsubsection}{\numberline {6.3.2}Lecture}{6}
-\contentsline {section}{\numberline {7}Conclusion}{7}
+\contentsline {section}{Introduction}{2}
+\contentsline {section}{Organisation du projet}{2}
+\contentsline {section}{St\IeC {\'e}ganographie ?}{3}
+\contentsline {section}{Technique utilis\IeC {\'e}e}{3}
+\contentsline {subsection}{Sch\IeC {\'e}ma g\IeC {\'e}n\IeC {\'e}ral}{4}
+\contentsline {section}{Guide pratique}{4}

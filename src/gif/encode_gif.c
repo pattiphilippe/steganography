@@ -75,7 +75,7 @@ void encode_lct(FILE *gif_src, FILE *gif_dest, FILE *secret_src, int lct_id, int
         encode_secret_gif(gif_src, gif_dest, secret_src, size_lct);
 }
 
-//TODO rapport : hypothese que au moins 16 couleurs diff dans gif, pour taille min d'une LCT
+//TODO rapport : hypothese que au moins 16 couleurs diff dans gif, pour taille min de 48 bytes par LCT
 void encode_length_gif(FILE *gif_src, FILE *gif_dest, FILE *secret_src, int size_lct)
 {
     unsigned secret_length = check_lengths_gif(gif_src, secret_src);
@@ -87,9 +87,9 @@ void encode_length_gif(FILE *gif_src, FILE *gif_dest, FILE *secret_src, int size
     copy_rest_of_ct(gif_src, gif_dest, curr_pos, max_pos);
 }
 
-void encode_secret_gif(FILE *src_gif, FILE *gif_dest, FILE *secret_src, int size_lct)
+void encode_secret_gif(FILE *gif_src, FILE *gif_dest, FILE *secret_src, int size_lct)
 {
-    long curr_pos = ftell(src_gif);
+    long curr_pos = ftell(gif_src);
     long max_pos = curr_pos + size_lct;
 
     char src_msg_buffer;
@@ -104,11 +104,11 @@ void encode_secret_gif(FILE *src_gif, FILE *gif_dest, FILE *secret_src, int size
         for (int i = 0; i < 8; i++)
         {
             secret_bit = get_bit(src_msg_buffer, i);
-            hide_bit(src_gif, gif_dest, secret_bit);
+            hide_bit(gif_src, gif_dest, secret_bit);
         }
     }
 
-    copy_rest_of_ct(src_gif, gif_dest, curr_pos, max_pos);
+    copy_rest_of_ct(gif_src, gif_dest, curr_pos, max_pos);
 }
 
 void copy_rest_of_ct(FILE *gif_src, FILE *gif_dest, long curr_pos, long max_pos)

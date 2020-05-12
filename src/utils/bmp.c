@@ -64,9 +64,9 @@ void hide_bit(FILE *src_img, FILE *dest, const int secret_bit)
     if (img_bit != secret_bit)
     {
         if (secret_bit == 0)
-            src_img_buffer = src_img_buffer & ~1; // met le premier bit à 0
+            src_img_buffer = src_img_buffer & ~1; // met le premier bit a 0
         else
-            src_img_buffer = src_img_buffer | 1; // met le dernier à 1
+            src_img_buffer = src_img_buffer | 1; // met le dernier a 1
     }
     fputc(src_img_buffer, dest);
 }

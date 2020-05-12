@@ -19,6 +19,13 @@
 \usepackage{tcolorbox,listings}
 \usepackage{fullpage}
 \usepackage{color}
+\usepackage{multicol} %positionner plusieurs images sur une ligne
+\usepackage{lipsum}
+\usepackage{mwe}
+\usepackage{graphicx} %nécessaire pour les imafes
+\usepackage{float} % ici: H option pour float 
+\usepackage{subcaption} % charge le package caption
+
 
 % Modification des marges ------------------------------
 \oddsidemargin -4mm 	% Marge de gauche -4mm
@@ -31,9 +38,8 @@
 \pdfminorversion=7
 \headsep = 30pt
 
-% Modification du cadre du code source ------------------------------
-\definecolor{darkWhite}{rgb}{0.94,0.94,0.94}
-
+% Modification du cadre des codes source ------------------------------
+\definecolor{darkWhite}{rgb}{0.94,0.94,0.94} 
 \lstset{
     backgroundcolor=\color{darkWhite},
     breakatwhitespace=false,
@@ -54,6 +60,13 @@
     stringstyle=\color{gray},
     tabsize=4,
     title=\lstname,
+    basicstyle=\footnotesize,
+    numbers=left,
+    stepnumber=1,
+    showstringspaces=false,
+    tabsize=1,
+    breaklines=true,
+    breakatwhitespace=false,
 }
  
 \lstdefinestyle{frameStyle}{
@@ -106,7 +119,7 @@
 
 
 % Numérotation et table des matières -----------------
-\setcounter{tocdepth}{1}    % fixe la profondeur de la table des matières
+\setcounter{tocdepth}{3}    % fixe la profondeur de la table des matières
 \setcounter{secnumdepth}{-1} % fixe la profondeur de la numérotation des sections et paragraph
 
 \lhead{}
@@ -127,8 +140,8 @@
 
 % Inclusion des textes
 \include{intro}
-%\include{bitmap} % pas de saut de page
-%\include{gif}
+\include{bitmap} 
+\include{gif}
 %\include{conclusion}
 \printindex			% Impression de la table des index
 \end{document}

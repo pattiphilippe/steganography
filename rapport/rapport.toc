@@ -4,4 +4,15 @@
 \contentsline {section}{St\IeC {\'e}ganographie ?}{3}
 \contentsline {section}{Technique utilis\IeC {\'e}e}{3}
 \contentsline {subsection}{Sch\IeC {\'e}ma g\IeC {\'e}n\IeC {\'e}ral}{4}
-\contentsline {section}{Guide pratique}{4}
+\contentsline {subsection}{Encodage : extrait de code source concernant la manipulation des LSB}{4}
+\contentsline {subsection}{D\IeC {\'e}codage : extrait de code source concernant la manipulation des LSB}{4}
+\contentsline {section}{Guide pratique}{5}
+\contentsline {section}{Bitmap}{6}
+\contentsline {subsection}{Pourquoi le bitmap?}{6}
+\contentsline {subsection}{Application du LSB}{7}
+\contentsline {section}{GIF}{8}
+\contentsline {subsection}{Pourquoi le GIF?}{8}
+\contentsline {subsection}{Application du LSB}{8}
+\contentsline {subsection}{Avancement}{8}
+\contentsline {subsubsection}{Lecture}{8}
+\contentsline {subsubsection}{Lecture}{9}

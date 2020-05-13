@@ -14,7 +14,6 @@ Nous fournirons aussi un guide pratique pour utiliser les exécutables.
 
 \vspace{1.5cm}
 
-
 \newpage
 \section{Organisation du projet}
 La structure de notre projet s'organise essentiellement en quatre répertoires dont voici le détail :\\ 
@@ -47,13 +46,16 @@ Parmi les scénarios de tests envisagés, nous avons tenté de cacher :\\
     \item une \textbf{vidéo} (.mp4) dans une \textbf{image} (.bmp/.gif)\\
 \end{itemize}
 
-
 Il est évident que pour que cela soit possible, des conditions sont à poser.
 Il faudra bien sûr que le fichier à cacher soit plus petit que le fichier objet. Il faudra aussi peauffiner les conditions de 
 faisabilité qui sont fortement dépendantes du type de fichier et veiller à respecter la règle d'or : le dissimuler à tout prix.
 Cela signifie qu'il faudra limiter au maximum l'impact sur le fichier dans lequel on aura caché des données sinon ce serait contraire
 au principe de stéganographie.
 
+\vspace{1.5cm}
+\begin{center}
+    \includegraphics[width=10cm]{steganographie.eps}
+\end{center}
 
 \newpage
 \section{Least Significant Bit (L.S.B.)}
@@ -63,9 +65,7 @@ important d'un byte appelé le bit de poids faible.
 Pour coder le message, il suffit de lire un byte à cacher et de l'encoder dans le bit de poids faible d'un byte choisi.
 Pour décoder le message, il suffit de lire le bit de poids faible de ces bytes 'élus' et de reformer un message compréhensible.\\\\
 
-
-\includegraphics[width=12cm]{lsb.eps}\\\\
-
+\includegraphics[width=15cm]{lsb.eps}\\
 
 C'est cette logique que nous nous sommes employés à suivre dans le cas de traitement sur ces deux formats de fichiers image.
 Ainsi, la technique est la même mais certains choix se sont imposés de part les différences entre les deux structures de ces 
@@ -75,12 +75,11 @@ perdre un bit d'information sans que cela ne se remarque.
 Par exemple, pour une couleur codée en rgb, le changement du dernier bit a un impact très faible, quasi invisible à l'oeil nu.
 Il est donc adéquat pour y dissimuler des données.\\\\
 
-
+\newpage
 \subsection{Encodage : extrait de code source concernant la manipulation des LSB}
 \lstinputlisting[language=c, firstline=57, lastline=72]{../src/utils/bmp.c}
 
 \subsection{Décodage : extrait de code source concernant la manipulation des LSB}
-\lstinputlisting[language=c, firstline=91, lastline=101]{../src/utils/bmp.c}
-
-\vspace{1.5cm}
+\lstinputlisting[language=c, firstline=30, lastline=47]{../src/utils/bmp.c}
+\lstinputlisting[language=c, firstline=92, lastline=95]{../src/utils/bmp.c}
 

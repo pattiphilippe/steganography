@@ -11,20 +11,12 @@ Le BITMAPINFOHEADER est une des versions les plus simples et rétrocompatible.
 Actuellement, il existe des versions plus complètes, tels que le BITMAPV4HEADER ou BITMAPV5HEADER.\\
 La structure du format BITMAP est connue et disponible en ligne. En voici un schéma, utilisant le BITMAPINFOHEADER :\\
 
-\includegraphics[width=14cm]{bitmap_structure.eps}\\\\
+\includegraphics[width=14cm]{bitmap_structure.eps}
 
 \subsection{Application du LSB}
 Nous cachons les données dans les bytes décrivant les couleurs de l'image source, juste après le header.
 Les modifications étant faites sur des couleurs, l'image est peu altérée. Les modifications sont invisibles à l'oeil humain.
 De plus, ce fichier n'utilisant généralement pas d'algorithme de compression, on ne doit pas se soucier de perte de données, 
-ce qui impacteraient le décodage d'une image dans laquelle on aurait caché des données.
+ce qui aurait probablement impacter le décodage d'une image dans laquelle on aurait caché des données.
 
 \vspace{1.5cm}
-
-\begin{figure}[H]
-    \centering
-    \subcaptionbox{Bitmap source}{\includegraphics[width=0.45\textwidth]{splash_color_src.eps}}%
-    \hfill
-    \subcaptionbox{Bitmap dest }{\includegraphics[width=0.45\textwidth]{splash_color_dest.eps}}%
-    \caption{Encodage d'un fichier texte dans un bitmap}
-\end{figure}

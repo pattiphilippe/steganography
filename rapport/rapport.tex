@@ -23,10 +23,13 @@
 \usepackage{lipsum}
 \usepackage{mwe}
 \usepackage{graphicx} %nécessaire pour les images
+\usepackage{multimedia}
 \usepackage{float} % ici: H option pour float 
 \usepackage{subcaption} % charge le package caption
 \usepackage{epstopdf}
-\usepackage{media9}
+\usepackage{pifont}
+
+
 
 % Modification des marges ------------------------------
 \oddsidemargin -4mm 	% Marge de gauche -4mm
@@ -34,7 +37,6 @@
 \textheight 22cm 	% Hauteur du texte = 22cm
 \parindent 0cm		% Pas d'indentation de paragraphe
 % -----------------------------------------------------
-
 \pagestyle{fancy}
 \pdfminorversion=7
 \headsep = 30pt
@@ -102,6 +104,7 @@
         \textbf{Stéganographie : Bitmap et GIF}
             
         \vspace{0.5cm}
+
         \LARGE
            
         \vspace{0.5cm}
@@ -131,7 +134,6 @@
 \singlespacing
 
 % Titres sur  chaque page -----------------------------
-
 \rhead{Stéganographie - Bitmap / GIF}
 \lfoot{\copyright{Foud Hind, Patti Philippe}}
 \cfoot{ } % Bas centre - obligatoire !
@@ -143,6 +145,7 @@
 \include{intro}
 \include{bitmap} 
 \include{gif}
+\include{presentation}
 \include{conclusion}
 \printindex			% Impression de la table des index
 \end{document}

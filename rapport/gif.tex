@@ -9,11 +9,9 @@ Ce projet peut donc intéressé pas mal de gens.\\
 La structure du format GIF est connue et disponible en ligne. En voici un schéma : 
 
 \vspace{1.5cm}
-
 \includegraphics[width=15cm]{gif_structure.eps}
 
-
-\newpage
+\vspace{1.5cm}
 \subsection{Application du LSB}
 Nous avons choisi de cacher des informations dans les bytes des Local Color Table. 
 Les Color Table décrivent des couleurs, chaque couleur étant codée sur 3 bytes. 
@@ -25,14 +23,7 @@ alors la global color table.
 Au final, on aura autant de local color table qu'il y a de blocs image data.\\
 
 Il est possible de calculer la taille maximale du message cachée à l'avance. 
-Pour cela, on compte le nombre de bytes que l'on peut cacher par Color Table : nombre de bytes dans une Color Table / 8.
+Pour cela, on compte le nombre de bytes que l'on peut cacher par Color Table : nombre de bytes dans une color Table / 8.
 Puis, on multiplie cela par le nombre potentiel de Local Color Table dans le fichier, ce qui revient à compter le nombre de bloc image data.
 
 \vspace{1.5cm}
-
-\includemedia[width=0.45\linewidth,height=0.45\linewidth,activate=pageopen,
-passcontext,
-transparent,
-addresource=dog_src.mp4,
-flashvars={source=dog_src.mp4}
-]{\includegraphics[width=0.45\linewidth]{dog_src.png}}{VPlayer.swf}

@@ -1,5 +1,18 @@
 \section {Conclusion}
-En conclusion, pour cette première remise, nous avons essayé de faire au mieux selon les conditions actuelles et les difficultés de communication.
-Une certaine partie du travail a été accomplie telle que l'analyse complète des formats d'image considérés, une première approche de stéganographie dans les bitmaps.
-D'autres parties restent à améliorer ou encore à implémenter.
-Pour la prochaine remise, nous espérons parvenir à rencontrer les attentes convenues dans les meilleurs conditions possibles.
+Ce projet nous a permis de pratiquer de nombreuses compétences importantes pour les futurs informaticiens que nous sommes
+telles que le travail de recherche et la collaboration.
+Nous avons dû appronfondir nos connaissances en programmation C pour répondre à des besoins de compréhension des formats 
+de fichier mais aussi pour prendre les meilleures décisions concernant l'implémentation du code.
+Dans un premier temps, nous nous sommes efforcés d'afficher les fichiers afin d'en maitriser les différentes sections
+et contraintes qui y sont liées.
+Nous avons ensuite commencé à coder selon une technique reconnue pour être simple et efficace qui se base sur le LSB évoquée
+plus haut. Il s'agit donc de travailler sur les bits de poids faible ce qui crée une différence imperceptible à l'oeil humain.
+D'abord dans le bitmap, pour des questions de simplicité, puis dans le gif.
+Nous avons tenté au maximum de réutiliser le code. 
+Ce qui implique que le traitement est le même, la seule différence liée au format est l'endroit où l'on applique ce traitement.
+Nous travaillons après le header dans le cas des bitmaps alors que pour les gifs, nous traitons les local color table.
+Cela se justifie par le fait que celles-ci ne souffrent pas de compression et garantissent, en principe, un décodage sans encombres.
+Pour terminer, nous avons également envisagé d'utiliser une autre technique appelée le MSB dont on parle également ci-dessus mais
+comme son nom l'indique, travailler sur les bits de poids forts à une incidence non négligeable qui trahit la manipulation du fichier
+et qui ne fait partie de notre implémentation que dans le but de s'opposer à la bonne pratique.
+ 

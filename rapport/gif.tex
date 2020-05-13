@@ -1,12 +1,12 @@
 \section{GIF}
 
-\subsection{Pourquoi le GIF?}
+\subsection{Aperçu du GIF}
 Le format GIF permet de stocker plusieurs images dans un fichier. 
 Ceci permet de créer des diaporamas, voire des animations si les images sont affichées à un rythme suffisamment soutenu. 
 Chaque image d'une animation peut avoir sa propre palette.
 Le GIF est un format très utilisé, particulièrement sur les réseaux sociaux. 
 Ce projet peut donc intéressé pas mal de gens.\\
-La structure du format GIF est connue et disponible en ligne. En voici un schéma :
+La structure du format GIF est connue et disponible en ligne. En voici un schéma : 
 
 \vspace{1.5cm}
 
@@ -15,14 +15,18 @@ La structure du format GIF est connue et disponible en ligne. En voici un schém
 
 \newpage
 \subsection{Application du LSB}
-Nous avons choisi de cacher des informations dans les pixels qui se trouvent dans les Local Color Table car il s'agit d'une
-suite de pixels qui ne sont soumis à aucune compression contrairement au segment d'image data.
-Cette section facultative peut revenir devant chaque bloc image data. Si cette section n'existe pas, nous la rajoutons en copiant
-alors la global color table à l'emplacement où elle aurait été c'est-à-dire juste devant le bloc image data.
-On aura autant de color table qu'il n'y a de blocs image data.
+Nous avons choisi de cacher des informations dans les bytes des Local Color Table. 
+Les Color Table décrivent des couleurs, chaque couleur étant codée sur 3 bytes. 
+Ces informations ne sont pas compressées contrairement au bloc image data.\\
 
-Il est possible de calculer la taille maximale du message cachée à l'avance : 
-en comptant le nombre de bloc image data et en le multipliant par le nombre de byte dans la Global Color Table.
+Cette section, Local Color Table, est facultative et peut revenir devant chaque bloc image data. 
+Si elle n'existe pas, nous la rajoutons en copiant
+alors la global color table.
+Au final, on aura autant de local color table qu'il y a de blocs image data.\\
+
+Il est possible de calculer la taille maximale du message cachée à l'avance. 
+Pour cela, on compte le nombre de bytes que l'on peut cacher par Color Table : nombre de bytes dans une Color Table / 8.
+Puis, on multiplie cela par le nombre potentiel de Local Color Table dans le fichier, ce qui revient à compter le nombre de bloc image data.
 
 \vspace{1.5cm}
 

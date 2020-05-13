@@ -1,15 +1,15 @@
 \babel@toc {french}{}
 \contentsline {section}{Introduction}{2}
-\contentsline {section}{Organisation du projet}{2}
-\contentsline {section}{St\IeC {\'e}ganographie ?}{3}
-\contentsline {section}{Technique utilis\IeC {\'e}e}{3}
-\contentsline {subsection}{Sch\IeC {\'e}ma g\IeC {\'e}n\IeC {\'e}ral}{4}
-\contentsline {subsection}{Encodage : extrait de code source concernant la manipulation des LSB}{4}
-\contentsline {subsection}{D\IeC {\'e}codage : extrait de code source concernant la manipulation des LSB}{4}
-\contentsline {section}{Guide pratique}{5}
-\contentsline {section}{Bitmap}{6}
-\contentsline {subsection}{Pourquoi le bitmap?}{6}
-\contentsline {subsection}{Application du LSB}{7}
-\contentsline {section}{GIF}{8}
-\contentsline {subsection}{Pourquoi le GIF?}{8}
-\contentsline {subsection}{Application du LSB}{9}
+\contentsline {section}{Organisation du projet}{3}
+\contentsline {section}{Guide pratique}{3}
+\contentsline {section}{St\IeC {\'e}ganographie : D\IeC {\'e}finition}{4}
+\contentsline {section}{Least Significant Bit (L.S.B.)}{5}
+\contentsline {subsection}{Encodage : extrait de code source concernant la manipulation des LSB}{5}
+\contentsline {subsection}{D\IeC {\'e}codage : extrait de code source concernant la manipulation des LSB}{6}
+\contentsline {section}{Bitmap}{7}
+\contentsline {subsection}{Aper\IeC {\c c}u du Bitmap}{7}
+\contentsline {subsection}{Application du LSB}{8}
+\contentsline {section}{GIF}{9}
+\contentsline {subsection}{Aper\IeC {\c c}u du GIF}{9}
+\contentsline {subsection}{Application du LSB}{10}
+\contentsline {section}{Conclusion}{11}

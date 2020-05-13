@@ -1,18 +1,21 @@
 \section{Introduction}
-L'objectif du projet est d'implémenter un programme illustrant le concept de sécurité suivant : La stéganographie.\\
+L'objectif du projet est d'implémenter un programme illustrant le concept de sécurité suivant : la stéganographie.\\
+
 Abordée du point de vue du cours de système, elle nous permet d'approfondir nos connaissances sur l'utilisation de la mémoire
-pour stocker des informations.\\Il est évident que pour mener à bien un projet de cette envergure, d'autres compétences nous ont été nécessaires
-telles que l'apprentissage du langage C à un niveau plus basique notamment pour réaliser des opérations de manipulation de bits.
-Nous avons également eu besoin d'apprendre en détails les structures de fichier bitmap et GIF pour décider de la meilleure technique à
+pour stocker des informations.\\
+
+Il est évident que pour mener à bien un projet de cette envergure, d'autres compétences nous ont été nécessaires
+telles que l'apprentissage approfondi du langage C, notamment pour réaliser des opérations de manipulation de bits.
+Nous avons également eu besoin d'apprendre en détails les structures de fichier bitmap et GIF, pour décider de la meilleure technique à
 utiliser afin d'y cacher des messages.\\
-Dans notre implémentation, pour des raisons de clareté, nous avons choisi de suivre une structure de dossier 'bmp' et 'gif' regroupant
-le code qui permettra de cacher un message à l'intérieur de ces deux formats de fichiers respectifs.
-Dans ce rapport, nous passerons en revue l'organisation du projet, le choix pour chaque format, la technique utilisée et 
-l'évolution du projet.\\ Nous fournirons aussi un guide pour utiliser les exécutables. 
+
+Dans ce rapport, nous passerons en revue l'organisation du projet, le choix pour chaque format et la technique utilisée. 
+Nous fournirons aussi un guide pratique pour utiliser les exécutables. 
 
 \vspace{1.5cm}
 
 
+\newpage
 \section{Organisation du projet}
 La structure de notre projet s'organise essentiellement en quatre répertoires dont voici le détail :\\ 
 
@@ -27,9 +30,12 @@ La structure de notre projet s'organise essentiellement en quatre répertoires d
 \end{itemize}
 On peut également trouver à la racine, un makefile général qui automatise le lancement du programme ainsi qu'un fichier README.
 
+\vspace{1.5cm}
+\section{Guide pratique}
+\lstinputlisting[language=make, firstline=1, lastline=18]{../makefile}
 
 \newpage
-\section{Stéganographie ?}
+\section{Stéganographie : Définition}
 La stéganographie est l'art de la dissimulation : son objet est de faire passer inaperçu des données dans d'autres données. 
 Elle se distingue de la cryptographie, « art du secret », qui cherche à rendre un message inintelligible à autre que qui-de-droit.\\
 Les fichiers peuvent être de type divers : fichiers image, audio, html, vidéos etc.\\
@@ -49,12 +55,18 @@ Cela signifie qu'il faudra limiter au maximum l'impact sur le fichier dans leque
 au principe de stéganographie.
 
 
-\section{Technique utilisée}
+\newpage
+\section{Least Significant Bit (L.S.B.)}
 Pour coder/décoder un message, nous employons la technique du Least Significant Bit (LSB). \\
 Comme vous le voyez sur le schéma ci-dessous [Schéma général], cette technique consiste à se focaliser sur le bit le moins 
 important d'un byte appelé le bit de poids faible.
 Pour coder le message, il suffit de lire un byte à cacher et de l'encoder dans le bit de poids faible d'un byte choisi.
-Pour décoder le message, il suffit de lire le bit de poids faible de ces bytes 'élus' et de reformer un message compréhensible.\\
+Pour décoder le message, il suffit de lire le bit de poids faible de ces bytes 'élus' et de reformer un message compréhensible.\\\\
+
+
+\includegraphics[width=12cm]{lsb.eps}\\\\
+
+
 C'est cette logique que nous nous sommes employés à suivre dans le cas de traitement sur ces deux formats de fichiers image.
 Ainsi, la technique est la même mais certains choix se sont imposés de part les différences entre les deux structures de ces 
 fichiers image. Ces choix portent notamment sur 'l'élection' des bytes dans lesquels nous allons cacher l'information.
@@ -63,8 +75,6 @@ perdre un bit d'information sans que cela ne se remarque.
 Par exemple, pour une couleur codée en rgb, le changement du dernier bit a un impact très faible, quasi invisible à l'oeil nu.
 Il est donc adéquat pour y dissimuler des données.\\\\
 
-\subsection{Schéma général}
-\includegraphics[width=12cm]{lsb.eps}
 
 \subsection{Encodage : extrait de code source concernant la manipulation des LSB}
 \lstinputlisting[language=c, firstline=57, lastline=72]{../src/utils/bmp.c}
@@ -74,5 +84,3 @@ Il est donc adéquat pour y dissimuler des données.\\\\
 
 \vspace{1.5cm}
 
-\section{Guide pratique}
-\lstinputlisting[language=make, firstline=1, lastline=18]{../makefile}

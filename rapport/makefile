@@ -4,12 +4,25 @@
 #HOWTO : make ; make clean
 #AUTEUR : Foud Hind et Patti Philippe
 
+FN = rapport
 
-rapport: 	rapport.pdf
-	@evince	rapport.pdf&
+$(FN): 	$(FN).pdf
+	@evince	$(FN).pdf&
 	
-rapport.pdf: rapport.tex  intro.tex bitmap.tex gif.tex presentation.tex conclusion.tex
-	@./goSlides	
+$(FN).pdf: $(FN).tex  intro.tex bitmap.tex gif.tex presentation.tex conclusion.tex
+
+	@rm -f $(FN).pdf
+	@latex $(FN).tex
+	#Running latex twice to set the Table of contents directly
+	@touch $(FN).pdf
+	@latex $(FN).tex
+	@rm -f $(FN).aux $(FN).log $(FN).out
+
+	@dvips $(FN).dvi -o $(FN).ps
+
+	@ps2pdf $(FN).ps
+	@rm -f $(FN).ps
+
 
 clean : 
-	rm *.aux *.log *.pdf *.toc *.ps 
+	@rm -f *.aux *.log *.pdf *.toc *.ps 

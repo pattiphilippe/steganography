@@ -8,7 +8,7 @@
 rapport: 	rapport.pdf
 	@evince	rapport.pdf&
 	
-rapport.pdf:	rapport.tex  intro.tex bitmap.tex gif.tex conclusion.tex
+rapport.pdf:	rapport.tex  intro.tex bitmap.tex gif.tex presentation.tex conclusion.tex
 	@pdflatex rapport.tex
 
 clean : 

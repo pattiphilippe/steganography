@@ -1,7 +1,13 @@
 #! /bin/sh
 FN=rapport
+
+rm $FN.pdf
+
 latex $FN.tex
 rm $FN.aux $FN.log $FN.out
+
 dvips $FN.dvi -o $FN.ps
 rm $FN.dvi
-gv $FN.ps 
+
+#gv $FN.ps 
+ps2pdf $FN.ps

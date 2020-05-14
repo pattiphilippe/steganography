@@ -5,8 +5,11 @@
 #AUTEUR : Foud Hind et Patti Philippe
 
 
-rapport :
+rapport: 	rapport.pdf
+	@evince	rapport.pdf&
+	
+rapport.pdf: rapport.tex  intro.tex bitmap.tex gif.tex presentation.tex conclusion.tex
 	@./goSlides	
 
 clean : 
-	rm *.aux *.log *.pdf *.ps *.toc *.fdb_latexmk *.fls
+	rm *.aux *.log *.pdf *.toc *.ps 

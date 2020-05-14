@@ -1,21 +1,22 @@
 \babel@toc {french}{}
-\contentsline {section}{Introduction}{2}
-\contentsline {section}{Organisation du projet}{3}
-\contentsline {section}{Guide pratique}{3}
-\contentsline {section}{St\IeC {\'e}ganographie : D\IeC {\'e}finition}{4}
-\contentsline {section}{Least Significant Bit (L.S.B.)}{5}
-\contentsline {subsection}{Encodage : extrait de code source concernant la manipulation des LSB}{6}
-\contentsline {subsection}{D\IeC {\'e}codage : extrait de code source concernant la manipulation des LSB}{6}
-\contentsline {section}{Bitmap}{7}
-\contentsline {subsection}{Aper\IeC {\c c}u du Bitmap}{7}
-\contentsline {subsection}{Application du LSB}{8}
-\contentsline {section}{GIF}{9}
-\contentsline {subsection}{Aper\IeC {\c c}u du GIF}{9}
+\contentsline {section}{Introduction}{3}
+\contentsline {section}{Organisation du projet}{4}
+\contentsline {section}{Guide pratique}{4}
+\contentsline {section}{St\IeC {\'e}ganographie : D\IeC {\'e}finition}{5}
+\contentsline {section}{Least Significant Bit (L.S.B.)}{6}
+\contentsline {subsection}{Encodage : extrait de code source concernant la manipulation des LSB}{7}
+\contentsline {subsection}{D\IeC {\'e}codage : extrait de code source concernant la manipulation des LSB}{7}
+\contentsline {section}{Bitmap}{8}
+\contentsline {subsection}{Aper\IeC {\c c}u du Bitmap}{8}
 \contentsline {subsection}{Application du LSB}{9}
-\contentsline {section}{Pr\IeC {\'e}sentation}{10}
-\contentsline {subsection}{Pr\IeC {\'e}ambule}{10}
-\contentsline {subsection}{Most Significant Bit (M.S.B.)}{10}
-\contentsline {subsection}{Encodage : extrait de code source concernant la manipulation des MSB}{10}
-\contentsline {subsection}{D\IeC {\'e}codage : extrait de code source concernant la manipulation des MSB}{11}
-\contentsline {subsection}{R\IeC {\'e}sultats obtenus}{11}
-\contentsline {section}{Conclusion}{12}
+\contentsline {section}{GIF}{10}
+\contentsline {subsection}{Aper\IeC {\c c}u du GIF}{10}
+\contentsline {subsection}{Application du LSB}{10}
+\contentsline {section}{Pr\IeC {\'e}sentation}{12}
+\contentsline {subsection}{Pr\IeC {\'e}ambule}{12}
+\contentsline {subsection}{Most Significant Bit (M.S.B.)}{12}
+\contentsline {subsection}{Encodage : extrait de code source concernant la manipulation des MSB}{12}
+\contentsline {subsection}{D\IeC {\'e}codage : extrait de code source concernant la manipulation des MSB}{13}
+\contentsline {subsection}{R\IeC {\'e}sultats obtenus}{13}
+\contentsline {section}{Conclusion}{14}
+\contentsline {section}{R\IeC {\'e}f\IeC {\'e}rences}{14}

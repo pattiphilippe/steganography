@@ -12,8 +12,6 @@ int sizeOfColorTable(const unsigned char *packed_field)
 	return 3 * pow(2.0, ((*packed_field & 0x07) + 1));
 }
 
-//TODO marquer hypothèse au moins 2 lct, gif pas seulement une image, erreur dans getMaxSecretLength
-//TODO rapport : fonctionne avec la taille limite de chars accepté
 unsigned check_lengths_gif(FILE *src_img, FILE *src_secret)
 {
 	unsigned secret_length = get_file_length(src_secret);

@@ -24,6 +24,14 @@ Au final, on aura autant de local color table qu'il y a de blocs image data.\\
 
 Il est possible de calculer la taille maximale du message cachée à l'avance. 
 Pour cela, on compte le nombre de bytes que l'on peut cacher par Color Table : nombre de bytes dans une color Table / 8.
-Puis, on multiplie cela par le nombre potentiel de Local Color Table dans le fichier, ce qui revient à compter le nombre de bloc image data.
+Puis, on multiplie cela par le nombre potentiel de Local Color Table dans le fichier, ce qui revient à compter le nombre de bloc image data.\\
+
+Nous avons décidé de cacher la taille du message dans la première Local Color Table. 
+Le gif source doit donc contenir au moins 2 LCT pour pouvoir cacher un message. \\
+
+La taille du message est codée sur un unsigned, donc 4 bytes cachés sur 32 bytes d'une Local Color Table. 
+Par soucis de simplification, les color tables doivent contenir au moins 32 bytes d'informations.
+Ceci peut se vérifier facilement : le gif doit employer au moins 16 couleurs différentes. 
+Il n'y a que quelques rares exceptions qui ne correspondront pas à ce critère.
 
 \vspace{1.5cm}

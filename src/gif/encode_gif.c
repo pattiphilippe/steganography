@@ -75,7 +75,6 @@ void encode_lct(FILE *gif_src, FILE *gif_dest, FILE *secret_src, int lct_id, int
         encode_secret_gif(gif_src, gif_dest, secret_src, size_lct);
 }
 
-//TODO rapport : hypothese que au moins 16 couleurs diff dans gif, pour taille min de 48 bytes par LCT
 void encode_length_gif(FILE *gif_src, FILE *gif_dest, FILE *secret_src, int size_lct)
 {
     unsigned secret_length = check_lengths_gif(gif_src, secret_src);

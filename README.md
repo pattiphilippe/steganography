@@ -9,3 +9,6 @@ Pour générer le rapport depuis les sources tex, exécuter rapport/makefile.<br
 ## Comment exécuter le projet ##
 Exécuter le /makefile.<br\>
 Des commandes sont expliquées dans ce makefile. Celles-ci sont reprises dans le rapport/rapport.pdf.
+
+## Authors
+Patti Philippe & Foud Hind
